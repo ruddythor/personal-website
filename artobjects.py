@@ -16,7 +16,7 @@ class SVG:
 #HAVE AN ADD SHAPE
 #have svg keep array of circles.
 
-class Shape():
+class Shape(SVG):
 	def __init__(self):
 		Name="Something"
 	def circling(self, filename):
@@ -44,10 +44,11 @@ class Endsvg():
 #A=Shape(circle, 10, 10)
 #a.function
 
-svg=SVG()
-svg.createfile("myxml.xml")
+#svg=SVG()
+#svg.createfile("myxml.xml")
 
 circle=Shape()
+circle.createfile("myxml.xml")
 circle.circling("myxml.xml")
 
 closed=Endsvg()
