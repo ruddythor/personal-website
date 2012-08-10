@@ -11,7 +11,7 @@ class Circle():
 		self.r=r
 		self.stroke_width=stroke_width
 		circle = open(filename, "w")
-		circle.writelines("<circle cx=\"%d\" cy=\"%d\" r=\"%d\" stroke=\"black\" stroke-width=\"%d\" fill=\"none\"/>" % cx, cy, r, stroke_width)
+		circle.writelines("<circle cx=\"%d\" cy=\"%d\" r=\"%d\" stroke=\"black\" stroke-width=\"%d\" fill=\"none\"/>" % (cx, cy, r, stroke_width))
 		circle.close()
 
 circle=Circle()
