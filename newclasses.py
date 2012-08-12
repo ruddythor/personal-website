@@ -78,7 +78,3 @@ mysvg.writefile()
 
 
 
-
-
-
-
