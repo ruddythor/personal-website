@@ -1,0 +1,88 @@
+Python -- It's Classy!
+
+Python is a fun little language that's been around for about two decades now ( http://en.wikipedia.org/wiki/Python_(programming_language) ). Created by Guido van Rossum, it's an object-oriented programming language that is, to me, very common sense in its approach to programming.
+
+For this entry I learned about classes in Python. The concept of classes is fairly common in object-oriented programming (or at least that's what I read everywhere). Creating a class, such as "circle," "snake" or "chair," makes it easy to create individual instances of that class that you can manipulate or reuse at will.
+
+So, let's say I have a Snake class, and let's pretend it's an enemy in some little RPG game you're making. Every time I instantiate (or create an instance of) that class, it can have default properties and unique properties. In essence, a class is just a collection of data and functions that use that data. Also associated with the class can be a collection of actions, or methods (also called functions). 
+
+So, in our example of Snake, you could have the Slither method (which would be something like a "move" function), and you could have a Strike method (which would be like an "attack" function). You could have values associated with those actions, like an attack value for the Strike method and a move value for the Slither method. Other default data that might be associated with the class are a range of HP values or a range of other characteristics such as color or length.
+
+In experimenting with classes, I set out to create an SVG (scalable vector graphic) image using Python to generate instances of various shapes.
+
+The construction of a class in Python is fairly straightforward. Your first line will simply be "class Myclass:" -- the first letter of the class should be capitalized, though I'm not sure why. I think it may just be convention. 
+
+Your second line will be your init function, a required function. That line should look like this: "def __init__(self):", with the "self" being another required portion of constructing a class. Technically it can be labeled anything, but "self" is the conventional term used. The init function can take other parameters too. If it does take other parameters, you set those values when you instantiate the class, and those values will be connected to that instance of the class unless you change them after instantiating.
+
+For example, here is the circle class I created.
+
+class Circle():
+	def __init__(self, cx, cy, r, stroke_width):
+		self.cx=cx
+		self.cy=cy
+		self.r=r
+		self.stroke_width=stroke_width
+
+	def draw(self):
+		return "<circle cx=\"%d\" cy=\"%d\" r=\"%d\" stroke=\"black\" stroke-width=\"%d\" fill=\"none\"/>" % (self.cx, self.cy, self.r, self.stroke_width)
+
+To create an instance of the class, you create a variable -- say, "circle" -- and set it to "Circle()". So it would look something like "circle=Circle()". Because the __init__ function takes four additional values, you must set those when you instantiate the class. So your actual statement should look more like this "circle=Circle(10, 10, 10, 2)". (Those values -- x-coordinate, y-coordinate, radius and stroke-width -- are set by the XML language. For more information on SVG and XML, check out www.w3schools.com/svg/svg_circle.asp.)
+
+The "%d" are format characters -- they insert the values you assign when you instantiate the class. The "self.cx=cx" is merely taking the "cx" value you set when you instantiate the class and making it a permanent value for this particular instance of the class that you can use across multiple functions in the instance of the class.
+
+So now you have your own circle. But what can you do with it? 
+
+Well, in this example, all you can do is draw the circle. And technically you're not actually doing that. You're just returning that line under "def draw(self):" starting with "<circle". To get your program to actually draw a circle, you'll have to insert it into an XML file (more on that later).
+
+So how do you use that draw function, you ask? Excellent question! You just use your variable "circle" and append ".draw" at the end. So you'd have something like "circle.draw". That means you are applying the draw function to all of the data set with that instance of the Circle() class -- i.e., you are returning the line "<circle cx=", with all the variables filled in with the values you provided when you instantiated the class.
+
+One note, you can change values by doing "circle.cx=50" (or any other value you choose). This is handy if you want to have the instance of the class do something, then change its characteristics, then do something else. In the script I made, I had the circle appear as if it is bouncing. So I set the value of cx, had the program add that instance of the circle class to an array, then changed the cx (and cy) values, then added that circle to the array.
+
+Classes can be as complex as you want them to be, though. The only method you have to have is the __init__ method. Everything after that is your own creation. I created an SVG class that creates a file that would allow me to add as many instances of a class as I wanted to. This included an __init__ method, an "addshape" method, and a "writefile" method. Here's that class:
+
+class SVG:
+	def __init__(self, filename):
+		self.filename=filename
+		self.mylist=[]
+
+	def addshape(self, shape):
+		self.mylist.append(shape)
+
+	def writefile(self):
+		header="<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">"
+		footer="</svg>"
+		thefile=open(self.filename, "w")
+		thefile.write(header)
+		thefile.write("\n")
+		for x in self.mylist:
+			thefile.write(x.draw())
+			thefile.write("\n")
+		thefile.write(footer)
+		thefile.close()
+
+In the __init__ file I created an array that would hold each instance of a class I created. The "addshape" method just added each instance of a class to the array, then iterate through each item in the array to print it in an XML file (creating and writing to the XML file is handled by the -- you guessed it -- "writefile" method).
+
+So to instantiate the SVG class, you'd do something like "mysvgfile=SVG():". But you need a filename right? Because the __init__ method includes the "filename" variable, you set the filename when you instantiate the class. So you'd actually do something like "mysvgfile=SVG('theactualsvgfile.xml')". mysvgfile is just the variable name. "theactualsvgfile.xml" is the name of the file. "self.mylist=[]" is an empty array that will hold all the instances of the shapes we want to include. The "shape" parameter allows you to specify which instance of a shape to include. Without going into too much of the other stuff, everything under "writefile(self):" is just details of adding data to the file we created and has little to do with classes in Python.
+
+So to add, for example, the circle we created earlier, we'd do something like "mysvgfile.addshape(circle)". Voila. You have an array of shapes you've created. To write it all to file, you just hit "mysvgfile.writefile" and you have your file with all your shapes in it. Open it up with something that reads XML and you'll see everything laid out for you.
+
+
+
+
+END TAG, OR SET AS DESCRIPTOR SOMEWHERE IN BLOG
+
+Welcome to the first entry of the LightCastle blog!
+
+First, we'll get the boring stuff out of the way. So here's a little about this blog and its authors. LightCastle is a development and consulting business run by Dan and Tamara Funk, based out of Staunton, Va. They do a lot of stuff, including XSLT and Ruby on Rails. My name is Joshua Brown. I'm a full-time reporter learning to program.
+
+This blog will largely focus on my attempts at learning to code, but will also feature posts from other LightCastle employees on other languages and topics.
+
+END TAG, OR SET AS DESCRIPTOR SOMEWHERE IN BLOG
+
+
+
+
+
+
+
+
