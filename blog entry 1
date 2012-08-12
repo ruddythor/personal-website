@@ -2,11 +2,18 @@ Python -- It's Classy!
 
 Python is a fun little language that's been around for about two decades now ( http://en.wikipedia.org/wiki/Python_(programming_language) ). Created by Guido van Rossum, it's an object-oriented programming language that is, to me, very common sense in its approach to programming.
 
-For this entry I learned about classes in Python. The concept of classes is fairly common in object-oriented programming (or at least that's what I read everywhere). Creating a class, such as "circle," "snake" or "chair," makes it easy to create individual instances of that class that you can manipulate or reuse at will.
+One thing I've been learning about in Python is classes. The concept of classes is fairly common in object-oriented programming (or at least that's what I read everywhere). Creating a class, such as "circle," "snake" or "chair," makes it so that you can create instances of that class easily and repeatedly that you can then manipulate at will.
 
-So, let's say I have a Snake class, and let's pretend it's an enemy in some little RPG game you're making. Every time I instantiate (or create an instance of) that class, it can have default properties (created each time you instantiate the class, no matter what) and unique properties (that you set for each instance of a class you create). In essence, a class is just a collection of data and functions that use that data. Also associated with the class can be a collection of actions, or methods (also called functions). 
+So, let's say I have a Snake class, and let's pretend it's an enemy in some little RPG game you're making. Having a class means I can create snakes ad infinitum quite easily for your character to battle. In essence, a class is just a collection of data and functions that use that data. Also associated with the class can be a collection of actions, or methods (also called functions). 
 
-So, in our example of Snake, you could have the Slither method (which would be something like a "move" function), and you could have a Strike method (which would be like an "attack" function). You could have values associated with those actions, like an attack value for the Strike method and a move value for the Slither method. Other default data that might be associated with the class are a range of HP values or a range of other characteristics such as color or length.
+Every time I instantiate (or create an instance of) a class, that instance can have default properties (standard data that is created each time you instantiate the class, no matter what) and unique properties (that you set specifically for an instance of a class you create). 
+
+So, in our example of Snake, you could have the Slither method (which would be something like a "move" function), and you could have a Strike method (which would be like an "attack" function). You could have values associated with those actions, like an attack value for the Strike method and a move value for the Slither method. The attack value would be an example of a piece of data associated with the class. The attack function would be an example of the class using a method that is operating on the values associated with said class.
+
+Other default data that might be associated with the class are a range of HP values or a range of other characteristics, such as color or length.
+
+
+-----My Classes-----
 
 In experimenting with classes, I set out to create an SVG (scalable vector graphic) image using Python to generate instances of various shapes.
 
