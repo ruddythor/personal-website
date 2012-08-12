@@ -66,7 +66,7 @@ So to instantiate the SVG class, you'd do something like "mysvgfile=SVG():". But
 
 So to add, for example, the circle we created earlier, we'd do something like "mysvgfile.addshape(circle)". Voila. You have an array of shapes you've created. To write it all to file, you just hit "mysvgfile.writefile" and you have your file with all your shapes in it. Open it up with something that reads XML and you'll see everything laid out for you.
 
-
+Here is a link to the whole program I wrote: https://github.com/jlegs/LightcastlePython/blob/master/newclasses.pys
 
 
 END TAG, OR SET AS DESCRIPTOR SOMEWHERE IN BLOG
