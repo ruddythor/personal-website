@@ -1,0 +1,38 @@
+write python restful server
+
+for simple multiplayer game
+
+battle game.
+
+OBJECTS ARE:
+player, armor and weapon
+
+so each should be restful thing. can add player, delete, update. same with armor and weapons.
+
+can also associate piece of armor or weapon with a player. When you call get on a player, you'll not only get back player, but the armor and weapons for that player.
+
+can issue new attack. (maybe it's a strike. that's another type of model [object].)
+
+will need some way to connect to the server - will have to tell the client what the address of the server. doesnt have to handle pairing people up, just assumes two people want to connect. 
+
+fires itself up each time you make request -- so how do you write web application in python. 
+so you go to localhost you want python to respond on that port (80?)
+
+
+have set of five weapons and set of five armortypes, they should all have like interesting descriptions and certain level of hit multiplier
+
+can equip then battle
+
+
+if not click based will have to deal with fact that 
+
+whereas if you just sit there and throw hits then when you try and hit after you're dead it just responds with 'dead' or whatever
+
+cuz dont know when other person's turn is. 
+
+server code chunk in one dir
+and client code chunk in another dir
+
+doesnt even have to be interactive, can just wait then strike then strike.
+
+
