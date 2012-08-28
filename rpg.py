@@ -57,11 +57,23 @@ class Player:
 		self.equipment.remove(item)
 
 	def equip(self, item):
-#		if len(self.equipped_items)>3:
-#			self.equipped_items.remove()#ITEMNUMBERONE
-		self.equipped_items.append(item)
-#		if self.equipment.index(item):
-#			self.equipped_items.append(item)
+		if len(self.equipped_items)>2:
+			self.equipped_items.pop(0)
+		weapons=0
+		armors=0
+		for x in self.equipped_items:
+			if x.is_armor==True:
+				armors+=1
+			else:
+				weapons+=1
+		if armors<=0 and item.is_armor==True:
+			self.equipped_items.append(item)
+		elif weapons<=1 and item.is_armor==False:
+			self.equipped_items.append(item)
+		else:
+			print "You have too many of that type of item equipped. Try again."
+		# if self.equipment.index(item):
+		# self.equipped_items.append(item
 
 	def unequip(self, item):
 		self.equipped_items.remove(item)
@@ -94,7 +106,8 @@ print playerone.defend()
 
 #========================CLASS DEFINING EQUIPMENT CREATION===================================s
 class Equipment:
-	def __init__(self, attack_value, defense_value, name, description):
+	def __init__(self, attack_value, defense_value, name, description, is_armor):
+		self.is_armor=is_armor
 		self.name=name
 		self.description=description
 		self.attack_value=attack_value
@@ -116,16 +129,16 @@ class Equipment:
 
 #======================ESTABLISHING WEAPONS AND ARMOR================================
 
-longsword=Equipment(10, 0, "long sword", "A bad-ass slayer of women and small men")
+longsword=Equipment(10, 0, "long sword", "A bad-ass slayer of women and small men", False)
 print "This is the longsword's attack value"
 print longsword.attack()
-shortsword=Equipment(7, 0, "short sword", "A not-so-bad-ass slayer of women and small men")
+shortsword=Equipment(7, 0, "short sword", "A not-so-bad-ass slayer of women and small men", False)
 print "this is the short sword's attack value"
 print shortsword.attack()
 
-lightarmor=Equipment(0, 5, "light armor", "A simple piece of armor that barely protects you. It is very simple looking.")
+lightarmor=Equipment(0, 5, "light armor", "A simple piece of armor that barely protects you. It is very simple looking.", True)
 
-heavyarmor=Equipment(0,15, "heavy armor", "A complex piece of armor that protects you strongly.")
+heavyarmor=Equipment(0,15, "heavy armor", "A complex piece of armor that protects you strongly.", True)
 
 
 
@@ -154,5 +167,24 @@ print playerone.attack()
 print playerone.defend()
 
 
-
-
+playerone.equip(heavyarmor)
+playerone.display_equipped()
+print
+print
+playerone.equip(shortsword)
+playerone.add(longsword)
+playerone.equip(longsword)
+print playerone.equipped_items
+print len(playerone.equipped_items)
+print playerone.attack()
+playerone.equip(heavyarmor)
+print playerone.equipped_items
+playerone.equip(longsword)
+playerone.equip(longsword)
+playerone.equip(shortsword)
+print playerone.equipped_items
+playerone.equip(heavyarmor)
+print playerone.equipped_items
+print playerone.attack()
+print playerone.defend()
+print "that was the defense value. number above is attack"
