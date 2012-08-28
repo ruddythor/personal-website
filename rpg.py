@@ -25,15 +25,14 @@ class Die:
 		return
 
 
+#======================================CREATES THE PLAYER CLASS WITH <ATTACK> <DEFEND> <ADD> <DROP> <EQUIP> <UNEQUIP> <DISPLAY_INVENTORY> AND <DISPLAY_EQUIPPED> METHODS=========================================================
 class Player:
-	def __init__(self):
-		Name = ""
+	def __init__(self, Name):
+		self.Name=Name
 		die=Die()
 		print "this is the die roll"
 		self.hproll=die.roll(15, 6)
 		self.hpmax=die.total
-#		for x in self.hproll:
-#			self.hpmax += x
 		self.base_attack=3
 		self.base_defense=2
 		self.equipment=[]
@@ -54,7 +53,7 @@ class Player:
 	def add(self, item):
 		self.equipment.append(item)
 
-	def drop(self, weapon):
+	def drop(self, item):
 		self.equipment.remove(item)
 
 	def equip(self, item):
@@ -64,18 +63,22 @@ class Player:
 #		if self.equipment.index(item):
 #			self.equipped_items.append(item)
 
+	def unequip(self, item):
+		self.equipped_items.remove(item)
+
 	def display_inventory(self):
 		for item in self.equipment:
-			print item
+			print "\t", item
 		return
 
 	def display_equipped(self):
 		print "These are your equipped items"
 		for item in self.equipped_items:
-			print item
+			print "\t", item
 		return
-
-playerone=Player()
+#===========================INSTANTIATES PLAYERONE OF THE PLAYER CLASS AND TESTS SOME OF THE METHODS AND VARIABLES=========================
+playerone=Player("Charles")
+print playerone.Name
 print "This is the player's max HP"
 print playerone.hpmax
 print "This is the player's base attack value"
@@ -83,13 +86,13 @@ print playerone.base_attack
 print "This is the player's base defense value"
 print playerone.base_defense
 print "This is the player's attack value"
-print playerone.attack()#THIS WILL RETURN ATTACK VALUE 
+print playerone.attack()
 print "This is the player's defense value"
-print playerone.defend()#RETURNS DEFENSE VALUE
+print playerone.defend()
 
 #FUNCTION FOR ACTUAL COMBAT
 
-
+#========================CLASS DEFINING EQUIPMENT CREATION===================================s
 class Equipment:
 	def __init__(self, attack_value, defense_value, name, description):
 		self.name=name
@@ -131,7 +134,7 @@ heavyarmor=Equipment(0,15, "heavy armor", "A complex piece of armor that protect
 
 
 
-
+#===========================================TESTING MORE FUNCTIONS OF THE PLAYER CLASS. THEY ALL SEEM TO WORK==========================
 playerone.add(longsword)
 playerone.add(shortsword)
 playerone.add(lightarmor)
@@ -143,7 +146,7 @@ playerone.display_equipped()
 
 print "NOW, this is the player's attack value, because we equipped a short sword"
 print playerone.attack()
-
+playerone.unequip(shortsword)
 playerone.equip(longsword)
 playerone.display_equipped()
 print "NOW, this is the player's attack value, because we equipped a Long sword"
