@@ -72,10 +72,11 @@ class Player:
 				armors+=1
 			else:
 				weapons+=1
-		if armors<=0 and item.is_armor==True:
-			self.equipped_items.append(item)
-		elif weapons<=1 and item.is_armor==False:
-			self.equipped_items.append(item)
+		if self.equipment.index(item):
+			if armors<=0 and item.is_armor==True:
+				self.equipped_items.append(item)
+			elif weapons<=1 and item.is_armor==False:
+				self.equipped_items.append(item)
 		else:
 			print "You have too many of that type of item equipped. Try again."
 		# if self.equipment.index(item):
@@ -240,13 +241,38 @@ def buy():
 
 The following items are available for purchase:"""
 	for key in available_items:
-		print "\t", key, ":", available_items[key], available_items[key].buy_value
+		print "\t", key, ":", available_items[key], "\t", available_items[key].buy_value, "gold"
 
 	print """You have %i gold.
 Enter the number of the item you'd like to purchase.""" %playerone.gold
 	purchase_item=input(">>")
-	playerone.add(available_items[purchase_item])
+	if available_items[purchase_item].buy_value<=playerone.gold:
+		playerone.add(available_items[purchase_item])
+		playerone.gold=playerone.gold-available_items[purchase_item].buy_value
+	print "You now have %i gold" % playerone.gold
 	main_menu()
+
+def sell():
+	print """
+
+
+
+
+You have the following items to sell:"""
+	for x in playerone.equipment:
+		print "\t", x, "\t", x.sell_value, "gold"
+	print "Enter the number of the item you'd like to sell."
+	sell_item=input(">>")
+
+
+
+
+
+
+
+
+
+
 
 
 def change_equipment():
