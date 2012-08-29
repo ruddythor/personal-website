@@ -238,19 +238,42 @@ def buy():
 
 The following items are available for purchase:"""
 	for key in available_items:
-		print key, ":", available_items[key], available_items[key].buy_value
+		print "\t", key, ":", available_items[key], available_items[key].buy_value
 
 	print """You have %i gold.
 Enter the number of the item you'd like to purchase.""" %playerone.gold
 	purchase_item=input(">>")
 	playerone.add(available_items[purchase_item])
+	main_menu()
+
+
+def change_equipment():
+	print """
+
+
+
+
+The following items are equippable by you:"""
+	print
+	for x in playerone.equipment:
+		print "\t", x
+	print "\nWhat would you like to equip?"
+	equip_this=input(">>")
+
+
+
+
+
+
+
+
+
 
 
 main_menu()
 
 #============================================TESTING THE BUY FUNCTION==============================
 
-playerone.display_equipped()
-print "These are your inventory items"
-playerone.display_inventory()
+
+
 
