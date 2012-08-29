@@ -2,7 +2,7 @@
 import random
 import string
 import time
-
+import sys
 
 class Die:
 	def __init__(self):
@@ -211,6 +211,8 @@ You have the following options:
 		info()
 	elif player_choice==4:
 		change_equipment()
+	elif player_choice==5:
+		quit()
 	else:
 		main_menu()
 
@@ -267,7 +269,8 @@ The following items are equippable by you:"""
 
 
 
-
+def quit():
+	sys.exit()
 
 
 main_menu()
