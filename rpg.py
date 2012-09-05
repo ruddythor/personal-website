@@ -189,6 +189,15 @@ available_items={1:dagger, 2:shortsword, 3:longsword, 4:lightarmor, 5:heavyarmor
 
 
 #=========================================NOW FOR THE FUNCTIONS OF THE GAME=============================================
+
+
+
+
+
+
+
+
+
 def main_menu():
 	print """
 
@@ -268,13 +277,6 @@ You have the following items to sell:"""
 
 
 
-
-
-
-
-
-
-
 def change_equipment():
 	print """
 
@@ -299,10 +301,53 @@ def quit():
 	sys.exit()
 
 
-main_menu()
+#main_menu()
 
-#============================================TESTING THE BUY FUNCTION==============================
+#============================================MENU CLASS==============================
+class Menu:
+	def __init__(self):
+		Name="this is a menu class"
+		self.menu_item_number=0
+		self.menu_dictionary={}
+		self.function_call=[]
 
+	def new_item(self, menu_item, function_call):
+		self.menu_item_number+=1
+		self.menu_dictionary[self.menu_item_number]=menu_item
+		self.function_call.append(function_call)
+
+	def display_menu(self):
+		for x in self.menu_dictionary:
+			print "\t", x, ":", self.menu_dictionary[x]
+		print
+		print "Enter the number corresponding to the action you'd like to perform."
+		choice=input(">>")
+		self.function_call[choice-1]+"()"
+		
+
+
+
+print
+print
+print
+
+print "This is me testing the Menu class"
+print
+menu=Menu()
+menu.new_item("buy something", "buy")
+menu.new_item("sell something", "sell")
+
+menu.display_menu()
+
+
+
+
+
+
+
+
+
+		
 
 
 
