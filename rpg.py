@@ -63,8 +63,7 @@ class Player:
 		self.equipment.remove(item)
 
 	def equip(self, item):
-		if len(self.equipped_items)>2:
-			self.equipped_items.pop(0)
+
 		weapons=0
 		armors=0
 		for x in self.equipped_items:
@@ -72,6 +71,10 @@ class Player:
 				armors+=1
 			else:
 				weapons+=1
+
+		if len(self.equipped_items)>2:
+			self.equipped_items.pop(0)
+
 		if self.equipment.index(item):
 			if armors<=0 and item.is_armor==True:
 				self.equipped_items.append(item)
@@ -80,7 +83,7 @@ class Player:
 		else:
 			print "You have too many of that type of item equipped. Try again."
 		# if self.equipment.index(item):
-		# self.equipped_items.append(item
+		# self.equipped_items.append(item)
 
 	def unequip(self, item):
 		self.equipped_items.remove(item)
@@ -195,8 +198,9 @@ available_items={1:dagger, 2:shortsword, 3:longsword, 4:lightarmor, 5:heavyarmor
 
 
 
-
-
+#class Menu:
+#	def __init__(self):
+#		Name="Menu Class"
 
 def main_menu():
 	print """
@@ -301,46 +305,7 @@ def quit():
 	sys.exit()
 
 
-#main_menu()
-
-#============================================MENU CLASS==============================
-class Menu:
-	def __init__(self):
-		Name="this is a menu class"
-		self.menu_item_number=0
-		self.menu_dictionary={}
-		self.function_call=[]
-
-	def new_item(self, menu_item, function_call):
-		self.menu_item_number+=1
-		self.menu_dictionary[self.menu_item_number]=menu_item
-		self.function_call.append(function_call)
-
-	def display_menu(self):
-		for x in self.menu_dictionary:
-			print "\t", x, ":", self.menu_dictionary[x]
-		print
-		print "Enter the number corresponding to the action you'd like to perform."
-		choice=input(">>")
-		self.function_call[choice-1]+"()"
-		
-
-
-
-print
-print
-print
-
-print "This is me testing the Menu class"
-print
-menu=Menu()
-menu.new_item("buy something", "buy")
-menu.new_item("sell something", "sell")
-
-menu.display_menu()
-
-
-
+main_menu()
 
 
 
