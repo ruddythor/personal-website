@@ -294,14 +294,41 @@ print
 print
 print rat.attack()
 print
-print
+print "this is the rat's hp, base attack and base defense"
 print rat.hpmax, rat.base_attack, rat.base_defense
 print 
+print
+print "This is the player's HP"
+print playerone.hpmax
 print "This is the player one's attack roll"
 print playerone.attack()
+print playerone.attack()
+print playerone.attack()
+print playerone.attack()
+
+enemy_hp=rat.hpmax
+playerone_hp=playerone.hpmax
+print "Rat's HP"
+print rat.hpmax
+#print rat.hpmax
+#print rat.hpmax
 
 
-
+while enemy_hp or playerone_hp >=0:
+	enemy_hp=enemy_hp-playerone.attack()
+	playerone_hp=playerone_hp-rat.attack()
+	print "This is the enemy's hp", enemy_hp
+	print "This is your hp", playerone_hp
+	if enemy_hp<=0:
+		print "You defeated the enemy"
+		print "enemy's hp", enemy_hp
+		print "Your hp", playerone_hp
+		break
+	elif playerone_hp<=0:
+		print "You died"
+		print "enemy's hp", enemy_hp
+		print "Your hp", playerone_hp
+		break
 
 
 
@@ -466,7 +493,7 @@ def quit():
 	sys.exit()
 
 
-main_menu()
+#main_menu()
 
 
 
