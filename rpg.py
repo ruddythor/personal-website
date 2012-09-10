@@ -300,30 +300,44 @@ print
 print
 print "This is the player's HP"
 print playerone.hpmax
-print "This is the player one's attack roll"
+print "This is a sample of player one's attack roll"
 print playerone.attack()
-print playerone.attack()
-print playerone.attack()
-print playerone.attack()
+#print playerone.attack()
+#print playerone.attack()
+#print playerone.attack()
 
 enemy_hp=rat.hpmax
+enemy_defend=rat.defend()
 playerone_hp=playerone.hpmax
 print "Rat's HP"
 print rat.hpmax
-#print rat.hpmax
-#print rat.hpmax
-
-
+your_defend=playerone.defend()
+enemy_attack=rat.attack()
+your_attack=playerone.attack()
+#========================================================THE COMBAT	 LOOP=======================================================
 while enemy_hp or playerone_hp >=0:
-	enemy_hp=enemy_hp-playerone.attack()
-	playerone_hp=playerone_hp-rat.attack()
+	your_attack=your_attack-enemy_defend
+	enemy_attack=enemy_attack-your_defend	
+	#NEED A CHECK TO KEEP HP PERMANENT
+	if enemy_attack>=your_defend:
+		playerone_hp=playerone_hp-enemy_attack
+	elif your_attack>=enemy_defend:
+		enemy_hp=enemy_hp-your_attack
+	else:
+		enemy_attack=rat.attack()
+		print enemy_attack
+
+
+
 	print "This is the enemy's hp", enemy_hp
 	print "This is your hp", playerone_hp
+
 	if enemy_hp<=0:
 		print "You defeated the enemy"
 		print "enemy's hp", enemy_hp
 		print "Your hp", playerone_hp
 		break
+		#will need a function to divvy out rewards if you win
 	elif playerone_hp<=0:
 		print "You died"
 		print "enemy's hp", enemy_hp
