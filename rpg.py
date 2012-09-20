@@ -3,6 +3,7 @@ import random
 import string
 import time
 import sys
+#testing new git repo
 
 class Die:
 	def __init__(self):
