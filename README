@@ -7,13 +7,15 @@
 - Light Castle is intended to be a RESTful server/client text-based RPG game, written in Python.
 
 ** Source
-The upstream version of the game can be found here [fn:1]. For now, this is my fork. [fn:2]
+- The upstream version of the game can be found here [fn:1]. For now, this is my fork. [fn:2]
 
 ** Installation
-TODO
+- As of right now (Wed Sep 26 12:35:12 EDT 2012), you can run "python2 rpg.py" to get a random result.
+*** TODO Test webserver.py and webapp.py
 
 ** Known Bugs
-TODO
+- Wed Sep 26 12:36:57 EDT 2012: When running rpg.py, player always wins, presumably due to an algorithmic error.
+
 
 * Changelog
 - Wed Sep 26 12:00:03 EDT 2012: Created README and added some general information about the game.
