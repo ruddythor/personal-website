@@ -19,6 +19,7 @@
 
 * Changelog
 - Wed Sep 26 12:00:03 EDT 2012: Created README and added some general information about the game.
+- Wed Sep 26 12:50:42 EDT 2012: Edited some comments and cleaned up SOME syntax in rpg.py.
 
 * Footnotes
 [fn:1] https://github.com/jlegs/LightcastlePython
