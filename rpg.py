@@ -1,9 +1,15 @@
 #!/usr/bin/env python
+
+## FILE: rpg.py
+## AUTHOR: Josh Brown (Copyleft 2012)
+
+## NOTE: from @bbetances: I'm just cleaning up some of the syntax and adding some comments to make this more readable.
+## NOTE: custom commenting mode for GNU Emacs can be found here: https://raw.github.com/bbetances/conf-scripts/master/emacs-dir/custom-modes/custom-comments.el
+
 import random
 import string
 import time
 import sys
-#testing new git repo
 
 class Die:
 	def __init__(self):
@@ -28,7 +34,7 @@ class Die:
 		return
 
 
-#======================================CREATES THE PLAYER CLASS WITH <ATTACK> <DEFEND> <ADD> <DROP> <EQUIP> <UNEQUIP> <DISPLAY_INVENTORY> AND <DISPLAY_EQUIPPED> METHODS=========================================================
+## COMMENT: Creates the Player class
 class Player:
 	def __init__(self, Name):
 		self.Name=Name
@@ -113,8 +119,8 @@ class Player:
 		self.gold+=item.sell_value
 
 
-
-#===========================INSTANTIATES PLAYERONE OF THE PLAYER CLASS AND TESTS SOME OF THE METHODS AND VARIABLES=========================
+## FIX: Generate a random player name, or prompt for one.
+## COMMENT: Creates a player and instantiates the player's statistics.
 playerone=Player("Charles")
 #print playerone.Name
 #print "This is the player's max HP"
@@ -130,7 +136,7 @@ playerone=Player("Charles")
 
 #FUNCTION FOR ACTUAL COMBAT
 
-#========================CLASS DEFINING EQUIPMENT CREATION===================================s
+## COMMENT: Creates the Equipment class. 
 class Equipment:
 	def __init__(self, attack_value, defense_value, name, description, is_armor, buy_value, sell_value):
 		self.is_armor=is_armor
@@ -171,11 +177,7 @@ heavyarmor=Equipment(0,15, "heavy armor", "A complex piece of armor that protect
 global available_items
 available_items={1:dagger, 2:shortsword, 3:longsword, 4:lightarmor, 5:heavyarmor}
 
-
-#===========================================ESTABLISHING SOME ENEMIES==========================
-
-
-
+## COMMENT: Creates the Enemy class.
 
 class Enemy:
 	def __init__(self, Name, hp_dice, base_attack, base_defense):
@@ -455,55 +457,6 @@ The following items are equippable by you:"""
 
 
 #def arena():
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def quit():
 	sys.exit()
 
