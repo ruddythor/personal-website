@@ -12,116 +12,117 @@ import time
 import sys
 
 class Die:
-	def __init__(self):
-		myclass='this is the die roll class'
-		self.myrolls=[]
-	def __str__(self):
-		return 'Dieroll'
-	def __repr__(self):
-		return 'Dieroll'
+    "The Die class is meant to create a die and roll a random number"
+    def __init__(self):
+	myClass = "This is the die roll class"
+	self.myRolls = []
+    def __str__(self):
+        return 'Dieroll'
+    def __repr__(self):
+	return 'Dieroll'
+
 #	@staticmethod
-	def roll(self, dice, sides):
-		for x in self.myrolls:
-			self.myrolls.remove(x)
-		self.total=0
-		for x in range(1, dice+1):
-			self.myrolls.append(random.randrange(1, sides))
-		for x in self.myrolls:
-			self.total+=x
-#			print x,
-#		print "This is the total for the die roll"
-#		print self.total
+    def roll(self, dice, sides):
+	for x in self.myrolls:
+		self.myrolls.remove(x)
+	self.total=0
+	for x in range (1, dice + 1):
+		self.myrolls.append (random.randrange (1, sides))
+	for x in self.myrolls:
+		self.total += x
+		# print x,
+		# print "This is the total for the die roll"
+		# print self.total
 		return
 
 
 ## COMMENT: Creates the Player class
 class Player:
-	def __init__(self, Name):
-		self.Name=Name
-		die=Die()
-#		print "this is the die roll"
-		self.hproll=die.roll(15, 6)
-		self.hpmax=die.total
-		self.base_attack=3
-		self.base_defense=2
-		self.equipment=[]
-		self.equipped_items=[]
-		self.gold=50
-#		self.right_hand=[]
-#		self.left_hand=[]
-#		self.head=[]
+	"The Player class creates a player, and gives the Player object statistics like HP, Defense, and Attack"
+    def __init__ (self, name):
+	self.name = name
+	die = Die()
+	# print "this is the die roll"
+	self.hproll = die.roll(15, 6)
+	self.hpmax = die.total
+	self.base_attack = 3
+	self.base_defense = 2
+	self.equipment = []
+	self.equipped_items = []
+	self.gold = 50
+	# self.right_hand = []
+	# self.left_hand = []
+	# self.head = []
 
-	def attack(self):
-		attack_value=self.base_attack
-		for item in self.equipped_items:
-			attack_value+=item.attack_value
-#		return attack_value
-		hitdice=Die()
-		hitdice.roll(attack_value, 6)
-		attack=hitdice.total
-		return attack
+    def attack(self):
+	attack_value = self.base_attack
+	for item in self.equipped_items:
+		attack_value += item.attack_value
+	# return attack_value
+	hitdice = Die()
+	hitdice.roll(attack_value, 6)
+	attack = hitdice.total
+	return attack
 
-	def defend(self):
-		defense_value=self.base_defense
-		for item in self.equipped_items:
-			defense_value+=item.defense_value
-		return defense_value
+    def defend (self):
+	defense_value=self.base_defense
+	for item in self.equipped_items:
+	defense_value+=item.defense_value
+	return defense_value
 
-	def add(self, item):
-		self.equipment.append(item)
+    def add(self, item):
+	self.equipment.append(item)
 
-	def drop(self, item):
-		self.equipment.remove(item)
+    def drop(self, item):
+	self.equipment.remove(item)
 
-	def equip(self, item):
-
-		weapons=0
-		armors=0
-		for x in self.equipped_items:
-			if x.is_armor==True:
-				armors+=1
-			else:
-				weapons+=1
-
-		if len(self.equipped_items)>2:
-			self.equipped_items.pop(0)
-
-		if self.equipment.index(item):
-			if armors<=0 and item.is_armor==True:
-				self.equipped_items.append(item)
-			elif weapons<=1 and item.is_armor==False:
-				self.equipped_items.append(item)
+    def equip(self, item):
+	weapons=0
+	armors=0
+	for x in self.equipped_items:
+		if x.is_armor==True:
+			armors+=1
 		else:
-			print "You have too many of that type of item equipped. Try again."
-		# if self.equipment.index(item):
-		# self.equipped_items.append(item)
+			weapons+=1
+	if len(self.equipped_items)>2:
+		self.equipped_items.pop(0)
 
-	def unequip(self, item):
-		self.equipped_items.remove(item)
+	if self.equipment.index(item):
+		if armors<=0 and item.is_armor==True:
+			self.equipped_items.append(item)
+		elif weapons<=1 and item.is_armor==False:
+			self.equipped_items.append(item)
+	else:
+		print "You have too many of that type of item equipped. Try again."
+	# if self.equipment.index(item):
+	# self.equipped_items.append(item)
 
-	def display_inventory(self):
-		for item in self.equipment:
-			print "\t", item
-		return
+    def unequip(self, item):
+	self.equipped_items.remove(item)
 
-	def display_equipped(self):
-		print "These are your equipped items"
-		for item in self.equipped_items:
-			print "\t", item
-		return
+    def display_inventory(self):
+	for item in self.equipment:
+		print "\t", item
+	return
 
-	def buy(self, item):
-		self.equipment.append(item)
-		self.gold=self.gold-item.buy_value
+    def display_equipped(self):
+	print "These are your equipped items"
+	for item in self.equipped_items:
+		print "\t", item
+	return
 
-	def sell(self, item):
-		self.equipment.remove(item)
-		self.gold+=item.sell_value
+    def buy(self, item):
+	self.equipment.append(item)
+	self.gold=self.gold-item.buy_value
+
+    def sell(self, item):
+	self.equipment.remove(item)
+	self.gold+=item.sell_value
 
 
 ## FIX: Generate a random player name, or prompt for one.
-## COMMENT: Creates a player and instantiates the player's statistics.
-playerone=Player("Charles")
+## COMMENT: Creates a player and instantiates the player's statistics
+playerone = Player("Charles")
 #print playerone.Name
 #print "This is the player's max HP"
 #print playerone.hpmax
