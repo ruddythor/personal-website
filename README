@@ -1,0 +1,23 @@
+## FILE: /home/syrinx/LightcastlePython/README
+## AUTHOR: Brandon Betances (Copyleft 2012)
+=This README file is best read using Org-mode in GNU Emacs=
+
+* Light Castle
+** Overview
+- Light Castle is intended to be a RESTful server/client text-based RPG game, written in Python.
+
+** Source
+The upstream version of the game can be found here [fn:1]. For now, this is my fork. [fn:2]
+
+** Installation
+TODO
+
+** Known Bugs
+TODO
+
+* Changelog
+- Wed Sep 26 12:00:03 EDT 2012: Created README and added some general information about the game.
+
+* Footnotes
+[fn:1] https://github.com/jlegs/LightcastlePython
+[fn:2] https://github.com/bbetances/LightcastlePython
