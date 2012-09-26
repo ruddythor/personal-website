@@ -1,6 +1,5 @@
 #!usr/bin/env
 
-
 class Circle():
 	def __init__(self, cx, cy, r, stroke_width):
 		self.cx=cx
