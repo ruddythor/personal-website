@@ -455,7 +455,7 @@ The following items are equippable by you:"""
 
 
 #def arena():
-	
+
 
 
 
@@ -512,10 +512,6 @@ def quit():
 
 
 
-
-
-
-		
 
 
 
