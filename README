@@ -12,6 +12,8 @@
 ** Known Bugs
 - Wed Sep 26 12:36:57 EDT 2012: When running rpg.py, player always wins, presumably due to an algorithmic error.
 
+----edit by @jlegs -- this isn't actually a bug, it's just me testing things. The rat's hp is low enough that the player kills it in 1 or 2 hits.
+
 
 * Changelog
 - Wed Sep 26 12:00:03 EDT 2012: Created README and added some general information about the game.
