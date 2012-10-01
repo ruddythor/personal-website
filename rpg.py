@@ -12,6 +12,8 @@ import character
 import dice
 import equipment
 import enemy
+#test
+
 #===========================INSTANTIATES PLAYERONE OF THE PLAYER CLASS AND TESTS SOME OF THE METHODS AND VARIABLES=========================
 playerone=character.Player("Charles", 1)
 #print playerone.Name
