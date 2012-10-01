@@ -77,29 +77,26 @@ playerone.equip(lightarmor)
 #print playerone.defend()
 
 
-
-
-
-rat=enemy.Enemy("A Rat", 10, 1, 1)
+#rat=enemy.Enemy("A Rat", 10, 1, 1)
 #hitdice=Die()
 #hitdice.roll(rat.attack(), 6)
 #attack=hitdice.total
 #print attack
-print 
-print
-print rat.myrolls
-print
-print
-print rat.attack()
-print
-print "this is the rat's hp, base attack and base defense"
-print rat.hpmax, rat.base_attack, rat.base_defense
-print 
-print
-print "This is the player's HP"
-print playerone.hpmax
-print "This is a sample of player one's attack roll"
-print playerone.attack()
+#print 
+#print
+#print rat.myrolls
+#print
+#print
+#print rat.attack()
+#print
+#print "this is the rat's hp, base attack and base defense"
+#print rat.hpmax, rat.base_attack, rat.base_defense
+#print 
+#print
+#print "This is the player's HP"
+#print playerone.hpmax
+#print "This is a sample of player one's attack roll"
+#print playerone.attack()
 #print playerone.attack()
 #print playerone.attack()
 #print playerone.attack()
@@ -217,7 +214,7 @@ The following items are equippable by you:"""
 
 
 def info():
-	print """This is your character's information: #@IndentOk
+    print """This is your character's information: #@IndentOk
 	\tplayerone.level
 	\tplayerone.Name
 	\tplayerone.hpmax
