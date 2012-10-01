@@ -9,10 +9,6 @@ import enemy
 import equipment
 
 
-def __init__():
-    ''''''
-    Name="arena function"
-
 def select_enemy():
     pass
 
