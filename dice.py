@@ -6,7 +6,6 @@ Created on Sep 27, 2012
 import random
 class Die:
     def __init__(self):
-        myclass='this is the die roll class'
         self.myrolls=[]
     def __str__(self):
         return 'Dieroll'
