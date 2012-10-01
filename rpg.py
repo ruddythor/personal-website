@@ -333,9 +333,25 @@ The following items are equippable by you:"""
 #def arena():
     
 
+def info():
+	print """This is your character's information:
+	\tplayerone.level
+	\tplayerone.Name
+	\tplayerone.hpmax
+	\tplayerone.base_attack
+	\tplayerone.base_defense
+	\tplayerone.gold"""
 
-
-
+		self.level=level
+		self.Name=Name
+		die=dice.Die()
+		self.hproll=die.roll(15, 6)
+		self.hpmax=die.total
+		self.base_attack=3
+		self.base_defense=2
+		self.equipment=[]
+		self.equipped_items=[]
+		self.gold=50
 
 
 
