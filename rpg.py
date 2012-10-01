@@ -342,16 +342,9 @@ def info():
 	\tplayerone.base_defense
 	\tplayerone.gold"""
 
-		self.level=level
-		self.Name=Name
-		die=dice.Die()
-		self.hproll=die.roll(15, 6)
-		self.hpmax=die.total
-		self.base_attack=3
-		self.base_defense=2
-		self.equipment=[]
-		self.equipped_items=[]
-		self.gold=50
+#		self.equipment=[]
+#		self.equipped_items=[]
+
 
 
 
