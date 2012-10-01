@@ -183,43 +183,7 @@ print playerone.attack()
 #print playerone.attack()
 #print playerone.attack()
 
-enemy_hp=rat.hpmax
-enemy_defend=rat.defend()
-playerone_hp=playerone.hpmax
-print "Rat's HP"
-print rat.hpmax
-your_defend=playerone.defend()
-enemy_attack=rat.attack()
-your_attack=playerone.attack()
-#========================================================THE COMBAT     LOOP=======================================================
-while enemy_hp or playerone_hp >=0:
-    your_attack=your_attack-enemy_defend
-    enemy_attack=enemy_attack-your_defend    
-    #NEED A CHECK TO KEEP HP PERMANENT
-    if enemy_attack>=your_defend:
-        playerone_hp=playerone_hp-enemy_attack
-    elif your_attack>=enemy_defend:
-        enemy_hp=enemy_hp-your_attack
-    else:
-        enemy_attack=rat.attack()
-        print enemy_attack
 
-
-
-    print "This is the enemy's hp", enemy_hp
-    print "This is your hp", playerone_hp
-
-    if enemy_hp<=0:
-        print "You defeated the enemy"
-        print "enemy's hp", enemy_hp
-        print "Your hp", playerone_hp
-        break
-        #will need a function to divvy out rewards if you win
-    elif playerone_hp<=0:
-        print "You died"
-        print "enemy's hp", enemy_hp
-        print "Your hp", playerone_hp
-        break
 
 
 
@@ -330,11 +294,45 @@ The following items are equippable by you:"""
 
 
 
-#def arena():
-    
+def arena():
+    #========================================================THE COMBAT     LOOP=======================================================
+    enemy_hp=rat.hpmax
+    enemy_defend=rat.defend()
+    playerone_hp=playerone.hpmax
+    print "Rat's HP"
+    print rat.hpmax
+    your_defend=playerone.defend()
+    enemy_attack=rat.attack()
+    your_attack=playerone.attack()
+    while enemy_hp or playerone_hp >=0:
+        your_attack=your_attack-enemy_defend
+        enemy_attack=enemy_attack-your_defend    
+        #NEED A CHECK TO KEEP HP PERMANENT
+        if enemy_attack>=your_defend:
+            playerone_hp=playerone_hp-enemy_attack
+        elif your_attack>=enemy_defend:
+            enemy_hp=enemy_hp-your_attack
+        else:
+            enemy_attack=rat.attack()
+        print enemy_attack
+        print "This is the enemy's hp", enemy_hp
+        print "This is your hp", playerone_hp
+
+        if enemy_hp<=0:
+            print "You defeated the enemy"
+            print "enemy's hp", enemy_hp
+            print "Your hp", playerone_hp
+            main_menu()
+            break
+        #will need a function to divvy out rewards if you win
+        elif playerone_hp<=0:
+            print "You died"
+            print "enemy's hp", enemy_hp
+            print "Your hp", playerone_hp
+            break
 
 def info():
-	print """This is your character's information:
+	print """This is your character's information: #@IndentOk
 	\tplayerone.level
 	\tplayerone.Name
 	\tplayerone.hpmax
@@ -356,7 +354,7 @@ def quit():
 
 
 
-
+#arena()
 
 
         
