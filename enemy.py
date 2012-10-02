@@ -3,11 +3,8 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-#===========================================ESTABLISHING SOME ENEMIES==========================
 import dice
 import equipment
-
-
 
 class Enemy:
     def __init__(self, Name, hp_dice, base_attack, base_defense, xp_value, renown_value):
@@ -41,9 +38,6 @@ class Enemy:
         attack=hitdice.total
         return attack
 
-
-
-
     def defend(self):
         defense_value=self.base_defense
         for item in self.equipped_items:
@@ -64,7 +58,6 @@ class Enemy:
                 armors+=1
             else:
                 weapons+=1
-
         if len(self.equipped_items)>2:
             self.equipped_items.pop(0)
 
@@ -75,8 +68,6 @@ class Enemy:
                 self.equipped_items.append(item)
         else:
             print "You have too many of that type of item equipped. Try again."
-        # if self.equipment.index(item):
-        # self.equipped_items.append(item)
 
     def unequip(self, item):
         self.equipped_items.remove(item)

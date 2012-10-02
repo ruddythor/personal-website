@@ -9,6 +9,7 @@ import random
 
 
 def fight():
+    level_threshhold=100
     import rpg
     from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
@@ -18,7 +19,7 @@ def fight():
     enemy_defend=opponent.defend()
     playerone_hp=rpg.playerone.hpmax
     your_defend=rpg.playerone.defend()
-   
+    
     print "You are fighting "+opponent.Name, "\n\topponent's max HP:", opponent.hpmax, "\n\tYour HP:", rpg.playerone.hpmax
     while enemy_hp or playerone_hp >=0:
         enemy_attack=opponent.attack()
@@ -40,8 +41,6 @@ def fight():
             print your_attack, "<--YOUR ATTACK (after factoring defnese) VAL WAS"
             print your_defend, "<--YOUR DEFENSE VAL"
             enemy_hp=enemy_hp-your_attack
-        else:
-            enemy_attack=opponent.attack()
         print "Enemy HP:\t\t", enemy_hp
         print "Your HP:\t\t", playerone_hp, "\n\nEND OF ROUND\n--------------"
 
@@ -52,8 +51,10 @@ def fight():
             rpg.playerone.xp+=opponent.xp_value
             rpg.playerone.renown+=opponent.renown_value
             print rpg.playerone.renown, rpg.playerone.xp
-            
-            
+            if rpg.playerone.xp>=level_threshhold:
+                rpg.playerone.level+=1
+                print "**** You leveled up! ****"
+                rpg.playerone.hpmax+=rpg.playerone.hpmax*.15#NEED TO ROUND UP!!!!
             rpg.main_menu()
             break
         #will need a function to divvy out rewards if you win
