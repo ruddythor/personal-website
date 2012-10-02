@@ -6,6 +6,10 @@ Created on Oct 1, 2012
 '''
 import enemy
 
-barbarian=enemy.Enemy("A barbarian", 15, 10, 10)
-rat=enemy.Enemy("A rat", 10, 1, 1)
+barbarian=enemy.Enemy("A barbarian", 15, 8, 5, 15, 5)
+rat=enemy.Enemy("A rat", 10, 3, 1, 5, 2)
+
+
+
+
 enemylist=[barbarian, rat]

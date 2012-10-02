@@ -16,32 +16,12 @@ import arena
 
 #===========================INSTANTIATES PLAYERONE OF THE PLAYER CLASS AND TESTS SOME OF THE METHODS AND VARIABLES=========================
 playerone=character.Player("Charles", 1)
-#print playerone.Name
-#print "This is the player's max HP"
-#print playerone.hpmax
-#print "This is the player's base attack value"
-#print playerone.base_attack
-#print "This is the player's base defense value"
-#print playerone.base_defense
-#print "This is the player's attack value"
-#print playerone.attack()
-#print "This is the player's defense value"
-#print playerone.defend()
-
-#FUNCTION FOR ACTUAL COMBAT
-
-
 
 
 #======================ESTABLISHING WEAPONS AND ARMOR================================
 
 longsword=equipment.Equipment(10, 0, "long sword", "A bad-ass slayer of women and small men", False, 50, 15)
-#print "This is the longsword's attack value"
-#print longsword.attack()
 shortsword=equipment.Equipment(7, 0, "short sword", "A not-so-bad-ass slayer of women and small men", False, 25, 7)
-#print "this is the short sword's attack value"
-#print shortsword.attack()
-
 dagger=equipment.Equipment(4, 0, "dagger", "A small dagger, capable of killing someone, but only if you get really cloes to them.", False, 15, 4)
 lightarmor=equipment.Equipment(0, 5, "light armor", "A simple piece of armor that barely protects you. It is very simple looking.", True, 65, 20)
 heavyarmor=equipment.Equipment(0,15, "heavy armor", "A complex piece of armor that protects you strongly.", True, 100, 25)
@@ -64,45 +44,7 @@ playerone.add(lightarmor)
 playerone.add(heavyarmor)
 playerone.equip(shortsword)
 playerone.equip(lightarmor)
-#playerone.display_inventory()
-#playerone.display_equipped()
-
-#print "NOW, this is the player's attack value, because we equipped a short sword"
-#print playerone.attack()
-#playerone.unequip(shortsword)
-#playerone.equip(longsword)
-#playerone.display_equipped()
-#print "NOW, this is the player's attack value, because we equipped a Long sword"
-#print playerone.attack()
-#print playerone.defend()
-
-
-#rat=enemy.Enemy("A Rat", 10, 1, 1)
-#hitdice=Die()
-#hitdice.roll(rat.attack(), 6)
-#attack=hitdice.total
-#print attack
-#print 
-#print
-#print rat.myrolls
-#print
-#print
-#print rat.attack()
-#print
-#print "this is the rat's hp, base attack and base defense"
-#print rat.hpmax, rat.base_attack, rat.base_defense
-#print 
-#print
-#print "This is the player's HP"
-#print playerone.hpmax
-#print "This is a sample of player one's attack roll"
-#print playerone.attack()
-#print playerone.attack()
-#print playerone.attack()
-#print playerone.attack()
-
-
-
+#playerone.equip(shortsword)
 
 
 
@@ -194,9 +136,6 @@ You have the following items to sell:"""
     sell_item=input(">>")
 
 
-
-
-
 def change_equipment():
     print """
 
@@ -209,8 +148,6 @@ The following items are equippable by you:"""
         print "\t", x
     print "\nWhat would you like to equip?"
     equip_this=input(">>")
-
-
 
 
 def info():
@@ -226,20 +163,10 @@ def info():
 #		self.equipped_items=[]
 
 
-
-
 def quit():
     sys.exit()
 
 
 #main_menu()
 
-
-
 arena.fight()
-
-
-        
-
-
-

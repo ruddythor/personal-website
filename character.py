@@ -17,6 +17,8 @@ class Player:
         self.equipment=[]
         self.equipped_items=[]
         self.gold=50
+        self.xp=0
+        self.renown=0
 #        self.right_hand=[]
 #        self.left_hand=[]
 #        self.head=[]
@@ -63,8 +65,7 @@ class Player:
                 self.equipped_items.append(item)
         else:
             print "You have too many of that type of item equipped. Try again."
-        # if self.equipment.index(item):
-        # self.equipped_items.append(item)
+
 
     def unequip(self, item):
         self.equipped_items.remove(item)
