@@ -5,7 +5,7 @@ Created on Oct 2, 2012
 @author: josh
 '''
 import player
-
+import menus
 def buy():
     global available_items
     print "\n\n\n\n\nThe following items are available for purchase:"
@@ -18,11 +18,8 @@ def buy():
         player.playerone.add(player.available_items[purchase_item])
         player.playerone.gold=player.playerone.gold-player.available_items[purchase_item].buy_value
         print "You now have %i gold" % player.playerone.gold
-#    import menuclass
-    import menus
     menus.main()
-#    menu=menuclass.Menu()
-#    menu.main()
+
 
 def sell():
     print "\n\n\n\n\nYou have the following items to sell:"
@@ -30,21 +27,12 @@ def sell():
         print "\t", x, "\t", x.sell_value, "gold"
     print "Enter the number of the item you'd like to sell."
     sell_item=input(">>")
-#    menu=menuclass.Menu()
-#    menu.main()
-    import menus
     menus.main()
     
     
 def main():
-    global available_items
-    print """
-
-
-
-
-
-Enter 1 to buy something. Enter 2 to sell something."""
+#    global available_items
+    print """\n\n\n\n\nEnter 1 to buy something. Enter 2 to sell something."""
     buy_or_sell=input("\n>>")
     if buy_or_sell==1:
         buy()

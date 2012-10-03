@@ -5,6 +5,10 @@ Created on Oct 3, 2012
 @author: josh
 '''
 import player
+import store
+import arena
+import sys
+
 def main():
     print """\n\n\n\n
     You have the following options:
@@ -16,17 +20,15 @@ def main():
                              Enter a number and press enter."""
     player_choice=input("\n>>")
     if player_choice==1:
-        import store
         store.main()
     elif player_choice==2:
-        import arena
         arena.fight()
     elif player_choice==3:
         info()
     elif player_choice==4:
         change_equipment()
     elif player_choice==5:
-        quit()
+        endgame()
 #    else:
 #        main()
  
@@ -47,10 +49,7 @@ def info():
     \tplayer.playerone.base_defense
     \tplayer.playerone.gold"""
     main()
-#        self.equipment=[]
-#        self.equipped_items=[]
 
-def quit():
-    import sys
+def endgame():
     sys.exit()
 
