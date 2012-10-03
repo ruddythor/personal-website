@@ -4,10 +4,9 @@ Created on Oct 2, 2012
 
 @author: josh
 '''
-
+import player
 
 def buy():
-    import player
     global available_items
     print "\n\n\n\n\nThe following items are available for purchase:"
     for key in player.available_items:
@@ -26,13 +25,11 @@ def buy():
 #    menu.main()
 
 def sell():
-    import player
     print "\n\n\n\n\nYou have the following items to sell:"
     for x in player.playerone.equipment:
         print "\t", x, "\t", x.sell_value, "gold"
     print "Enter the number of the item you'd like to sell."
     sell_item=input(">>")
-    import menuclass
 #    menu=menuclass.Menu()
 #    menu.main()
     import menus

@@ -4,7 +4,6 @@ Created on Oct 1, 2012
 @author: josh
 '''
 import dice
-import equipment
 
 class Enemy:
     def __init__(self, Name, hp_dice, base_attack, base_defense, xp_value, renown_value):

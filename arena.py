@@ -4,14 +4,12 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-import equipment
+import player
 import random
 #import menuclass
 
 def fight():
-    import menuclass
     level_threshhold=100
-    import player
     from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
     opponent=random.choice(enemylist)
@@ -58,12 +56,10 @@ def fight():
                 level_threshhold=level_threshhold*.2+level_threshhold
             import menus
             menus.main()        
-            #rpg.main_menu()
             break
         #will need a function to divvy out rewards if you win
         elif playerone_hp<=0:
             print "================You died================"
             print "\tenemy's hp\t\t", enemy_hp
             print "\tYour hp\t\t", playerone_hp
-            #rpg.main_menu()
             break

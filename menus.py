@@ -4,9 +4,7 @@ Created on Oct 3, 2012
 
 @author: josh
 '''
-#import rpg
-#import arena
-
+import player
 def main():
     print """\n\n\n\n
     You have the following options:
@@ -33,7 +31,6 @@ def main():
 #        main()
  
 def change_equipment():
-#    import rpg
     print """\n\n\n\n\nThe following items are equippable by you:"""
     print
     for x in player.playerone.equipment:
@@ -42,7 +39,6 @@ def change_equipment():
     equip_this=input(">>")
 
 def info():
-#    import rpg
     print """This is your character's information:
     \tplayer.playerone.level
     \tplayer.playerone.Name
