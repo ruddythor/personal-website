@@ -6,6 +6,16 @@ Created on Oct 2, 2012
 '''
 import player
 import menus
+
+def main():
+    print "\n\n\n\n\nEnter 1 to buy something. Enter 2 to sell something."
+    buy_or_sell=input("\n>>")
+    if buy_or_sell==1:
+        buy()
+    elif buy_or_sell==2:
+        sell()
+
+
 def buy():
     global available_items
     print "\n\n\n\n\nThe following items are available for purchase:"
@@ -28,13 +38,3 @@ def sell():
     print "Enter the number of the item you'd like to sell."
     sell_item=input(">>")
     menus.main()
-    
-    
-def main():
-#    global available_items
-    print """\n\n\n\n\nEnter 1 to buy something. Enter 2 to sell something."""
-    buy_or_sell=input("\n>>")
-    if buy_or_sell==1:
-        buy()
-    elif buy_or_sell==2:
-        sell()

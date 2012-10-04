@@ -12,8 +12,6 @@ import dice
 global level_threshhold
 level_threshhold=100
 def fight():
-#    global level_threshhold
-#    level_threshhold=100
     from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
     opponent=random.choice(enemylist)

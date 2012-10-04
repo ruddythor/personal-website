@@ -29,8 +29,8 @@ def main():
         change_equipment()
     elif player_choice==5:
         endgame()
-#    else:
-#        main()
+    else:
+        main()
  
 def change_equipment():
     print """\n\n\n\n\nThe following items are equippable by you:"""
@@ -39,6 +39,7 @@ def change_equipment():
         print "\t", x
     print "\nWhat would you like to equip?"
     equip_this=input(">>")
+    main()
 
 def info():
     print """This is your character's information:
