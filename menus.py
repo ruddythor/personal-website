@@ -35,20 +35,20 @@ def main():
 def change_equipment():
     print """\n\n\n\n\nThe following items are equippable by you:"""
     print
+    i=1
     for x in player.playerone.equipment:
-        print "\t", x
+        print "\t",i, x
+        i+=1
     print "\nWhat would you like to equip?"
     equip_this=input(">>")
+    player.playerone.equip(player.playerone.equipment[equip_this-1])
     main()
 
 def info():
-    print """This is your character's information:
-    \tplayer.playerone.level
-    \tplayer.playerone.Name
-    \tplayer.playerone.hpmax
-    \tplayer.playerone.base_attack
-    \tplayer.playerone.base_defense
-    \tplayer.playerone.gold"""
+    print "This is your character's information:\n\tName: ", player.playerone.Name," \n\tlevel: ", player.playerone.level, "\n\thpmax: ", player.playerone.hpmax, "\n\tbase attack: ", player.playerone.base_attack, "\n\tbase defense vale: ", player.playerone.base_defense, "\n\tgold: ", player.playerone.gold
+    print "These are your equipped items:"
+    for item in player.playerone.equipped_items:
+        print "\t", item, "attack value: ", item.attack_value, "defense value: ", item.defense_value
     main()
 
 def endgame():
