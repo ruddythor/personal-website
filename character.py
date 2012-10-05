@@ -4,7 +4,7 @@ Created on Sep 27, 2012
 @author: josh
 '''
 import dice
-#======================================CREATES THE PLAYER CLASS WITH <ATTACK> <DEFEND> <ADD> <DROP> <EQUIP> <UNEQUIP> <DISPLAY_INVENTORY> AND <DISPLAY_EQUIPPED> METHODS=========================================================
+
 class Player:
     def __init__(self, Name, level):
         self.level=level
@@ -46,7 +46,6 @@ class Player:
         self.equipment.remove(item)
 
     def equip(self, item):
-
         weapons=0
         armors=0
         for x in self.equipped_items:
@@ -54,31 +53,29 @@ class Player:
                 armors+=1
             else:
                 weapons+=1
-
         if len(self.equipped_items)>2:
             self.equipped_items.pop(0)
+#            self.equipped_items.append(item)
 
-        if self.equipment.index(item):
-            if armors<=0 and item.is_armor==True:
-                self.equipped_items.append(item)
-            elif weapons<=1 and item.is_armor==False:
-                self.equipped_items.append(item)
-        else:
-            print "You have too many of that type of item equipped. Try again."
-
+        if armors<2 and item.is_armor==True:
+            self.equipped_items.append(item)
+        if weapons<2 and item.is_armor==False:
+            self.equipped_items.append(item)
 
     def unequip(self, item):
         self.equipped_items.remove(item)
 
     def display_inventory(self):
+        print "\nThese are the items in your inventory:\n"
         for item in self.equipment:
             print "\t", item
         return
 
     def display_equipped(self):
-        print "These are your equipped items"
+        print "\nThese are your equipped items:\n"
         for item in self.equipped_items:
-            print "\t", item
+            print "\t", item, "attack value: ", item.attack_value, "defense value: ", item.defense_value
+#            print "\t", item
         return
 
     def buy(self, item):
