@@ -33,8 +33,15 @@ def buy():
 
 def sell():
     print "\n\n\n\n\nYou have the following items to sell:"
+    i=1
     for x in player.playerone.equipment:
-        print "\t", x, "\t", x.sell_value, "gold"
+        print "\t", i, ":", x, "\t", x.sell_value, "gold"
+        i+=1
     print "Enter the number of the item you'd like to sell."
     sell_item=input(">>")
+    item_sold=player.playerone.equipment[sell_item-1]
+    player.playerone.gold+=item_sold.sell_value
+    if item_sold in player.playerone.equipped_items:
+        player.playerone.unequip(item_sold)
+    player.playerone.drop(item_sold)
     menus.main()
