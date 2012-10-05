@@ -38,14 +38,16 @@ def fight():
             print "Player goes first."
             playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
-                check_for_levelup()
                 player.playerone.xp+=opponent.xp_value
-                print player.playerone.xp, "\nyou killed the enemy, returning to main menu"
+                player.playerone.gold+=opponent.gold
+                player.playerone.renown+=opponent.renown_value
+                check_for_levelup()
+                print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
                 break
 
             enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
-                print "You died. Returning to main menu"
+                print "You were defeated. Returning to main menu"
                 menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
@@ -54,13 +56,15 @@ def fight():
             print "Opponent goes first."
             enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
-                print"You died. Returning to main menu"
+                print"You were defeated. Returning to main menu"
                 menus.main()
             playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
-                check_for_levelup()
                 player.playerone.xp+=opponent.xp_value
-                print player.playerone.xp, "\nyou killed the enemy, returning to main menu"
+                player.playerone.gold+=opponent.gold
+                player.playerone.renown+=opponent.renown_value
+                check_for_levelup()
+                print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
                 menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
@@ -89,7 +93,7 @@ def check_for_levelup():
     if player.playerone.xp>=level_threshhold:
         print "Checking for level up"
         player.playerone.level+=1
-        player.playerone.hpmax+=player.playerone.hpmax*.15#NEED TO ROUND UP!!!!
-        level_threshhold=level_threshhold*.2+level_threshhold
-        print "**** You leveled up! ****\n your new level is: ", player.playerone.level, "your new level threshhold", level_threshhold
+        player.playerone.hpmax+=int(player.playerone.hpmax*.15)
+        level_threshhold=int(level_threshhold*.2+level_threshhold)
+        print "**** You leveled up! ****\n your new level is: ", player.playerone.level, "your new level threshhold", level_threshhold, "your new hp is: ", player.playerone.hpmax
         player.playerone.xp=0
