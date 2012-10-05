@@ -18,6 +18,8 @@ class Enemy:
         self.base_defense=base_defense
         self.equipment=[]
         self.equipped_items=[]
+        self.goldroll=die.roll(5, 6)
+        self.gold=die.total
 #        self.right_hand=[]
 #        self.left_hand=[]
 #        self.head=[]
