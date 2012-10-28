@@ -15,7 +15,6 @@ def fight():
     from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
     opponent=random.choice(enemylist)
-    global enemy_hp, playerone_hp
     opponent.hpmax=opponent.hpmax
     enemy_hp=opponent.hpmax
     enemy_defend=opponent.defend()
@@ -36,7 +35,7 @@ def fight():
         
         if player_initiative > opponent_initiative:
             print "Player goes first."
-            playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
+            enemy_hp = playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
                 player.playerone.xp+=opponent.xp_value
                 player.playerone.gold+=opponent.gold
@@ -45,47 +44,48 @@ def fight():
                 print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
                 break
 
-            enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
+            playerone_hp = enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
                 print "You were defeated. Returning to main menu"
-                menus.main()
+                #menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
         
         elif opponent_initiative>player_initiative:
             print "Opponent goes first."
-            enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
+            playerone_hp = enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
                 print"You were defeated. Returning to main menu"
-                menus.main()
-            playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
+                #menus.main()
+            enemy_hp = playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
                 player.playerone.xp+=opponent.xp_value
                 player.playerone.gold+=opponent.gold
                 player.playerone.renown+=opponent.renown_value
                 check_for_levelup()
                 print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
-                menus.main()
+                #menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
-        print "END OF TURN\n-----------------------------"
-    menus.main()
+        print "END OF TURN\n--------------------------"
+	
+    #menus.main()
 
-def enemy_attack_check(enemy_attack, your_defend, player_hp, enemy_hp):
-    global playerone_hp
+def enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp):
     if enemy_attack>your_defend:
         print "opponent lands attack"
         enemy_attack=enemy_attack-your_defend
-        playerone_hp=playerone_hp-enemy_attack
-        print playerone_hp
+        playeroneHp=playerone_hp-enemy_attack
+        print playeroneHp
+	return playeroneHp
 
-def playerone_attack_check(your_attack, enemy_defend, enem_hp, playerone_hp):
-    global enemy_hp
+def playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp):
     if your_attack>enemy_defend:
         print "player lands attack"
         your_attack=your_attack-enemy_defend
-        enemy_hp=enemy_hp-your_attack
-        print enemy_hp
+        enemyHp=enemy_hp-your_attack
+        print enemyHp
+	return enemyHp
 
 def check_for_levelup():
     print "about to check for level up"

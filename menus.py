@@ -7,7 +7,7 @@ Created on Oct 3, 2012
 import player
 import store
 import arena
-import sys
+
 
 def main():
     print """\n\n\n\n
@@ -28,7 +28,8 @@ def main():
     elif player_choice==4:
         change_equipment()
     elif player_choice==5:
-        endgame()
+        endgame = True
+	return endgame
     else:
         main()
  
@@ -42,7 +43,7 @@ def change_equipment():
     print "\nWhat would you like to equip?"
     equip_this=input(">>")
     player.playerone.equip(player.playerone.equipment[equip_this-1])
-    main()
+    #main()
 
 def info():
     print "This is your character's information:\n\tName: ", player.playerone.Name," \n\tlevel: ", player.playerone.level, "\n\thpmax: ", player.playerone.hpmax, "\n\tbase attack: ", player.playerone.base_attack, "\n\tbase defense vale: ", player.playerone.base_defense, "\n\tgold: ", player.playerone.gold
@@ -51,8 +52,6 @@ def info():
 #        print "\t", item, "attack value: ", item.attack_value, "defense value: ", item.defense_value
     player.playerone.display_inventory()
     advance_screen=raw_input("PRESS ENTER TO ADVANCE TO MAIN MENU")
-    main()
+    #main()
 
-def endgame():
-    sys.exit()
 
