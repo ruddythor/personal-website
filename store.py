@@ -5,7 +5,7 @@ Created on Oct 2, 2012
 @author: josh
 '''
 import player
-import menus
+#import menus
 
 def main():
     print "\n\n\n\n\nEnter 1 to buy something. Enter 2 to sell something."
@@ -28,7 +28,7 @@ def buy():
         player.playerone.add(player.available_items[purchase_item])
         player.playerone.gold=player.playerone.gold-player.available_items[purchase_item].buy_value
         print "You now have %i gold" % player.playerone.gold
-    menus.main()
+#    menus.main()
 
 
 def sell():
@@ -44,4 +44,4 @@ def sell():
     if item_sold in player.playerone.equipped_items:
         player.playerone.unequip(item_sold)
     player.playerone.drop(item_sold)
-    menus.main()
+#    menus.main()

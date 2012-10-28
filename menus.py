@@ -45,14 +45,16 @@ def change_equipment():
     main()
 
 def info():
-    print "This is your character's information:\n\tName: ", player.playerone.Name," \n\tlevel: ", player.playerone.level, "\n\thpmax: ", player.playerone.hpmax, "\n\tbase attack: ", player.playerone.base_attack, "\n\tbase defense vale: ", player.playerone.base_defense, "\n\tgold: ", player.playerone.gold
+    print "This is your character's information:\n\tName: ", player.playerone.Name, "\n\tlevel: ", player.playerone.level, "\n\thpmax: ", player.playerone.hpmax, "\n\tbase attack: ", player.playerone.base_attack, "\n\tbase defense vale: ", player.playerone.base_defense, "\n\tgold: ", player.playerone.gold
     player.playerone.display_equipped()
 #    for item in player.playerone.equipped_items:
 #        print "\t", item, "attack value: ", item.attack_value, "defense value: ", item.defense_value
     player.playerone.display_inventory()
-    advance_screen=raw_input("PRESS ENTER TO ADVANCE TO MAIN MENU")
+    advance_screen=raw_input("PRESS ENTER TO ADVANCE TO MAIN MENU\n\n")
     main()
 
 def endgame():
+    global gameover
+    gameover=True
     sys.exit()
 

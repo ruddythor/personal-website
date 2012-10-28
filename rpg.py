@@ -6,4 +6,13 @@ Created on Sep 27, 2012
 '''
 
 import menus
-menus.main()
+#import wx
+#program = wx.App()
+#window=wx.Frame(menus.Main())
+#window.Show()
+#program.MainLoop()
+global gameover
+gameover=False
+while gameover==False:
+    menus.main()
+

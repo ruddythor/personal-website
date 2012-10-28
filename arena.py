@@ -6,7 +6,7 @@ Created on Oct 1, 2012
 '''
 import player
 import random
-import menus
+#import menus
 import dice
 
 global level_threshhold
@@ -48,7 +48,7 @@ def fight():
             enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
                 print "You were defeated. Returning to main menu"
-                menus.main()
+#                menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
         
@@ -57,7 +57,7 @@ def fight():
             enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
             if playerone_hp<=0:
                 print"You were defeated. Returning to main menu"
-                menus.main()
+#                menus.main()
             playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
                 player.playerone.xp+=opponent.xp_value
@@ -65,11 +65,11 @@ def fight():
                 player.playerone.renown+=opponent.renown_value
                 check_for_levelup()
                 print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
-                menus.main()
+#                menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
         print "END OF TURN\n-----------------------------"
-    menus.main()
+#    menus.main()
 
 def enemy_attack_check(enemy_attack, your_defend, player_hp, enemy_hp):
     global playerone_hp
