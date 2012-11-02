@@ -6,28 +6,33 @@ Created on Oct 3, 2012
 '''
 import player
 import store
-import arena
+import fight
+import generator
 
 
 def main():
     print """\n\n\n\n
     You have the following options:
-    \t1: Enter the store.
-    \t2: Enter the arena to fight.
-    \t3: Display player information.
-    \t4: Change weapon and armor loadout.
-    \t5: Quit
+    \t1: Create your character.
+    \t2: Enter the store.
+    \t3: Enter the arena to fight.
+    \t4: Display player information.
+    \t5: Change weapon and armor loadout.
+    \t6: Quit
                              Enter a number and press enter."""
     player_choice=input("\n>>")
     if player_choice==1:
-        store.main()
+	character = generator.Character()
+	player = character.genChar()	
     elif player_choice==2:
-        arena.fight()
+        store.main()
     elif player_choice==3:
-        info()
+        arena.fight()
     elif player_choice==4:
-        change_equipment()
+        info()
     elif player_choice==5:
+        change_equipment()
+    elif player_choice==6:
         endgame = True
 	return endgame
     else:
