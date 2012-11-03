@@ -12,12 +12,12 @@ import dice
 global level_threshhold
 level_threshhold=100
 def fight():
-    from enemylist import enemylist
+   # from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
-    opponent=random.choice(enemylist)
-    opponent.hpmax=opponent.hpmax
-    enemy_hp=opponent.hpmax
-    enemy_defend=opponent.defend()
+   # opponent=random.choice(enemylist)
+  #  opponent.hpmax=opponent.hpmax
+  #  enemy_hp=opponent.hpmax
+  #  enemy_defend=opponent.defend()
     playerone_hp=player.playerone.hpmax
     your_defend=player.playerone.defend()
     print "You are fighting "+opponent.Name, "\n\tOpponent's max HP:", opponent.hpmax, "\n\tYour HP:", player.playerone.hpmax

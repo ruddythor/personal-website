@@ -9,9 +9,8 @@ class Player:
     def __init__(self, Name, level):
         self.level=level
         self.Name=Name
-        die=dice.Die()
-        self.hproll=die.roll(15, 6)
-        self.hpmax=die.total
+        die=diceRoll.Die()
+        self.hpmax=die.roll(15, 6)
         self.base_attack=3
         self.base_defense=2
         self.equipment=[]
@@ -28,9 +27,8 @@ class Player:
         for item in self.equipped_items:
             attack_value+=item.attack_value
 #        return attack_value
-        hitdice=dice.Die()
-        hitdice.roll(attack_value, 6)
-        attack=hitdice.total
+        hitdice=diceRoller.Die()
+        attack = hitdice.roll(attack_value, 6)
         return attack
 
     def defend(self):

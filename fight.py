@@ -9,8 +9,8 @@ Created on Oct 28, 2012
 import player
 import random
 import menus
-import DiceRoller
-import enemyGen
+import diceRoll
+import generator
 
 #display battle menu... i.e. attack, item, magic, surrender
 #attack option runs the round() module
@@ -30,37 +30,77 @@ import enemyGen
 #surrender option will abandon the battle and exit to the menus.main() module
 def battle(self):
 	endFight = False
-	generator = enemyGen.Generator()
-	enemyName,  =generator.getEnemy()
+	generator = generator.Generator()
+	enemyName, enemyDesc, enemyHP, enemyBaseAttack, enemyBaseDefense, xpVal, renownVal, goldDie = generator.getEnemy()
+	print "A", enemyName, " has appeared. "	
+	#if playerLevel > enemyLevel
+		#print "\nThe", enemyName, "looks kind of weak."
+	#elif playerLevel < enemyLevel
+		#if enemyLevel-playerLevel > 2
+			#print "\nThe", enemyName, "looks pretty tough."
+		#else:
+			#print "\nThe", enemyNem, "should be a decent challenge."
+	#else:
+		#print "\nThe 
+	die = diceRoll.die()
+	playerInit = 0
+	enemyInit = 0
+	while playerInit == enemyInit	
+		playerInit = die.roll(1, 20)
+		enemyInit = die.roll(1, 20)
 	while endFight != True
-		batRound()
-	
+		pDamage, eDamage, endFight = batRound(playerInit, enemyInit, playerAttack, playerDefense, enemyAttack, enemyDefense)
+		pTotDamage += pDamage
+		eTotDamage += eDamage
+		if enemyHP-pTotDamage <= 0
+			playerWin()
+			endFight = True
+		elif playerHP-eTotDamage <= 0
+			playerLoss()
+			endFight = True
+		
 
-#while endFight != True
-#	battle ---- call the round function
-#round() establishes initiative and calls playerTurn() or enemyTurn() appropriately
-#after functions are performed, a check decides if the
-#
-#
+def batRound(self, playerInit, enemyInit, playerAttack, playerDefense, enemyAttack, enemyDefense):
+	battleEnd = False
+	if playerInit > enemyInit
+	    	pDamage, battleEnd = playerTurn(battleEnd, playerAttack, enemyDefense)
+		eDamage = enemyTurn(enemyAttack, playerDefense)
+		return battleEnd
+	else:
+	        eDamage = enemyTurn(enemyAttack, playerDefense)
+		pDamage, battleEnd = playerTurn(battleEnd, playerAttack, enemyDefense)
+		return battleEnd
+	
+def playerTurn(self, battleEnd, playerAttack, enemyDefense):
+	choice = 0
+	while choice < 1 or > 4		
+		print "\n\t\tBATTLE MENU\n\t1) Attack\n\t2) Item\n\t3) Magic\n\t4) Surrender"
+		choice = input(">>")
+		if choice == 1:
+			pDamage = playerAttack(playerAttack, enemyDefense)
+			return pDamage
+		elif choice == 2:
+			useItem()
+		elif choice == 3:
+			useSpell()
+		elif choice == 4:
+			battleEnd = retreat()
+			return battleEnd
+		else:
+			print "That is not a valid choice. Please re-enter your choice."
+	#check enemyHP to see if it remains greater than 0
+	#if so, continue battle sequence by returning the battleEnd = False value to calling function and enemy's current HP
 
-def batRound(self):
-	die = DiceRoller.die()
-	playerInit, enemyInit
-	playerAttack, enemyAttack, playerDamage, enemyDamage
-	
-	'''
-	
-	LOGIC for battle round
-	--while playerInitiative == enemyInitiative -> get random rolls for initiative for player and enemy
-	----compare initiative rolls to see who is higher
-	 if playerInitiative > enemyInitiative
-	------playerRound(check playerAttack to see if attack is landed, return playerDamage)
-	------enemyRound(check enemyAttack to see if attack is landed, return enemyDamage)
-	 else
-	------enemyRound(same as above)
-	------playerRound(same as above)
-	
-	'''
-	
 
-
+def retreat(self, battleEnd):
+	choice = 0
+	while choice < 1 or choice > 2
+	    print "Do you really want to retreat from the battle...\n1) yes\n2) no"
+	    choice = input(">>")
+	    if choice == 1
+		battleEnd = True
+		return battleEnd
+	    elif choice == 2
+		break
+	    else:
+		"Invalid input."

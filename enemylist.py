@@ -12,8 +12,8 @@ Created on Oct 28, 2012
             #begin list of foes
 	    #", [    1,                 2,           3,  4, 5,  6, 7, 8]"
 	    #", ['barbarian', "A brutish barbarian", 15, 8, 5, 15, 5, 5]"
-enemylist = [  
+enemylist = [   ['barbarian', "A brutish barbarian", 15, 8, 5, 15, 5, 5], ['rat', "A fairly weak rat", 10, 3, 1, 5, 2, 2], 
+                ['soldier', "A well-trained soldier", 17, 9, 7, 17, 8, 10] 
 	    ]#end of list of foes
 
-		#['barbarian', "A brutish barbarian", 15, 8, 5, 15, 5, 5], ['rat', "A fairly weak rat", 10, 3, 1, 5, 2, 2], 
-                #['soldier', "A well-trained soldier", 17, 9, 7, 17, 8, 10]
+		
