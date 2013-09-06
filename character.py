@@ -3,13 +3,13 @@ Created on Sep 27, 2012
 
 @author: josh
 '''
-import dice
+from dice import Die
 
 class Player:
     def __init__(self, Name, level):
         self.level=level
         self.Name=Name
-        die=dice.Die()
+        die=Die()
         self.hproll=die.roll(15, 6)
         self.hpmax=die.total
         self.base_attack=3
@@ -19,16 +19,14 @@ class Player:
         self.gold=50
         self.xp=0
         self.renown=0
-#        self.right_hand=[]
-#        self.left_hand=[]
-#        self.head=[]
+
 
     def attack(self):
         attack_value=self.base_attack
         for item in self.equipped_items:
             attack_value+=item.attack_value
 #        return attack_value
-        hitdice=dice.Die()
+        hitdice=Die()
         hitdice.roll(attack_value, 6)
         attack=hitdice.total
         return attack
