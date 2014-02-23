@@ -33,8 +33,8 @@ def fight():
 
             enemy_attacks(opponent, playerone)
             if playerone.current_hp <= 0:
+                playerone.current_hp = playerone.hpmax
                 print "You were defeated. Returning to main menu"
-#                menus.main()
                 break
             print "Your hp: ", playerone.current_hp, "Enemy's hp: ", opponent.current_hp
         
@@ -42,20 +42,15 @@ def fight():
             print "Opponent goes first."
             enemy_attacks(opponent, playerone)
             if playerone.current_hp <= 0:
+                playerone.current_hp = playerone.hpmax
                 print"You were defeated. Returning to main menu"
-#                menus.main()
+
             player_attacks(playerone, opponent)
             if opponent.current_hp <= 0:
-                playerone.xp+=opponent.xp_value
-                playerone.gold+=opponent.gold
-                playerone.renown+=opponent.renown_value
-                check_for_levelup(playerone)
-                print playerone.xp, "\nyou defeated the enemy, returning to main menu"
-#                menus.main()
+                won_fight(playerone, opponent)
                 break
             print "Your hp: ", playerone.current_hp, "Enemy's hp: ", opponent.current_hp
         print "END OF TURN\n-----------------------------"
-#    menus.main()
 
 
 
@@ -77,7 +72,8 @@ def won_fight(player, opponent):
     player.gold += opponent.gold
     player.renown += opponent.renown_value
     check_for_levelup(player)
-    print player.xp, "\nyou defeated the enemy, returning to main menu"
+    player.current_hp = player.hpmax
+    print "Your XP:", player.xp, "\nyou defeated the enemy, returning to main menu"
 
 
 
