@@ -30,16 +30,15 @@ def main():
     elif player_choice==5:
         endgame()
     else:
-        gameover = True
-        return gameover
- 
+        main()
+
+
 def change_equipment():
     print """\n\n\n\n\nThe following items are equippable by you:"""
     print
-    i=1
-    for x in player.playerone.equipment:
-        print "\t",i, x
-        i+=1
+    for index, item in enumerate(player.playerone.equipment):
+        print "\t %r: %r" % (int(index)+1, item)
+
     print "\nWhat would you like to equip?"
     equip_this=input(">>")
     player.playerone.equip(player.playerone.equipment[equip_this-1])
@@ -63,4 +62,4 @@ def endgame():
     global gameover
     gameover=True
     sys.exit()
-
+#    return gameover

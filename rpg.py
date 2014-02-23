@@ -11,7 +11,7 @@ import menus
 #window=wx.Frame(menus.Main())
 #window.Show()
 #program.MainLoop()
-global gameover
+
 gameover=False
 while gameover==False:
     menus.main()
