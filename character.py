@@ -5,13 +5,13 @@ Created on Sep 27, 2012
 '''
 from dice import Die
 
-class Player:
-    def __init__(self, Name, level):
+class Player():
+    def __init__(self, name, level):
         self.level=level
-        self.Name=Name
-        die=Die()
-        self.hproll=die.roll(15, 6)
-        self.hpmax=die.total
+        self.name=name
+        die = Die()
+        self.hpmax=die.roll(15, 6)
+        self.current_hp = self.hpmax
         self.base_attack=3
         self.base_defense=2
         self.equipment=[]
@@ -25,10 +25,8 @@ class Player:
         attack_value=self.base_attack
         for item in self.equipped_items:
             attack_value+=item.attack_value
-#        return attack_value
-        hitdice=Die()
-        hitdice.roll(attack_value, 6)
-        attack=hitdice.total
+        dice=Die()
+        attack=dice.roll(attack_value, 6)
         return attack
 
     def defense_value(self):

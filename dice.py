@@ -5,7 +5,7 @@ Created on Sep 27, 2012
 @author: josh
 '''
 import random
-class Die:
+class Die():
     def __str__(self):
         return 'Dieroll'
     def __repr__(self):

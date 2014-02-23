@@ -6,8 +6,7 @@ Created on Oct 1, 2012
 '''
 from player import playerone
 import random
-#import menus
-import dice
+from dice import Die
 
 global level_threshhold
 level_threshhold=100
@@ -18,21 +17,14 @@ def fight():
     global enemy_hp, playerone_hp
     opponent.hpmax=opponent.hpmax
     enemy_hp=opponent.hpmax
-    enemy_defend=opponent.defense_value()
     playerone_hp= playerone.hpmax
-    your_defend=player.playerone.defense_value()
+
     print "You are fighting "+opponent.Name, "\n\tOpponent's max HP:", opponent.hpmax, "\n\tYour HP:", playerone.hpmax
 
-    while enemy_hp or playerone_hp >=0:
-        enemy_attack=opponent.attack()
-        your_attack=player.playerone.attack()
-        print
-        player_initiative_roll=dice.Die()
-        opponent_initiative_roll=dice.Die()
-        player_initiative_roll.roll(1, 20)
-        player_initiative=player_initiative_roll.total
-        opponent_initiative_roll.roll(1,20)
-        opponent_initiative=opponent_initiative_roll.total
+    while enemy_hp > 0 or playerone_hp > 0:
+        dice = Die()
+        player_initiative = dice.roll(1, 21)
+        opponent_initiative = dice.roll(1, 21)
         
         if player_initiative > opponent_initiative:
             print "Player goes first."

@@ -3,23 +3,20 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-import dice
+from dice import Die
 
-class Enemy:
+class Enemy():
     def __init__(self, Name, hp_dice, base_attack, base_defense, xp_value, renown_value):
         self.Name=Name
-        die=dice.Die()
         self.xp_value=xp_value
         self.renown_value=renown_value
-        self.hproll=die.roll(hp_dice, 6)
-        self.myrolls=die.myrolls
-        self.hpmax=die.total
+        dice = Die()
+        self.hpmax=dice.roll(hp_dice, 6)
         self.base_attack=base_attack
         self.base_defense=base_defense
         self.equipment=[]
         self.equipped_items=[]
-        self.goldroll=die.roll(5, 6)
-        self.gold=die.total
+        self.gold=dice.roll(5, 6)
 #        self.right_hand=[]
 #        self.left_hand=[]
 #        self.head=[]
@@ -33,13 +30,11 @@ class Enemy:
         attack_value=self.base_attack
         for item in self.equipped_items:
             attack_value+=item.attack_value
-#        return attack_value
-        hitdice=dice.Die()
-        hitdice.roll(attack_value, 6)
-        attack=hitdice.total
+        dice=dice.Die()
+        attack=dice.roll(attack_value, 6)
         return attack
 
-    def defend(self):
+    def defense_value(self):
         defense_value=self.base_defense
         for item in self.equipped_items:
             defense_value+=item.defense_value
