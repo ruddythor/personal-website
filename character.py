@@ -31,7 +31,7 @@ class Player:
         attack=hitdice.total
         return attack
 
-    def defend(self):
+    def defense_value(self):
         defense_value=self.base_defense
         for item in self.equipped_items:
             defense_value+=item.defense_value

@@ -4,7 +4,7 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-import player
+from player import playerone
 import random
 #import menus
 import dice
@@ -18,10 +18,10 @@ def fight():
     global enemy_hp, playerone_hp
     opponent.hpmax=opponent.hpmax
     enemy_hp=opponent.hpmax
-    enemy_defend=opponent.defend()
-    playerone_hp=player.playerone.hpmax
-    your_defend=player.playerone.defend()
-    print "You are fighting "+opponent.Name, "\n\tOpponent's max HP:", opponent.hpmax, "\n\tYour HP:", player.playerone.hpmax
+    enemy_defend=opponent.defense_value()
+    playerone_hp= playerone.hpmax
+    your_defend=player.playerone.defense_value()
+    print "You are fighting "+opponent.Name, "\n\tOpponent's max HP:", opponent.hpmax, "\n\tYour HP:", playerone.hpmax
 
     while enemy_hp or playerone_hp >=0:
         enemy_attack=opponent.attack()
@@ -38,11 +38,11 @@ def fight():
             print "Player goes first."
             playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
-                player.playerone.xp+=opponent.xp_value
-                player.playerone.gold+=opponent.gold
-                player.playerone.renown+=opponent.renown_value
+                playerone.xp+=opponent.xp_value
+                playerone.gold+=opponent.gold
+                playerone.renown+=opponent.renown_value
                 check_for_levelup()
-                print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
+                print playerone.xp, "\nyou defeated the enemy, returning to main menu"
                 break
 
             enemy_attack_check(enemy_attack, your_defend, playerone_hp, enemy_hp)
@@ -60,11 +60,11 @@ def fight():
 #                menus.main()
             playerone_attack_check(your_attack, enemy_defend, enemy_hp, playerone_hp)
             if enemy_hp<=0:
-                player.playerone.xp+=opponent.xp_value
-                player.playerone.gold+=opponent.gold
-                player.playerone.renown+=opponent.renown_value
+                playerone.xp+=opponent.xp_value
+                playerone.gold+=opponent.gold
+                playerone.renown+=opponent.renown_value
                 check_for_levelup()
-                print player.playerone.xp, "\nyou defeated the enemy, returning to main menu"
+                print playerone.xp, "\nyou defeated the enemy, returning to main menu"
 #                menus.main()
                 break
             print "Your hp: ", playerone_hp, "Enemy's hp: ", enemy_hp
@@ -90,10 +90,26 @@ def playerone_attack_check(your_attack, enemy_defend, enem_hp, playerone_hp):
 def check_for_levelup():
     print "about to check for level up"
     global level_threshhold
-    if player.playerone.xp>=level_threshhold:
+    if playerone.xp>=level_threshhold:
         print "Checking for level up"
-        player.playerone.level+=1
-        player.playerone.hpmax+=int(player.playerone.hpmax*.15)
+        playerone.level+=1
+        playerone.hpmax+=int(playerone.hpmax*.15)
         level_threshhold=int(level_threshhold*.2+level_threshhold)
-        print "**** You leveled up! ****\n your new level is: ", player.playerone.level, "your new level threshhold", level_threshhold, "your new hp is: ", player.playerone.hpmax
-        player.playerone.xp=0
+        print "**** You leveled up! ****\n your new level is: ", playerone.level, "your new level threshhold", level_threshhold, "your new hp is: ", playerone.hpmax
+        playerone.xp=0
+
+
+
+def player_attacks():
+    pass
+
+
+
+
+
+
+
+
+
+
+
