@@ -12,6 +12,7 @@ class Enemy():
         self.renown_value=renown_value
         dice = Die()
         self.hpmax=dice.roll(hp_dice, 6)
+        self.current_hp = self.hpmax
         self.base_attack=base_attack
         self.base_defense=base_defense
         self.equipment=[]
@@ -30,8 +31,8 @@ class Enemy():
         attack_value=self.base_attack
         for item in self.equipped_items:
             attack_value+=item.attack_value
-        dice=dice.Die()
-        attack=dice.roll(attack_value, 6)
+        dice = Die()
+        attack = dice.roll(attack_value, 6)
         return attack
 
     def defense_value(self):
