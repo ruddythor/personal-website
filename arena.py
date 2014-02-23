@@ -8,8 +8,6 @@ from player import playerone
 import random
 from dice import Die
 
-global level_threshhold
-level_threshhold=100
 def fight():
     from enemylist import enemylist
 # PICKS AN ENEMY FROM ENEMYLIST FILE
@@ -30,11 +28,7 @@ def fight():
             player_attacks(playerone, opponent)
 
             if opponent.current_hp <= 0:
-                playerone.xp+=opponent.xp_value
-                playerone.gold+=opponent.gold
-                playerone.renown+=opponent.renown_value
-                check_for_levelup()
-                print playerone.xp, "\nyou defeated the enemy, returning to main menu"
+                won_fight(playerone, opponent)
                 break
 
             enemy_attacks(opponent, playerone)
@@ -55,7 +49,7 @@ def fight():
                 playerone.xp+=opponent.xp_value
                 playerone.gold+=opponent.gold
                 playerone.renown+=opponent.renown_value
-                check_for_levelup()
+                check_for_levelup(playerone)
                 print playerone.xp, "\nyou defeated the enemy, returning to main menu"
 #                menus.main()
                 break
@@ -78,17 +72,24 @@ def player_attacks(player, enemy):
         return enemy.current_hp
 
 
+def won_fight(player, opponent):
+    player.xp += opponent.xp_value
+    player.gold += opponent.gold
+    player.renown += opponent.renown_value
+    check_for_levelup(player)
+    print player.xp, "\nyou defeated the enemy, returning to main menu"
 
-def check_for_levelup():
+
+
+def check_for_levelup(player):
     print "about to check for level up"
-    global level_threshhold
-    if playerone.xp>=level_threshhold:
+    if player.xp >= player.next_levelup:
         print "Checking for level up"
-        playerone.level+=1
-        playerone.hpmax+=int(playerone.hpmax*.15)
-        level_threshhold=int(level_threshhold*.2+level_threshhold)
-        print "**** You leveled up! ****\n your new level is: ", playerone.level, "your new level threshhold", level_threshhold, "your new hp is: ", playerone.hpmax
-        playerone.xp=0
+        player.level += 1
+        player.hpmax += int(playerone.hpmax*.15)
+        player.next_levelup = int(player.next_levelup*.2 + player.next_levelup)
+        print "**** You leveled up! ****\n your new level is: ", player.level, "your next level-up in: ", player.next_levelup, "your new hp is: ", player.hpmax
+        player.xp = 0
 
 
 

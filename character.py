@@ -19,6 +19,7 @@ class Player():
         self.gold=50
         self.xp=0
         self.renown=0
+        self.next_levelup = 100
 
 
     def attack(self):
