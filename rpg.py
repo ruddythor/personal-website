@@ -13,6 +13,6 @@ import menus
 #program.MainLoop()
 
 gameover=False
-while gameover==False:
+while not gameover:
     menus.main()
 
