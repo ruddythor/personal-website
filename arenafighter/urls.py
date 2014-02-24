@@ -6,7 +6,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'arenafighter.views.home.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
+    url(r'^store$', 'arenafighter.views.home.go_to_store', name='store'),
+    url(r'^info$', 'arenafighter.views.home.info', name='player_info'),
+    url(r'^arena$', 'arenafighter.views.home.go_to_arena', name='battle'),
+    url(r'^$', 'arenafighter.views.home.store', name='store'),
     url(r'^admin/', include(admin.site.urls)),
 )

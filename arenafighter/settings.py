@@ -41,7 +41,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'arenafighter'
+    'arenafighter',
+    'south',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,7 +68,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'arenafighter',
         'USER': 'arenafighter',
-        'PASSWORD': '',
+        'PASSWORD': 'arenafighter',
+        'HOST': 'localhost',
     }
 }
 
