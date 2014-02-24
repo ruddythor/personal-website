@@ -1,25 +1,23 @@
-'''
-Created on Sep 27, 2012
+from django.db import models
 
-@author: josh
-'''
-from dice import Die
+from arenafighter.utils.dice import Die
+from arenafighter.models.equipment import Equipment
 
-class Player():
-    def __init__(self, name, level):
-        self.level=level
-        self.name=name
-        die = Die()
-        self.hpmax=die.roll(15, 6)
-        self.current_hp = self.hpmax
-        self.base_attack=3
-        self.base_defense=2
-        self.equipment=[]
-        self.equipped_items=[]
-        self.gold=50
-        self.xp=0
-        self.renown=0
-        self.next_levelup = 100
+class Player(models.Model):
+    level = models.IntegerField(default=1)
+    name = models.TextField(default="Unknown")
+    die = Die()
+    hpmax = models.IntegerField(default=die.roll(15,6))
+    current_hp = models.IntegerField(default=hpmax)
+    base_attack = models.IntegerField(default=hpmax)
+    base_defense = models.IntegerField(default=hpmax)
+    equipment = models.ManyToManyField(Equipment)
+    equipped_items = models.ManyToManyField(Equipment)
+    gold = models.IntegerField(default=50)
+    xp = models.IntegerField(default=0)
+    renown = models.IntegerField(default=0)
+    next_levelup = models.IntegerField(default=100)
+    num_armor = models.IntegerField(default=0)
 
 
     def attack(self):
@@ -63,7 +61,6 @@ class Player():
         self.equipped_items.remove(item)
 
     def display_inventory(self):
-        print "\nThese are the items in your inventory:\n"
         for item in self.equipment:
             print "\t", item
         return
@@ -78,7 +75,9 @@ class Player():
     def buy(self, item):
         self.equipment.append(item)
         self.gold=self.gold-item.buy_value
+        self.save()
 
     def sell(self, item):
         self.equipment.remove(item)
         self.gold+=item.sell_value
+        self.save()

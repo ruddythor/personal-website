@@ -1,19 +1,10 @@
-#!/usr/bin/env python
-'''
-Created on Sep 28, 2012
+from django.db import models
 
-@author: josh
-'''
-#========================CLASS DEFINING EQUIPMENT CREATION===================================s
-class Equipment:
-    def __init__(self, attack_value, defense_value, name, description, is_armor, buy_value, sell_value):
-        self.is_armor=is_armor
-        self.name=name
-        self.description=description
-        self.attack_value=attack_value
-        self.defense_value=defense_value
-        self.buy_value=buy_value
-        self.sell_value=sell_value
+class Equipment(models.Model):
+    name = models.TextField(blank=False, null=False)
+    description = models.TextField(blank=True, null=False)
+    buy_value = models.IntegerField(default=0)
+    sell_value = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -21,10 +12,10 @@ class Equipment:
     def __repr__(self):
         return self.name
 
-    def to_string(self):
-        return self.name.join(self.attack_value)
 
-    def attack(self):
-        return str(self.attack_value)
-    def defend(self):
-        return str(self.defend_value)
+class Armor(Equipment):
+    defense_value = models.IntegerField(default=2)
+    is_armor = models.BooleanField(default=True)
+
+class Weapon(Equipment):
+    attack_value = models.IntegerField(default=2)
