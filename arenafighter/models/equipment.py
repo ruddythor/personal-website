@@ -39,7 +39,7 @@ class Armor(models.Model):
     is_armor = models.BooleanField(default=True)
     equipped = models.BooleanField(default=False)
     slots_required = models.IntegerField(default=2)
-    inventory = models.OneToOneField('Inventory', default=None, related_name='armor')
+    inventory = models.ForeignKey('Inventory', default=None, related_name='armor')
 
     class Meta:
         app_label = 'arenafighter'
@@ -53,7 +53,7 @@ class Weapon(models.Model):
     attack_value = models.IntegerField(default=2)
     equipped = models.BooleanField(default=False)
     slots_required = models.IntegerField(default=1)
-    inventory = models.OneToOneField('Inventory', default=None, related_name='weapons')
+    inventory = models.ForeignKey('Inventory', default=None, related_name='weapons')
 
     class Meta:
         app_label = 'arenafighter'

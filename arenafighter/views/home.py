@@ -5,7 +5,7 @@ Created on Oct 3, 2012
 @author: josh
 '''
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from arenafighter.forms import CreateCharacterForm
 from arenafighter.models.character import Player
 
@@ -27,6 +27,35 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+
+
+def info(request, id):
+    try:
+        player = Player.objects.get(id=id)
+    except:
+        return redirect('home')
+    context = {
+        'player': player,
+        'request': request,
+        'level': player.level,
+        'hpmax': player.hpmax,
+        'base_attack': player.base_attack,
+        'base_defense': player.base_defense,
+        'gold': player.gold,
+    }
+    return render(request, 'info.html', context)
+
+def delete(request, id):
+    player = Player.objects.get(id=id)
+    player.delete()
+    return redirect('home')
+
+def play_as_character(request, id):
+    request.user.character = id
+    context = {
+        'id': id,
+    }
+    return render(request, 'home.html', context)
 
 def go_to_store(request):
     context = {}
@@ -50,17 +79,7 @@ def change_equipment():
     main()
 
 
-def info(request, id):
-    player = Player.objects.get(id=id)
-    context = {
-        'request': request,
-        'level': player.level,
-        'hpmax': player.hpmax,
-        'base_attack': player.base_attack,
-        'base_defense': player.base_defense,
-        'gold': player.gold,
-    }
-    return render(request, 'info.html', context)
+
 
 
 

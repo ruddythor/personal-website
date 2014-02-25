@@ -8,6 +8,7 @@
 <p>GOLD {{ gold }}</p>
 <br/> <br/>
 
-<a href="">Play as this Character</a><br/>
+<a href="{% url 'play_as_character' player.id %}">Play as this Character</a><br/>
+<a href="{% url 'delete' player.id %}">Delete Character</a>
 
 {% endblock %}
