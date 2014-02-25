@@ -45,15 +45,14 @@ def change_equipment():
     main()
 
 
-def info(request):
+def info(request, id):
+    player = Player.objects.get(id=id)
     context = {
         'level': player.level,
         'hpmax': player.hpmax,
         'base_attack': player.base_attack,
         'base_defense': player.base_defense,
         'gold': player.gold,
-        'equipment': player.equipment,
-        'equipped_items': player.equipped_items,
     }
     return render(request, 'info.html', context)
 

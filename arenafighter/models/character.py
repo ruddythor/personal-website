@@ -5,7 +5,7 @@ from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapo
 
 class Player(models.Model):
     level = models.IntegerField(default=1)
-    name = models.TextField(default="Unknown")
+    name = models.TextField(default="The Stranger")
     hpmax = models.IntegerField(default=0)
     current_hp = models.IntegerField(default=0)
     base_attack = models.IntegerField(default=2)
@@ -24,8 +24,6 @@ class Player(models.Model):
         die = Die()
         self.hpmax = die.roll(15,6)
         self.current_hp = self.hpmax
-
-
 
     def __unicode__(self):
         return self.name

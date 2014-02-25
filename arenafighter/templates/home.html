@@ -1,22 +1,16 @@
-{% load %}
-<html>
+{% extends 'base.html' %}
+{% block title %}Josh's ARENA FIGHTER{% endblock %}
 
-<head></head>
-<title>Josh's ARENA FIGHTER</title>
-<body>
+{% block content %}
 <p><center><h2>Welcome to Arena-Fighter! The lamest game you'll ever play! (not really)</h2></center></p>
 
 <p>The following characters are available for you to play as:</p>
 {% for char in characters %}
-    <a href="{{ char }}">{{ char }}</a>
+    <a href="{% url 'player_info' char.id %}">{{ char }}</a><br/>
 {% endfor %}
 
 <p>Or create a new character</p>
-{{ form }}
-<a href ="{% url 'battle' %}">TO BATTLE!!</a>
+{{ form.as_p }}
+<a href ="{% url 'battle' %}">ONWARD, TO GLORIOUS BATTLE!!</a>
 
-
-
-</body>
-
-</html>
+{% endblock %}
