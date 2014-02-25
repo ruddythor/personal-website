@@ -15,4 +15,4 @@ class Die():
         total=0
         for x in range(1, dice+1):
             total += random.randrange(1, sides)
-        return total
+        return int(total)

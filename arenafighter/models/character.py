@@ -1,24 +1,34 @@
 from django.db import models
 
 from arenafighter.utils.dice import Die
-from arenafighter.models.equipment import Equipment
+from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
 
 class Player(models.Model):
     level = models.IntegerField(default=1)
     name = models.TextField(default="Unknown")
-    die = Die()
-    hpmax = models.IntegerField(default=die.roll(15,6))
-    current_hp = models.IntegerField(default=hpmax)
-    base_attack = models.IntegerField(default=hpmax)
-    base_defense = models.IntegerField(default=hpmax)
-    equipment = models.ManyToManyField(Equipment)
-    equipped_items = models.ManyToManyField(Equipment)
+    hpmax = models.IntegerField(default=0)
+    current_hp = models.IntegerField(default=0)
+    base_attack = models.IntegerField(default=2)
+    base_defense = models.IntegerField(default=3)
     gold = models.IntegerField(default=50)
     xp = models.IntegerField(default=0)
     renown = models.IntegerField(default=0)
     next_levelup = models.IntegerField(default=100)
     num_armor = models.IntegerField(default=0)
 
+    class Meta:
+        app_label = 'arenafighter'
+
+    def __init__(self, *args, **kwargs):
+        super(Player, self).__init__(*args, **kwargs)
+        die = Die()
+        self.hpmax = die.roll(15,6)
+        self.current_hp = self.hpmax
+
+
+
+    def __unicode__(self):
+        return self.name
 
     def attack(self):
         attack_value=self.base_attack

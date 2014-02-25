@@ -9,6 +9,5 @@ urlpatterns = patterns('',
     url(r'^store$', 'arenafighter.views.home.go_to_store', name='store'),
     url(r'^info$', 'arenafighter.views.home.info', name='player_info'),
     url(r'^arena$', 'arenafighter.views.home.go_to_arena', name='battle'),
-    url(r'^$', 'arenafighter.views.home.store', name='store'),
     url(r'^admin/', include(admin.site.urls)),
 )

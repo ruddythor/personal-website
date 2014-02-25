@@ -62,7 +62,6 @@ WSGI_APPLICATION = 'arenafighter.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -70,8 +69,13 @@ DATABASES = {
         'USER': 'arenafighter',
         'PASSWORD': 'arenafighter',
         'HOST': 'localhost',
+        'PORT': '5432',
+        'client_encoding': 'UTF8',
+        'default_transaction_isolation': 'read committed',
+        'timezone': 'UTC',
     }
 }
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/

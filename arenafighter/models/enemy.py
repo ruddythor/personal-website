@@ -26,6 +26,9 @@ class Enemy():
     def __repr__(self):
         return self.Name
 
+    class Meta:
+        app_label = 'arenafighter'
+
 
     def attack(self):
         attack_value=self.base_attack

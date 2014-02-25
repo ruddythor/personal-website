@@ -4,17 +4,21 @@ Created on Oct 3, 2012
 
 @author: josh
 '''
-import arenafighter.models.player as player
-import arenafighter.views.store as store
-import arenafighter.views.arena as arena
+
 from django.shortcuts import render
+from arenafighter.forms import CreateCharacterForm
+from arenafighter.models.character import Player
 import arenafighter.settings as settings
 
 
 
 def home(request):
+    characters = Player.objects.all()
+
+    form = CreateCharacterForm()
     context = {
-        'name': 'josh'
+        'form': form,
+        'characters': characters,
     }
     return render(request, 'home.html', context)
 
