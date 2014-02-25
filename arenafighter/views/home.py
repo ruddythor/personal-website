@@ -8,7 +8,6 @@ Created on Oct 3, 2012
 from django.shortcuts import render
 from arenafighter.forms import CreateCharacterForm
 from arenafighter.models.character import Player
-import arenafighter.settings as settings
 
 
 
@@ -16,6 +15,11 @@ def home(request):
     characters = Player.objects.all()
 
     form = CreateCharacterForm()
+    if request.POST:
+        form = CreateCharacterForm(request.POST)
+        if form.is_valid():
+            form.save(form.cleaned_data['name'])
+
     context = {
         'form': form,
         'characters': characters,

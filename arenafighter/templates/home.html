@@ -10,7 +10,10 @@
 {% endfor %}
 
 <p>Or create a new character</p>
+<form action="" method="post">{% csrf_token %}
 {{ form.as_p }}
+<input type="submit" value="Create New Character"/>
+</form>
 <a href ="{% url 'battle' %}">ONWARD, TO GLORIOUS BATTLE!!</a>
 
 {% endblock %}
