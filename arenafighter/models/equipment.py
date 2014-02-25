@@ -18,7 +18,7 @@ class InventoryItem(models.Model):
     buy_value = models.IntegerField(default=0)
     sell_value = models.IntegerField(default=0)
     slots_required = models.IntegerField(default=1)
-    inventory = models.OneToOneField('Inventory', default=None, related_name='items')
+    inventory = models.ForeignKey('Inventory', default=None, related_name='items')
 
     def __str__(self):
         return self.name

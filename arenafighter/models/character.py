@@ -1,13 +1,15 @@
 from django.db import models
 
-from arenafighter.utils.dice import Die
+from arenafighter.utils import dice
 from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+
+
 
 class Player(models.Model):
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
-    hpmax = models.IntegerField(default=0)
-    current_hp = models.IntegerField(default=0)
+    hpmax = models.IntegerField(default=dice.roll(15, 6))
+    current_hp = models.IntegerField()
     base_attack = models.IntegerField(default=2)
     base_defense = models.IntegerField(default=3)
     gold = models.IntegerField(default=50)
@@ -21,8 +23,6 @@ class Player(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Player, self).__init__(*args, **kwargs)
-        die = Die()
-        self.hpmax = die.roll(15,6)
         self.current_hp = self.hpmax
 
     def __unicode__(self):
@@ -32,8 +32,8 @@ class Player(models.Model):
         attack_value=self.base_attack
         for item in self.equipped_items:
             attack_value+=item.attack_value
-        dice=Die()
-        attack=dice.roll(attack_value, 6)
+#        dice=Die()
+        attack = dice.roll(attack_value, 6)
         return attack
 
     def defense_value(self):

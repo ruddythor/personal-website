@@ -21,6 +21,7 @@ def home(request):
             form.save(form.cleaned_data['name'])
 
     context = {
+        'request': request,
         'form': form,
         'characters': characters,
     }
@@ -52,6 +53,7 @@ def change_equipment():
 def info(request, id):
     player = Player.objects.get(id=id)
     context = {
+        'request': request,
         'level': player.level,
         'hpmax': player.hpmax,
         'base_attack': player.base_attack,

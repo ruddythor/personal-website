@@ -3,7 +3,7 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-from dice import Die
+from arenafighter.utils import dice
 from django.db import models
 
 
@@ -11,11 +11,11 @@ class Enemy(models.Model):
     name = models.TextField(default="An Enemy!")
     xp_value = models.IntegerField(default=5)
     renown_value = models.IntegerField(default=10)
-    hpmax = models.IntegerField()
+    hpmax = models.IntegerField(default=dice.roll(15, 6))
     current_hp = models.IntegerField(default=0)
     base_attack = models.IntegerField(default=4)
     base_defense = models.IntegerField(default=5)
-    gold = models.IntegerField()
+    gold = models.IntegerField(default=dice.roll(5, 6))
 
     def __str__(self):
         return self.name
@@ -27,16 +27,12 @@ class Enemy(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
-        die = Die()
-        self.hpmax = die.roll(15, 6)
         self.current_hp = self.hpmax
-        self.gold = die.roll(5, 6)
 
     def attack(self):
         attack_value=self.base_attack
 #        for item in self.equipped_items:
 #            attack_value+=item.attack_value
-        dice = Die()
         attack = dice.roll(attack_value, 6)
         return attack
 
