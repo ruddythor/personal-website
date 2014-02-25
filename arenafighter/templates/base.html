@@ -1,0 +1,16 @@
+<html>
+
+<head></head>
+<title>{% block title %}{% endblock %}</title>
+<body>
+{% block content %}{% endblock %}
+
+{% block footer_nav %}
+{% if request.path != '/' %}<a href="{% url 'home' %}">HOME</a> | {% endif %}
+<a href="{% url 'player_info' 5 %}">CHARACTER INFO</a> |
+<a href="{% url 'battle' %}">TO BATTLE!!</a> |
+<a href="{% url 'store' %}">STORE</a> |
+{% endblock %}
+</body>
+
+</html>
