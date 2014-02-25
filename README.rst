@@ -1,24 +1,11 @@
-## FILE: /home/syrinx/LightcastlePython/README
-## AUTHOR: Brandon Betances (Copyleft 2012)
-=This README file is best read using Org-mode in GNU Emacs=
+A Basic Django ARENA FIGHTER
+===============
 
-** Source
-- The upstream version of the game can be found here [fn:1]. For now, this is my fork. [fn:2]
-
-** Installation
-- As of right now (Wed Sep 26 12:35:12 EDT 2012), you can run "python2 rpg.py" to get a random result.
-*** TODO Test webserver.py and webapp.py
-
-** Known Bugs
-- Wed Sep 26 12:36:57 EDT 2012: When running rpg.py, player always wins, presumably due to an algorithmic error.
-
-----edit by @jlegs -- this isn't actually a bug, it's just me testing things. The rat's hp is low enough that the player kills it in 1 or 2 hits.
+Cue the battle music. Set up your favorite classes. It's time for the lousiest web RPG to hit the Internet since I was in high school.
 
 
-* Changelog
-- Wed Sep 26 12:00:03 EDT 2012: Created README and added some general information about the game.
-- Wed Sep 26 12:50:42 EDT 2012: Edited some comments and cleaned up SOME syntax in rpg.py.
+Really, I don't have install docs because this is more of a personal project, and for learningz.
 
-* Footnotes
-[fn:1] https://github.com/jlegs/LightcastlePython
-[fn:2] https://github.com/bbetances/LightcastlePython
+I'm using Postgres (yay Postgres!). Everything is pretty minimal right now. Clone and run locally to enjoy! (almost)
+
+
