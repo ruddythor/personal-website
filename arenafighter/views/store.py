@@ -4,16 +4,12 @@ Created on Oct 2, 2012
 
 @author: josh
 '''
-import arenafighter.models.player
-#import menus
+from django.shortcuts import render, redirect
+from arenafighter.models.character import Player
 
-def main():
-    print "\n\n\n\n\nEnter 1 to buy something. Enter 2 to sell something."
-    buy_or_sell=input("\n>>")
-    if buy_or_sell==1:
-        buy()
-    elif buy_or_sell==2:
-        sell()
+def shop(request):
+    context = {}
+    return render(request, 'store.html', context)
 
 
 def buy():

@@ -11,9 +11,15 @@
 
 <p>Or create a new character</p>
 <form action="" method="post">{% csrf_token %}
-{{ form.as_p }}
+{{ form.name }}
 <input type="submit" value="Create New Character"/>
 </form>
 <a href ="{% url 'battle' %}">ONWARD, TO GLORIOUS BATTLE!!</a><br/>
 
+{% if not request.user.is_authenticated %}
+<a href="{% url 'signup' %}">Create a user</a>
+<a href="{% url 'log_in' %}">Login</a>
+{% endif %}
+<br/>
+<br/>
 {% endblock %}
