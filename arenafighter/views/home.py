@@ -10,18 +10,23 @@ from arenafighter.forms import CreateCharacterForm, LoginForm
 from arenafighter.models.character import Player
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
-
+from django.forms.models import inlineformset_factory
 
 
 def home(request):
     characters = Player.objects.all()
-    print request.user.id
-    form = CreateCharacterForm()
     if request.POST:
+
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
-            form.save(form.cleaned_data['name'])
-
+            player = Player(name=request.POST['name'])
+            request.user.profile.current_character = player
+            print player
+            player.save()
+            request.user.profile.save()
+            return redirect('home')
+    else:
+        form = CreateCharacterForm()
 
     context = {
         'request': request,
@@ -84,21 +89,17 @@ def delete(request, id):
 def play_as_character(request, id):
     if request.user.profile:
         player = Player.objects.get(id=id)
-        player.profile = request.user.profile
-        player.profile.save()
         player.save()
-#        request.user.profile.current_character = Player.objects.get(id=id)
-#        request.user.profile.save()
-        print request.user.profile.current_character
+        request.user.profile.current_character = player
+        player.current_player.add(request.user.profile)
+        request.user.profile.save()
+        return redirect('home')
     else:
         profile = Profile(user=request.user)
         profile.save()
         request.user.profile.current_character = Player.objects.get(id=id)
         request.user.save()
-    context = {
-        'id': id,
-    }
-    return render(request, 'home.html', context)
+    return render(request, 'home.html')
 
 def go_to_store(request):
     context = {}
@@ -123,28 +124,3 @@ def change_equipment():
 
 
 
-
-
-
-def main(request):
-    print """\n\n\n\n
-    You have the following options:
-    \t1: Enter the store.
-    \t2: Enter the arena to fight.
-    \t3: Display player information.
-    \t4: Change weapon and armor loadout.
-    \t5: Quit
-                             Enter a number and press enter."""
-    player_choice=input("\n>>")
-    if player_choice==1:
-        store.main()
-    elif player_choice==2:
-        arena.fight()
-    elif player_choice==3:
-        info()
-    elif player_choice==4:
-        change_equipment()
-    elif player_choice==5:
-        endgame()
-    else:
-        main()

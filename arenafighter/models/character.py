@@ -18,7 +18,6 @@ class Player(models.Model):
     renown = models.IntegerField(default=0)
     next_levelup = models.IntegerField(default=100)
     num_armor = models.IntegerField(default=0)
-    profile = models.OneToOneField('Profile', related_name='current_character')
 
     class Meta:
         app_label = 'arenafighter'
