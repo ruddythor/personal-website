@@ -96,4 +96,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_PROFILE_MODULE = 'Profile'
+AUTH_PROFILE_MODULE = 'arenafighter.Profile'

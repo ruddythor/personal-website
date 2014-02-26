@@ -82,8 +82,19 @@ def delete(request, id):
     return redirect('home')
 
 def play_as_character(request, id):
-    request.user.profile.player = Player.objects.get(id=id)
-    request.user.save()
+    if request.user.profile:
+        player = Player.objects.get(id=id)
+        player.profile = request.user.profile
+        player.profile.save()
+        player.save()
+#        request.user.profile.current_character = Player.objects.get(id=id)
+#        request.user.profile.save()
+        print request.user.profile.current_character
+    else:
+        profile = Profile(user=request.user)
+        profile.save()
+        request.user.profile.current_character = Player.objects.get(id=id)
+        request.user.save()
     context = {
         'id': id,
     }

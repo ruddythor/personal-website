@@ -4,6 +4,8 @@
 {% block content %}
 <p><center><h2>Welcome to Arena-Fighter! The lamest game you'll ever play! (not really)</h2></center></p>
 
+<p>You are currently playing as {{ request.user.profile.current_character }}</p>
+
 <p>The following characters are available for you to play as:</p>
 {% for char in characters %}
     <a href="{% url 'player_info' char.id %}">{{ char }}</a><br/>
