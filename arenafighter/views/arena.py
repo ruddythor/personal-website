@@ -5,26 +5,18 @@ Created on Oct 1, 2012
 @author: josh
 '''
 from arenafighter.models.player import playerone
-import random
-from arenafighter.models.dice import Die
+from arenafighter.models.enemy import Enemy, random_enemy
+from arenafighter.utils import dice
 
-def fight():
-    from enemylist import enemylist
-# PICKS AN ENEMY FROM ENEMYLIST FILE
-    opponent=random.choice(enemylist)
+def fight(request):
+    random_enemy('weak')
 
-
-    print "You are fighting "+opponent.Name, "\n\tOpponent's max HP:", opponent.hpmax, "\n\tYour HP:", playerone.current_hp
 
     while opponent.current_hp > 0 or playerone.current_hp > 0:
-        dice = Die()
         player_initiative = dice.roll(1, 21)
         opponent_initiative = dice.roll(1, 21)
         
         if player_initiative > opponent_initiative:
-            print "Player goes first."
-
-
             player_attacks(playerone, opponent)
 
             if opponent.current_hp <= 0:
@@ -34,23 +26,18 @@ def fight():
             enemy_attacks(opponent, playerone)
             if playerone.current_hp <= 0:
                 playerone.current_hp = playerone.hpmax
-                print "You were defeated. Returning to main menu"
                 break
-            print "Your hp: ", playerone.current_hp, "Enemy's hp: ", opponent.current_hp
-        
+
         elif opponent_initiative>player_initiative:
             print "Opponent goes first."
             enemy_attacks(opponent, playerone)
             if playerone.current_hp <= 0:
                 playerone.current_hp = playerone.hpmax
-                print"You were defeated. Returning to main menu"
 
             player_attacks(playerone, opponent)
             if opponent.current_hp <= 0:
                 won_fight(playerone, opponent)
                 break
-            print "Your hp: ", playerone.current_hp, "Enemy's hp: ", opponent.current_hp
-        print "END OF TURN\n-----------------------------"
 
 
 
@@ -73,29 +60,22 @@ def won_fight(player, opponent):
     player.renown += opponent.renown_value
     check_for_levelup(player)
     player.current_hp = player.hpmax
-    print "Your XP:", player.xp, "\nyou defeated the enemy, returning to main menu"
-
+    return player
 
 
 def check_for_levelup(player):
-    print "about to check for level up"
     if player.xp >= player.next_levelup:
-        print "Checking for level up"
         player.level += 1
         player.hpmax += int(playerone.hpmax*.15)
         player.next_levelup = int(player.next_levelup*.2 + player.next_levelup)
-        print "**** You leveled up! ****\n your new level is: ", player.level, "your next level-up in: ", player.next_levelup, "your new hp is: ", player.hpmax
         player.xp = 0
+        return player
+    else:
+        return player
 
-
-
-
-
-
-
-
-
-
+# This defines an enemy strength definition where the key is the relative strength of the enemy
+# and the value is a dict of attributes for that enemy, where the dict key corresponds to an attribute
+# of Enemy(), making it easy to create random Enemy objects based on this dict
 
 
 

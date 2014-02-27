@@ -21,7 +21,6 @@ def home(request):
         if form.is_valid():
             player = Player(name=request.POST['name'])
             request.user.profile.current_character = player
-            print player
             player.save()
             request.user.profile.save()
             return redirect('home')
@@ -39,6 +38,10 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
             return redirect('home')
     else:
         form = UserCreationForm()

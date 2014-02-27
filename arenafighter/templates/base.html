@@ -3,19 +3,25 @@
 <head></head>
 <title>{% block title %}{% endblock %}</title>
 <body>
+<p><center><h2>Welcome to Arena-Fighter! The lamest game you'll ever play! (not really)</h2></center></p>
+
 {% block content %}{% endblock %}
-<p>You are currently playing as {{ user.profile.current_character }}</p>
 
 
 {% block footer_nav %}
-{% if request.path != '/' %}<a href="{% url 'home' %}">HOME</a> | {% endif %}
+<center>
+You are currently logged in as {{ user.username }}
+<br/>
+<a href="{% url 'home' %}">HOME</a>
 {% if user.profile.current_character %}
 <a href="{% url 'player_info' user.profile.current_character.id %}">CHARACTER INFO</a> |
 {% endif %}
 {% if user.is_authenticated %}
-<a href="{% url 'battle' %}">TO BATTLE!!</a> |
+ | <a href="{% url 'battle' %}">TO BATTLE!!</a> |
 <a href="{% url 'store' %}">STORE</a> |
 <a href="{% url 'log_out' %}">LOGOUT</a>{% endif %}
+<br/>
+</center>
 {% endblock %}
 </body>
 
