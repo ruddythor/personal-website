@@ -23,6 +23,7 @@ def fight(request):
             player_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
+                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
                 return redirect('arena')
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
@@ -42,6 +43,7 @@ def fight(request):
             player_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
+                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
                 return redirect('arena')
 
     context = {
@@ -73,7 +75,6 @@ def won_fight(player, opponent):
     player.current_hp = player.hpmax
     player.fights_won += 1
     player.save()
-    request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
     return player
 
 

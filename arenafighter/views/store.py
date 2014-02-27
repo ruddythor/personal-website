@@ -6,11 +6,46 @@ Created on Oct 2, 2012
 '''
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Player
+from arenafighter.models.equipment import Inventory, InventoryItem, Weapon, Armor
 
 def shop(request):
-
-    context = {}
+    items = InventoryItem.objects.all()
+    weapons = Weapon.objects.all()
+    armors = Armor.objects.all()
+    context = {'items': items,
+               'weapons': weapons,
+               'armors': armors,
+               }
     return render(request, 'store.html', context)
+
+def item_detail(request, id):
+    object = InventoryItem.objects.get(id=id)
+    context = {
+            'item': object,
+            }
+
+    return render(request, 'item.html', context)
+
+
+def armor_detail(request, id):
+    object = Armor.objects.get(id=id)
+    context = {
+            'item': object,
+            }
+
+    return render(request, 'item.html', context)
+
+
+def weapon_detail(request, id):
+    object = Weapon.objects.get(id=id)
+    context = {
+            'item': object,
+            }
+
+    return render(request, 'item.html', context)
+
+
+
 
 
 def buy():

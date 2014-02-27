@@ -82,12 +82,12 @@ class Player(models.Model):
 #            print "\t", item
         return
 
-    def buy(self, item):
-        self.equipment.append(item)
-        self.gold=self.gold-item.buy_value
+    def purchase(self, item):
+        item.inventory = self
+        self.gold -= item.buy_value
         self.save()
 
     def sell(self, item):
         self.equipment.remove(item)
-        self.gold+=item.sell_value
+        self.gold += item.sell_value
         self.save()
