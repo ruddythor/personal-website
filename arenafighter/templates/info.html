@@ -11,8 +11,16 @@
 <p>FIGHTS WON {{ character.fights_won }}</p>
 <p>FIGHTS LOST {{ character.fights_lost }}</p>
 -----------------------------
-<p>INVENTORY: {{ character.inventory.items }}</p>
-<p></p>
+<p>INVENTORY: </p>
+{% for item in character.inventory.items.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
+{% for item in character.inventory.weapons.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
+{% for item in character.inventory.armors.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
 <p></p>
 <p></p>
 <p></p>

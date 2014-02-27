@@ -10,6 +10,9 @@ class Inventory(models.Model):
     class Meta:
         app_label = 'arenafighter'
 
+    def __unicode__(self):
+        return self.owner.name
+        verbose_name_plural = "inventories"
 
 
 class InventoryItem(models.Model):
@@ -20,14 +23,12 @@ class InventoryItem(models.Model):
     slots_required = models.IntegerField(default=1)
     inventory = models.ManyToManyField('Inventory', default=None, related_name='items', blank=True, null=True)
 
-    def __str__(self):
-        return self.name
-    
-    def __repr__(self):
-        return self.name
-
     class Meta:
         app_label = 'arenafighter'
+
+    def __unicode__(self):
+        return self.name
+        verbose_name_plural = "inventory items"
 
 
 class Armor(models.Model):
@@ -44,6 +45,8 @@ class Armor(models.Model):
     class Meta:
         app_label = 'arenafighter'
 
+    def __unicode__(self):
+        return self.name
 
 class Weapon(models.Model):
     name = models.TextField(blank=False, null=False)
@@ -57,3 +60,6 @@ class Weapon(models.Model):
 
     class Meta:
         app_label = 'arenafighter'
+
+    def __unicode__(self):
+        return self.name
