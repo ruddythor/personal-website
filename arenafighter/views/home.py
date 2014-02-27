@@ -103,7 +103,12 @@ def go_to_store(request):
 
 
 def go_to_arena(request):
-    context = {}
+    if request.session.get('message'):
+        message = request.session.get('message')
+        context = {'message': message}
+        del(request.session['message'])
+    else:
+        context = {}
     return render(request, 'arena.html', context)
 
 

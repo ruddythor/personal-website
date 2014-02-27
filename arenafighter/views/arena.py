@@ -11,38 +11,49 @@ from arenafighter.utils import dice
 
 def fight(request):
     enemy = generate_enemy('weak')
+    print enemy
+    print request.user.profile.current_character.current_hp
+
+    while enemy.current_hp > 0 or request.user.profile.current_character.current_hp > 0:
+        message = "Looks like you're both about evenly matched"
+        player_initiative = dice.roll(1, 21)
+        opponent_initiative = dice.roll(1, 21)
+        if player_initiative > opponent_initiative:
+            player_attacks(request.user.profile.current_character, enemy)
+            if enemy.current_hp <= 0:
+                won_fight(request.user.profile.current_character, enemy)
+                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
+                request.user.profile.current_character.fights_won += 1
+                request.user.profile.current_character.save()
+                return redirect('arena')
+            enemy_attacks(enemy, request.user.profile.current_character)
+            if request.user.profile.current_character.current_hp <= 0:
+                request.user.profile.current_character.current_hp = request.user.profile.current_character.hpmax
+                request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                request.user.profile.current_character.fights_lost += 1
+                request.user.profile.current_character.save()
+                return redirect('arena')
+        elif opponent_initiative > player_initiative:
+            enemy_attacks(enemy, request.user.profile.current_character)
+            if request.user.profile.current_character.current_hp <= 0:
+                request.user.profile.current_character.current_hp = request.user.profile.current_character.hpmax
+                request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                request.user.profile.current_character.fights_lost += 1
+                request.user.profile.current_character.save()
+                return redirect('arena')
+            player_attacks(request.user.profile.current_character, enemy)
+            if enemy.current_hp <= 0:
+                won_fight(request.user.profile.current_character, enemy)
+                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
+                request.user.profile.current_character.fights_won += 1
+                request.user.profile.current_character.save()
+                return redirect('arena')
+
     context = {
         'enemy': enemy,
+        'message': message,
     }
     return render(request, 'fight.html', context)
-
-
-#    while opponent.current_hp > 0 or playerone.current_hp > 0:
-#        player_initiative = dice.roll(1, 21)
-#        opponent_initiative = dice.roll(1, 21)
-        
-#        if player_initiative > opponent_initiative:
-#            player_attacks(playerone, opponent)
-
-#            if opponent.current_hp <= 0:
-#                won_fight(playerone, opponent)
-#                break
-
-#            enemy_attacks(opponent, playerone)
-#            if playerone.current_hp <= 0:
-#                playerone.current_hp = playerone.hpmax
-#                break
-
-#        elif opponent_initiative>player_initiative:
-#            print "Opponent goes first."
-#            enemy_attacks(opponent, playerone)
-#            if playerone.current_hp <= 0:
-#                playerone.current_hp = playerone.hpmax
-
-#            player_attacks(playerone, opponent)
-#            if opponent.current_hp <= 0:
-#                won_fight(playerone, opponent)
-#                break
 
 
 
@@ -50,13 +61,13 @@ def enemy_attacks(enemy, player):
     if enemy.attack() > player.defense_value():
         attack_value = enemy.attack() - player.defense_value()
         player.current_hp -= attack_value
-        return player.current_hp
+        return player
 
 def player_attacks(player, enemy):
     if player.attack() > enemy.defense_value():
         attack_value = player.attack() - enemy.defense_value()
         enemy.current_hp -= attack_value
-        return enemy.current_hp
+        return enemy
 
 
 def won_fight(player, opponent):
@@ -65,6 +76,7 @@ def won_fight(player, opponent):
     player.renown += opponent.renown_value
     check_for_levelup(player)
     player.current_hp = player.hpmax
+    player.save()
     return player
 
 
@@ -74,6 +86,7 @@ def check_for_levelup(player):
         player.hpmax += int(playerone.hpmax*.15)
         player.next_levelup = int(player.next_levelup*.2 + player.next_levelup)
         player.xp = 0
+        player.save()
         return player
     else:
         return player

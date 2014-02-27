@@ -18,6 +18,8 @@ class Player(models.Model):
     renown = models.IntegerField(default=0)
     next_levelup = models.IntegerField(default=100)
     num_armor = models.IntegerField(default=0)
+    fights_won = models.IntegerField(default=0)
+    fights_lost = models.IntegerField(default=0)
 
     class Meta:
         app_label = 'arenafighter'
@@ -30,17 +32,16 @@ class Player(models.Model):
         return self.name
 
     def attack(self):
-        attack_value=self.base_attack
-        for item in self.equipped_items:
-            attack_value+=item.attack_value
-#        dice=Die()
+        attack_value = self.base_attack
+#        for item in self.equipped_items:
+#            attack_value+=item.attack_value
         attack = dice.roll(attack_value, 6)
         return attack
 
     def defense_value(self):
-        defense_value=self.base_defense
-        for item in self.equipped_items:
-            defense_value+=item.defense_value
+        defense_value = self.base_defense
+#        for item in self.equipped_items:
+#            defense_value+=item.defense_value
         return defense_value
 
     def add(self, item):
