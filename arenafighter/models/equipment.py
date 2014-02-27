@@ -22,6 +22,7 @@ class InventoryItem(models.Model):
     sell_value = models.IntegerField(default=0)
     slots_required = models.IntegerField(default=1)
     inventory = models.ManyToManyField('Inventory', default=None, related_name='items', blank=True, null=True)
+    type = models.TextField(default='InventoryItem', editable=False)
 
     class Meta:
         app_label = 'arenafighter'
@@ -41,6 +42,7 @@ class Armor(models.Model):
     equipped = models.BooleanField(default=False)
     slots_required = models.IntegerField(default=2)
     inventory = models.ManyToManyField('Inventory', default=None, related_name='armor', blank=True, null=True)
+    type = models.TextField(default='Armor', editable=False)
 
     class Meta:
         app_label = 'arenafighter'
@@ -57,6 +59,7 @@ class Weapon(models.Model):
     equipped = models.BooleanField(default=False)
     slots_required = models.IntegerField(default=1)
     inventory = models.ManyToManyField('Inventory', default=None, related_name='weapons', blank=True, null=True)
+    type = models.TextField(default='Weapon', editable=False)
 
     class Meta:
         app_label = 'arenafighter'

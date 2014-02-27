@@ -44,6 +44,41 @@ def weapon_detail(request, id):
 
     return render(request, 'item.html', context)
 
+def buy_armor(request, id):
+    object = Armor.objects.get(id=id)
+    player = Player.objects.get(id=request.user.profile.current_character.id)
+    player.inventory.armors.add(object)
+    player.gold -= object.buy_value
+    player.save()
+    context = {
+            'item': object,
+            }
+    return redirect('store')
+
+def buy_weapon(request, id):
+    object = Weapon.objects.get(id=id)
+    player = Player.objects.get(id=request.user.profile.current_character.id)
+    player.inventory.weapons.add(object)
+    player.gold -= object.buy_value
+    player.save()
+    context = {
+            'item': object,
+            }
+    return redirect('store')
+
+
+def buy_item(request, id):
+    object = InventoryItem.objects.get(id=id)
+    player = Player.objects.get(id=request.user.profile.current_character.id)
+    player.inventory.items.add(object)
+    player.gold -= object.buy_value
+    player.save()
+    context = {
+            'item': object,
+            }
+    return redirect('store')
+
+
 
 
 

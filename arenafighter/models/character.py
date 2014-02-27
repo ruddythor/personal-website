@@ -83,7 +83,7 @@ class Player(models.Model):
         return
 
     def purchase(self, item):
-        item.inventory = self
+        self.inventory.add(item)
         self.gold -= item.buy_value
         self.save()
 
