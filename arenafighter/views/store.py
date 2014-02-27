@@ -8,13 +8,14 @@ from django.shortcuts import render, redirect
 from arenafighter.models.character import Player
 
 def shop(request):
+
     context = {}
     return render(request, 'store.html', context)
 
 
 def buy():
-    global available_items
-    print "\n\n\n\n\nThe following items are available for purchase:"
+
+
     for key in player.available_items:
         print "\t", key, ":", player.available_items[key], "\t", player.available_items[key].buy_value, "gold"
     print "You have %i gold.\nEnter the number of the item you'd like to purchase." % player.playerone.gold

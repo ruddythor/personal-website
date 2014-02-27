@@ -23,9 +23,6 @@ def fight(request):
             player_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
-                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                character.fights_won += 1
-                character.save()
                 return redirect('arena')
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
@@ -45,9 +42,6 @@ def fight(request):
             player_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
-                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                character.fights_won += 1
-                character.save()
                 return redirect('arena')
 
     context = {
@@ -77,7 +71,9 @@ def won_fight(player, opponent):
     player.renown += opponent.renown_value
     check_for_levelup(player)
     player.current_hp = player.hpmax
+    player.fights_won += 1
     player.save()
+    request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
     return player
 
 

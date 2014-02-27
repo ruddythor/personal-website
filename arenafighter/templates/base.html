@@ -11,7 +11,9 @@
 
 {% block footer_nav %}
 <center>
+{% if user.is_authenticated %}
 You are currently logged in as {{ user.username }}
+{% endif %}
 <br/>
 <a href="{% url 'home' %}">HOME</a>
 {% if user.profile.current_character %}
