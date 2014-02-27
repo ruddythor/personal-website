@@ -6,7 +6,7 @@ from arenafighter.models.profile_model import Profile
 
 
 class PlayerAdmin(admin.ModelAdmin):
-    fields = ('name',)
+    pass
 admin.site.register(Player, PlayerAdmin)
 
 

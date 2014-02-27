@@ -11,6 +11,8 @@ from arenafighter.models.character import Player
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
 from django.forms.models import inlineformset_factory
+from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+
 
 
 def home(request):
@@ -21,8 +23,11 @@ def home(request):
         if form.is_valid():
             player = Player(name=request.POST['name'])
             request.user.profile.current_character = player
+            inventory = Inventory()
             player.save()
             request.user.profile.save()
+            inventory.owner = player
+            inventory.save()
             return redirect('home')
     else:
         form = CreateCharacterForm()
