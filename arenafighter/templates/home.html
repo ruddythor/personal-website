@@ -4,7 +4,8 @@
 {% block content %}
 <p><center><h2>Welcome to Arena-Fighter! The lamest game you'll ever play! (not really)</h2></center></p>
 
-<p>You are currently playing as {{ request.user.profile.current_character }}</p>
+{% if user.is_authenticated %}
+<p>You are currently playing as {{ user.profile.current_character }}</p>
 
 <p>The following characters are available for you to play as:</p>
 {% for char in characters %}
@@ -16,12 +17,12 @@
 {{ form.name }}
 <input type="submit" value="Create New Character"/>
 </form>
-<a href ="{% url 'battle' %}">ONWARD, TO GLORIOUS BATTLE!!</a><br/>
-
-{% if not request.user.is_authenticated %}
+<br/>
+<br/>
+{% else %}
+<center>
 <a href="{% url 'signup' %}">Create a user</a>
 <a href="{% url 'log_in' %}">Login</a>
+</center>
 {% endif %}
-<br/>
-<br/>
 {% endblock %}

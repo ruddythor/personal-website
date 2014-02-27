@@ -29,7 +29,6 @@ def home(request):
         form = CreateCharacterForm()
 
     context = {
-        'request': request,
         'form': form,
         'characters': characters,
     }
