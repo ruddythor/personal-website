@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 {% block title %}Your Character's Information{% endblock %}
 {% block content %}
-<p>LEVEL {{ level }}</p>
-<p>HP {{ hpmax }}</p>
-<p>base attack {{ base_attack }}</p>
-<p>base defense {{ base_defense }}</p>
-<p>GOLD {{ gold }}</p>
+<p>NAME: {{ character.name }}</p>
+<p>LEVEL {{ character.level }}</p>
+<p>HP {{ character.hpmax }}</p>
+<p>base attack {{ character.base_attack }}</p>
+<p>base defense {{ character.base_defense }}</p>
+<p>GOLD {{ character.gold }}</p>
+{% if character == user.profile.current_character %}
+*** THIS IS YOUR CURRENT CHARACTER ***
+{% endif %}
 <br/> <br/>
 
-<a href="{% url 'play_as_character' player.id %}">Play as this Character</a><br/>
-<a href="{% url 'delete' player.id %}">Delete Character</a><br/><br/>
+<a href="{% url 'play_as_character' character.id %}">Play as this Character</a><br/>
+<a href="{% url 'delete' character.id %}">Delete Character</a><br/><br/>
 
 {% endblock %}

@@ -4,40 +4,45 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-from arenafighter.models.player import playerone
+from django.shortcuts import render, redirect
+from arenafighter.models.character import Player
 from arenafighter.models.enemy import Enemy, random_enemy
 from arenafighter.utils import dice
 
 def fight(request):
-    random_enemy('weak')
+    enemy = random_enemy('weak')
+    context = {
+        'enemy': enemy,
+    }
+    return render(request, 'fight.html', context)
 
 
-    while opponent.current_hp > 0 or playerone.current_hp > 0:
-        player_initiative = dice.roll(1, 21)
-        opponent_initiative = dice.roll(1, 21)
+#    while opponent.current_hp > 0 or playerone.current_hp > 0:
+#        player_initiative = dice.roll(1, 21)
+#        opponent_initiative = dice.roll(1, 21)
         
-        if player_initiative > opponent_initiative:
-            player_attacks(playerone, opponent)
+#        if player_initiative > opponent_initiative:
+#            player_attacks(playerone, opponent)
 
-            if opponent.current_hp <= 0:
-                won_fight(playerone, opponent)
-                break
+#            if opponent.current_hp <= 0:
+#                won_fight(playerone, opponent)
+#                break
 
-            enemy_attacks(opponent, playerone)
-            if playerone.current_hp <= 0:
-                playerone.current_hp = playerone.hpmax
-                break
+#            enemy_attacks(opponent, playerone)
+#            if playerone.current_hp <= 0:
+#                playerone.current_hp = playerone.hpmax
+#                break
 
-        elif opponent_initiative>player_initiative:
-            print "Opponent goes first."
-            enemy_attacks(opponent, playerone)
-            if playerone.current_hp <= 0:
-                playerone.current_hp = playerone.hpmax
+#        elif opponent_initiative>player_initiative:
+#            print "Opponent goes first."
+#            enemy_attacks(opponent, playerone)
+#            if playerone.current_hp <= 0:
+#                playerone.current_hp = playerone.hpmax
 
-            player_attacks(playerone, opponent)
-            if opponent.current_hp <= 0:
-                won_fight(playerone, opponent)
-                break
+#            player_attacks(playerone, opponent)
+#            if opponent.current_hp <= 0:
+#                won_fight(playerone, opponent)
+#                break
 
 
 

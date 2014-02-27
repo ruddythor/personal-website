@@ -14,10 +14,10 @@ You are currently logged in as {{ user.username }}
 <br/>
 <a href="{% url 'home' %}">HOME</a>
 {% if user.profile.current_character %}
-<a href="{% url 'player_info' user.profile.current_character.id %}">CHARACTER INFO</a> |
+ | <a href="{% url 'player_info' user.profile.current_character.id %}">CHARACTER INFO</a>
 {% endif %}
 {% if user.is_authenticated %}
- | <a href="{% url 'battle' %}">TO BATTLE!!</a> |
+ | <a href="{% url 'arena' %}">TO BATTLE!!</a> |
 <a href="{% url 'store' %}">STORE</a> |
 <a href="{% url 'log_out' %}">LOGOUT</a>{% endif %}
 <br/>

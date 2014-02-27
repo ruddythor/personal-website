@@ -73,13 +73,7 @@ def info(request, id):
     except:
         return redirect('home')
     context = {
-        'player': player,
-        'request': request,
-        'level': player.level,
-        'hpmax': player.hpmax,
-        'base_attack': player.base_attack,
-        'base_defense': player.base_defense,
-        'gold': player.gold,
+        'character': player,
     }
     return render(request, 'info.html', context)
 
