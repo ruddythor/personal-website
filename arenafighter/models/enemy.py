@@ -97,7 +97,7 @@ enemy_strength_dict = {
     'ultimate': {'name': 'An Enemy!', 'xp_value': 250, 'renown_value': 200, 'hpmax': dice.roll(100, 4), 'current_hp': 0, 'base_attack': 200, 'base_defense': 150, 'gold': dice.roll(80, 5)},
 }
 
-def random_enemy(strength):
+def generate_enemy(strength):
 #c    enemy = Enemy([x for x in enemy_strength_dict[strength]])
     enemy = Enemy(name=enemy_strength_dict[strength]['name'],
                   xp_value=enemy_strength_dict[strength]['xp_value'],

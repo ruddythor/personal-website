@@ -6,11 +6,11 @@ Created on Oct 1, 2012
 '''
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Player
-from arenafighter.models.enemy import Enemy, random_enemy
+from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.utils import dice
 
 def fight(request):
-    enemy = random_enemy('weak')
+    enemy = generate_enemy('weak')
     context = {
         'enemy': enemy,
     }
