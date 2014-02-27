@@ -13,40 +13,41 @@ def fight(request):
     enemy = generate_enemy('weak')
     print enemy
     print request.user.profile.current_character.current_hp
+    character = Player.objects.get(id=request.user.profile.current_character.id)
 
-    while enemy.current_hp > 0 or request.user.profile.current_character.current_hp > 0:
+    while enemy.current_hp > 0 or player.current_hp > 0:
         message = "Looks like you're both about evenly matched"
         player_initiative = dice.roll(1, 21)
         opponent_initiative = dice.roll(1, 21)
         if player_initiative > opponent_initiative:
-            player_attacks(request.user.profile.current_character, enemy)
+            player_attacks(character, enemy)
             if enemy.current_hp <= 0:
-                won_fight(request.user.profile.current_character, enemy)
+                won_fight(character, enemy)
                 request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                request.user.profile.current_character.fights_won += 1
-                request.user.profile.current_character.save()
+                character.fights_won += 1
+                character.save()
                 return redirect('arena')
-            enemy_attacks(enemy, request.user.profile.current_character)
-            if request.user.profile.current_character.current_hp <= 0:
-                request.user.profile.current_character.current_hp = request.user.profile.current_character.hpmax
+            enemy_attacks(enemy, character)
+            if character.current_hp <= 0:
+                character.current_hp = character.hpmax
                 request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
-                request.user.profile.current_character.fights_lost += 1
-                request.user.profile.current_character.save()
+                character.fights_lost += 1
+                character.save()
                 return redirect('arena')
         elif opponent_initiative > player_initiative:
-            enemy_attacks(enemy, request.user.profile.current_character)
-            if request.user.profile.current_character.current_hp <= 0:
-                request.user.profile.current_character.current_hp = request.user.profile.current_character.hpmax
+            enemy_attacks(enemy, character)
+            if character.current_hp <= 0:
+                character.current_hp = character.hpmax
                 request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
-                request.user.profile.current_character.fights_lost += 1
-                request.user.profile.current_character.save()
+                character.fights_lost += 1
+                character.save()
                 return redirect('arena')
-            player_attacks(request.user.profile.current_character, enemy)
+            player_attacks(character, enemy)
             if enemy.current_hp <= 0:
-                won_fight(request.user.profile.current_character, enemy)
+                won_fight(character, enemy)
                 request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                request.user.profile.current_character.fights_won += 1
-                request.user.profile.current_character.save()
+                character.fights_won += 1
+                character.save()
                 return redirect('arena')
 
     context = {
