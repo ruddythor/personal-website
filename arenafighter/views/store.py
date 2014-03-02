@@ -6,7 +6,7 @@ Created on Oct 2, 2012
 '''
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
-from arenafighter.models.equipment import Inventory, InventoryItem, Weapon, Armor
+from arenafighter.models.inventory import Inventory, InventoryItem, Weapon, Armor
 
 def shop(request):
     items = InventoryItem.objects.all()

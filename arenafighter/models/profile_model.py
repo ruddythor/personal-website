@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from arenafighter.utils import dice
-from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 
 
 

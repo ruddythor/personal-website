@@ -42,12 +42,6 @@ class Enemy(models.Model):
 #            defense_value+=item.defense_value
         return defense_value
 
-    def add(self, item):
-        self.equipment.append(item)
-
-    def drop(self, item):
-        self.equipment.remove(item)
-
     def equip(self, item):
         pass
 #        weapons=0
@@ -72,11 +66,7 @@ class Enemy(models.Model):
 #        self.equipped_items.remove(item)
         pass
 
-    def display_inventory(self):
-#        for item in self.equipment:
-#            print "\t", item
-#        return
-        pass
+
 
     def display_equipped(self):
         pass

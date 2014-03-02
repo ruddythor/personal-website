@@ -6,7 +6,7 @@ from arenafighter.models.profile_model import User
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
 from django.forms.models import inlineformset_factory
-from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 
 
 
@@ -21,7 +21,7 @@ def home(request):
             inventory = Inventory()
             character.save()
             request.user.profile.save()
-            inventory.owner = character
+            inventory.character = character
             inventory.save()
             return redirect('home')
     else:
@@ -69,7 +69,7 @@ def log_out(request):
 
 def info(request, id):
     try:
-        character = Character.objects.select_related('inventory').get(id=id)
+        character = Character.objects.select_related('inventory', 'equipment').get(id=id)
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
                    }
@@ -83,19 +83,17 @@ def delete(request, id):
     return redirect('home')
 
 def play_as_character(request, id):
-    if request.user.profile:
-        character = Character.objects.get(id=id)
-        character.save()
-        request.user.profile.current_character = character
-        character.current_character.add(request.user.profile)
-        request.user.profile.save()
-        return redirect('home')
-    else:
-        profile = Profile(user=request.user)
-        profile.save()
-        request.user.profile.current_character = Character.objects.get(id=id)
-        request.user.save()
-    return render(request, 'home.html')
+#    if request.user.profile:
+    character = Character.objects.get(id=id)
+    character.current_character.add(request.user.profile)
+    character.save()
+    return redirect('home')
+#    else:
+#        profile = Profile(user=request.user)
+#        profile.save()
+#        request.user.profile.current_character = Character.objects.get(id=id)
+#        request.user.save()
+#    return render(request, 'home.html')
 
 def go_to_store(request):
     context = {}

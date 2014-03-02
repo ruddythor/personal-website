@@ -5,13 +5,13 @@ class Inventory(models.Model):
     slots = models.IntegerField(default=10)
     slots_filled = models.IntegerField(default=0)
     slots_empty = models.IntegerField(default=10)
-    owner = models.OneToOneField('Character', default=None, related_name='inventory', blank=True, null=True)
+    character = models.OneToOneField('Character', default=None, related_name='inventory', blank=True, null=True)
 
     class Meta:
         app_label = 'arenafighter'
 
     def __unicode__(self):
-        return self.owner.name
+        return self.character.name
         verbose_name_plural = "inventories"
 
 

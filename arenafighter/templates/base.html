@@ -21,11 +21,11 @@ You are currently logged in as {{ user.username }}
 {% with character_id=user.profile.current_character.id %}
     {% if character_id %}
      | <a href="{% url 'player_info' character_id %}">CHARACTER INFO</a>
+ | <a href="{% url 'arena' %}">TO BATTLE!!</a> |
+<a href="{% url 'store' %}">STORE</a>
     {% endif %}
 {% endwith %}
- | <a href="{% url 'arena' %}">TO BATTLE!!</a> |
-<a href="{% url 'store' %}">STORE</a> |
-<a href="{% url 'log_out' %}">LOGOUT</a>
+| <a href="{% url 'log_out' %}">LOGOUT</a>
 {% endif %}
 <br/>
 </center>

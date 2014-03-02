@@ -1,6 +1,6 @@
 from django.contrib import admin
 from arenafighter.models.character import Character
-from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 from arenafighter.models.enemy import Enemy
 from arenafighter.models.profile_model import Profile
 

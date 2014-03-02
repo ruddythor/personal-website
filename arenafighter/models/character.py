@@ -1,22 +1,20 @@
 from django.db import models
 
 from arenafighter.utils import dice
-from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 from arenafighter.models.profile_model import Profile
 
 
 class Equipped(models.Model):
-    character = models.OneToOneField('Character', default=None, related_name='equipment')
-    items = models.ForeignKey('InventoryItem', default=None, related_name='character')
-    weapons = models.ForeignKey('InventoryItem', default=None, related_name='character')
-    armor = models.ForeignKey('InventoryItem', default=None, related_name='character')
-    shield = models.OneToOneField('InventoryItem', default=None, related_name='character')
+    character = models.OneToOneField('Character', default=None, related_name='equipped')
+    items = models.ForeignKey('InventoryItem', default=None, related_name='equipped_on', null=True)
+    weapons = models.ForeignKey('Weapon', default=None, null=True, related_name='equipped_on')
+    armor = models.ForeignKey('Armor', default=None, null=True, related_name='equipped_on')
 
-#    class Meta:
-#        app_label = 'arenafighter'
-#
-#Character.equipped = property(lambda u: Character.objects.get_or_create(user=u)[0])
-#
+    class Meta:
+        app_label = 'arenafighter'
+
+
 
 class Character(models.Model):
     level = models.IntegerField(default=1)
@@ -103,3 +101,8 @@ class Character(models.Model):
         self.equipment.remove(item)
         self.gold += item.sell_value
         self.save()
+
+
+Character.equipped = property(lambda c: Equipped.objects.get_or_create(character=c)[0])
+Character.inventory = property(lambda c: Inventory.objects.get_or_create(character=c)[0])
+
