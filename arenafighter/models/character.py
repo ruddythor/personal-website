@@ -5,8 +5,15 @@ from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapo
 from arenafighter.models.profile_model import Profile
 
 
+class Equipped(models.Model):
+    character = models.OneToOneField('Character', default=None, related_name='equipment')
+    items = models.ForeignKey('InventoryItem', default=None, related_name='character')
+    weapons = models.ForeignKey('InventoryItem', default=None, related_name='character')
+    armor = models.ForeignKey('InventoryItem', default=None, related_name='character')
+    shield = models.OneToOneField('InventoryItem', default=None, related_name='character')
 
-class Player(models.Model):
+
+class Character(models.Model):
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
     hpmax = models.IntegerField(default=dice.roll(15, 6))
@@ -25,7 +32,7 @@ class Player(models.Model):
         app_label = 'arenafighter'
 
     def __init__(self, *args, **kwargs):
-        super(Player, self).__init__(*args, **kwargs)
+        super(Character, self).__init__(*args, **kwargs)
         self.current_hp = self.hpmax
 
     def __unicode__(self):

@@ -1,5 +1,5 @@
 from django import forms
-from arenafighter.models.character import Player, Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.character import Character, Inventory, InventoryItem, Armor, Weapon
 from arenafighter.models.profile_model import Profile
 from django.contrib.auth.models import User
 
@@ -10,7 +10,7 @@ class CreateCharacterForm(forms.Form):
 
 
 #    class Meta:
-#        model = Player
+#        model = Character
 #        fields = ('name',)
 
 

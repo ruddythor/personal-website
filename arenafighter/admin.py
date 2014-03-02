@@ -1,13 +1,13 @@
 from django.contrib import admin
-from arenafighter.models.character import Player
+from arenafighter.models.character import Character
 from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapon
 from arenafighter.models.enemy import Enemy
 from arenafighter.models.profile_model import Profile
 
 
-class PlayerAdmin(admin.ModelAdmin):
+class CharacterAdmin(admin.ModelAdmin):
     pass
-admin.site.register(Player, PlayerAdmin)
+admin.site.register(Character, CharacterAdmin)
 
 
 class InventoryAdmin(admin.ModelAdmin):

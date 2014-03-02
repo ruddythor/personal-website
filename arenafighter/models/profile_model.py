@@ -7,7 +7,7 @@ from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapo
 
 class Profile(models.Model):
     user = models.OneToOneField(User, related_name='profile')
-    current_character = models.ForeignKey('Player', related_name='current_player', null=True)
+    current_character = models.ForeignKey('Character', related_name='current_character', null=True)
     class Meta:
         app_label = 'arenafighter'
 

@@ -7,7 +7,7 @@ Created on Oct 3, 2012
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from arenafighter.forms import CreateCharacterForm, LoginForm
-from arenafighter.models.character import Player
+from arenafighter.models.character import Character
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
 from django.forms.models import inlineformset_factory
@@ -16,17 +16,17 @@ from arenafighter.models.equipment import Inventory, InventoryItem, Armor, Weapo
 
 
 def home(request):
-    characters = Player.objects.all()
+    characters = Character.objects.all()
     if request.POST:
 
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
-            player = Player(name=request.POST['name'])
-            request.user.profile.current_character = player
+            character = Character(name=request.POST['name'])
+            request.user.profile.current_character = character
             inventory = Inventory()
-            player.save()
+            character.save()
             request.user.profile.save()
-            inventory.owner = player
+            inventory.owner = character
             inventory.save()
             return redirect('home')
     else:
@@ -74,31 +74,31 @@ def log_out(request):
 
 def info(request, id):
     try:
-        player = Player.objects.get(id=id)
+        character = Character.objects.get(id=id)
     except:
         return redirect('home')
     context = {
-        'character': player,
+        'character': character,
     }
     return render(request, 'info.html', context)
 
 def delete(request, id):
-    player = Player.objects.get(id=id)
-    player.delete()
+    character = Character.objects.get(id=id)
+    character.delete()
     return redirect('home')
 
 def play_as_character(request, id):
     if request.user.profile:
-        player = Player.objects.get(id=id)
-        player.save()
-        request.user.profile.current_character = player
-        player.current_player.add(request.user.profile)
+        character = Character.objects.get(id=id)
+        character.save()
+        request.user.profile.current_character = character
+        character.current_character.add(request.user.profile)
         request.user.profile.save()
         return redirect('home')
     else:
         profile = Profile(user=request.user)
         profile.save()
-        request.user.profile.current_character = Player.objects.get(id=id)
+        request.user.profile.current_character = Character.objects.get(id=id)
         request.user.save()
     return render(request, 'home.html')
 
@@ -115,18 +115,5 @@ def go_to_arena(request):
     else:
         context = {}
     return render(request, 'arena.html', context)
-
-
-def change_equipment():
-    print """\n\n\n\n\nThe following items are equippable by you:"""
-    print
-    for index, item in enumerate(player.playerone.equipment):
-        print "\t %r: %r" % (int(index)+1, item)
-
-    print "\nWhat would you like to equip?"
-    equip_this=input(">>")
-    player.playerone.equip(player.playerone.equipment[equip_this-1])
-    main()
-
 
 
