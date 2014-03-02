@@ -11,8 +11,6 @@ from arenafighter.utils import dice
 
 def fight(request):
     enemy = generate_enemy('weak')
-    print enemy
-    print request.user.profile.current_character.current_hp
     character = Character.objects.get(id=request.user.profile.current_character.id)
 
     while enemy.current_hp > 0 or character.current_hp > 0:
@@ -81,7 +79,7 @@ def won_fight(character, opponent):
 def check_for_levelup(character):
     if character.xp >= character.next_levelup:
         character.level += 1
-        character.hpmax += int(characterone.hpmax*.15)
+        character.hpmax += int(character.hpmax*.15)
         character.next_levelup = int(character.next_levelup*.2 + character.next_levelup)
         character.xp = 0
         character.save()

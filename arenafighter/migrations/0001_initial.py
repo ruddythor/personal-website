@@ -14,7 +14,7 @@ class Migration(SchemaMigration):
             ('slots', self.gf('django.db.models.fields.IntegerField')(default=10)),
             ('slots_filled', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('slots_empty', self.gf('django.db.models.fields.IntegerField')(default=10)),
-            ('owner', self.gf('django.db.models.fields.related.OneToOneField')(related_name='inventory', null=True, default=None, to=orm['arenafighter.Player'], blank=True, unique=True)),
+            ('owner', self.gf('django.db.models.fields.related.OneToOneField')(related_name='inventory', null=True, default=None, to=orm['arenafighter.Character'], blank=True, unique=True)),
         ))
         db.send_create_signal('arenafighter', ['Inventory'])
 
@@ -26,9 +26,18 @@ class Migration(SchemaMigration):
             ('buy_value', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('sell_value', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('slots_required', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('inventory', self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='items', null=True, blank=True, to=orm['arenafighter.Inventory'])),
+            ('type', self.gf('django.db.models.fields.TextField')(default='InventoryItem')),
         ))
         db.send_create_signal('arenafighter', ['InventoryItem'])
+
+        # Adding M2M table for field inventory on 'InventoryItem'
+        m2m_table_name = db.shorten_name(u'arenafighter_inventoryitem_inventory')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('inventoryitem', models.ForeignKey(orm['arenafighter.inventoryitem'], null=False)),
+            ('inventory', models.ForeignKey(orm['arenafighter.inventory'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['inventoryitem_id', 'inventory_id'])
 
         # Adding model 'Armor'
         db.create_table(u'arenafighter_armor', (
@@ -41,9 +50,18 @@ class Migration(SchemaMigration):
             ('is_armor', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('equipped', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('slots_required', self.gf('django.db.models.fields.IntegerField')(default=2)),
-            ('inventory', self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='armor', null=True, blank=True, to=orm['arenafighter.Inventory'])),
+            ('type', self.gf('django.db.models.fields.TextField')(default='Armor')),
         ))
         db.send_create_signal('arenafighter', ['Armor'])
+
+        # Adding M2M table for field inventory on 'Armor'
+        m2m_table_name = db.shorten_name(u'arenafighter_armor_inventory')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('armor', models.ForeignKey(orm['arenafighter.armor'], null=False)),
+            ('inventory', models.ForeignKey(orm['arenafighter.inventory'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['armor_id', 'inventory_id'])
 
         # Adding model 'Weapon'
         db.create_table(u'arenafighter_weapon', (
@@ -55,24 +73,33 @@ class Migration(SchemaMigration):
             ('attack_value', self.gf('django.db.models.fields.IntegerField')(default=2)),
             ('equipped', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('slots_required', self.gf('django.db.models.fields.IntegerField')(default=1)),
-            ('inventory', self.gf('django.db.models.fields.related.ForeignKey')(default=None, related_name='weapons', null=True, blank=True, to=orm['arenafighter.Inventory'])),
+            ('type', self.gf('django.db.models.fields.TextField')(default='Weapon')),
         ))
         db.send_create_signal('arenafighter', ['Weapon'])
+
+        # Adding M2M table for field inventory on 'Weapon'
+        m2m_table_name = db.shorten_name(u'arenafighter_weapon_inventory')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('weapon', models.ForeignKey(orm['arenafighter.weapon'], null=False)),
+            ('inventory', models.ForeignKey(orm['arenafighter.inventory'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['weapon_id', 'inventory_id'])
 
         # Adding model 'Profile'
         db.create_table(u'arenafighter_profile', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(related_name='profile', unique=True, to=orm['auth.User'])),
-            ('current_character', self.gf('django.db.models.fields.related.ForeignKey')(related_name='current_player', to=orm['arenafighter.Player'])),
+            ('current_character', self.gf('django.db.models.fields.related.ForeignKey')(related_name='current_character', null=True, to=orm['arenafighter.Character'])),
         ))
         db.send_create_signal('arenafighter', ['Profile'])
 
-        # Adding model 'Player'
-        db.create_table(u'arenafighter_player', (
+        # Adding model 'Character'
+        db.create_table(u'arenafighter_character', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('level', self.gf('django.db.models.fields.IntegerField')(default=1)),
             ('name', self.gf('django.db.models.fields.TextField')(default='The Stranger')),
-            ('hpmax', self.gf('django.db.models.fields.IntegerField')(default=51)),
+            ('hpmax', self.gf('django.db.models.fields.IntegerField')(default=42)),
             ('current_hp', self.gf('django.db.models.fields.IntegerField')()),
             ('base_attack', self.gf('django.db.models.fields.IntegerField')(default=2)),
             ('base_defense', self.gf('django.db.models.fields.IntegerField')(default=3)),
@@ -81,8 +108,10 @@ class Migration(SchemaMigration):
             ('renown', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('next_levelup', self.gf('django.db.models.fields.IntegerField')(default=100)),
             ('num_armor', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('fights_won', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('fights_lost', self.gf('django.db.models.fields.IntegerField')(default=0)),
         ))
-        db.send_create_signal('arenafighter', ['Player'])
+        db.send_create_signal('arenafighter', ['Character'])
 
         # Adding model 'Enemy'
         db.create_table(u'arenafighter_enemy', (
@@ -90,11 +119,11 @@ class Migration(SchemaMigration):
             ('name', self.gf('django.db.models.fields.TextField')(default='An Enemy!')),
             ('xp_value', self.gf('django.db.models.fields.IntegerField')(default=5)),
             ('renown_value', self.gf('django.db.models.fields.IntegerField')(default=10)),
-            ('hpmax', self.gf('django.db.models.fields.IntegerField')(default=41)),
+            ('hpmax', self.gf('django.db.models.fields.IntegerField')(default=58)),
             ('current_hp', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('base_attack', self.gf('django.db.models.fields.IntegerField')(default=4)),
             ('base_defense', self.gf('django.db.models.fields.IntegerField')(default=5)),
-            ('gold', self.gf('django.db.models.fields.IntegerField')(default=18)),
+            ('gold', self.gf('django.db.models.fields.IntegerField')(default=19)),
         ))
         db.send_create_signal('arenafighter', ['Enemy'])
 
@@ -106,17 +135,26 @@ class Migration(SchemaMigration):
         # Deleting model 'InventoryItem'
         db.delete_table(u'arenafighter_inventoryitem')
 
+        # Removing M2M table for field inventory on 'InventoryItem'
+        db.delete_table(db.shorten_name(u'arenafighter_inventoryitem_inventory'))
+
         # Deleting model 'Armor'
         db.delete_table(u'arenafighter_armor')
+
+        # Removing M2M table for field inventory on 'Armor'
+        db.delete_table(db.shorten_name(u'arenafighter_armor_inventory'))
 
         # Deleting model 'Weapon'
         db.delete_table(u'arenafighter_weapon')
 
+        # Removing M2M table for field inventory on 'Weapon'
+        db.delete_table(db.shorten_name(u'arenafighter_weapon_inventory'))
+
         # Deleting model 'Profile'
         db.delete_table(u'arenafighter_profile')
 
-        # Deleting model 'Player'
-        db.delete_table(u'arenafighter_player')
+        # Deleting model 'Character'
+        db.delete_table(u'arenafighter_character')
 
         # Deleting model 'Enemy'
         db.delete_table(u'arenafighter_enemy')
@@ -130,19 +168,37 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'equipped': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'inventory': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'related_name': "'armor'", 'null': 'True', 'blank': 'True', 'to': "orm['arenafighter.Inventory']"}),
+            'inventory': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'armor'", 'default': 'None', 'to': "orm['arenafighter.Inventory']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
             'is_armor': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {}),
             'sell_value': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '2'})
+            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
+            'type': ('django.db.models.fields.TextField', [], {'default': "'Armor'"})
+        },
+        'arenafighter.character': {
+            'Meta': {'object_name': 'Character'},
+            'base_attack': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
+            'base_defense': ('django.db.models.fields.IntegerField', [], {'default': '3'}),
+            'current_hp': ('django.db.models.fields.IntegerField', [], {}),
+            'fights_lost': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'fights_won': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'gold': ('django.db.models.fields.IntegerField', [], {'default': '50'}),
+            'hpmax': ('django.db.models.fields.IntegerField', [], {'default': '42'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'level': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'name': ('django.db.models.fields.TextField', [], {'default': "'The Stranger'"}),
+            'next_levelup': ('django.db.models.fields.IntegerField', [], {'default': '100'}),
+            'num_armor': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'renown': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
+            'xp': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'arenafighter.enemy': {
             'Meta': {'object_name': 'Enemy'},
             'base_attack': ('django.db.models.fields.IntegerField', [], {'default': '4'}),
             'base_defense': ('django.db.models.fields.IntegerField', [], {'default': '5'}),
             'current_hp': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'gold': ('django.db.models.fields.IntegerField', [], {'default': '18'}),
-            'hpmax': ('django.db.models.fields.IntegerField', [], {'default': '41'}),
+            'gold': ('django.db.models.fields.IntegerField', [], {'default': '19'}),
+            'hpmax': ('django.db.models.fields.IntegerField', [], {'default': '58'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {'default': "'An Enemy!'"}),
             'renown_value': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
@@ -151,7 +207,7 @@ class Migration(SchemaMigration):
         'arenafighter.inventory': {
             'Meta': {'object_name': 'Inventory'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'owner': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'inventory'", 'null': 'True', 'default': 'None', 'to': "orm['arenafighter.Player']", 'blank': 'True', 'unique': 'True'}),
+            'owner': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'inventory'", 'null': 'True', 'default': 'None', 'to': "orm['arenafighter.Character']", 'blank': 'True', 'unique': 'True'}),
             'slots': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
             'slots_empty': ('django.db.models.fields.IntegerField', [], {'default': '10'}),
             'slots_filled': ('django.db.models.fields.IntegerField', [], {'default': '0'})
@@ -161,29 +217,15 @@ class Migration(SchemaMigration):
             'buy_value': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'inventory': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'related_name': "'items'", 'null': 'True', 'blank': 'True', 'to': "orm['arenafighter.Inventory']"}),
+            'inventory': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'items'", 'default': 'None', 'to': "orm['arenafighter.Inventory']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {}),
             'sell_value': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '1'})
-        },
-        'arenafighter.player': {
-            'Meta': {'object_name': 'Player'},
-            'base_attack': ('django.db.models.fields.IntegerField', [], {'default': '2'}),
-            'base_defense': ('django.db.models.fields.IntegerField', [], {'default': '3'}),
-            'current_hp': ('django.db.models.fields.IntegerField', [], {}),
-            'gold': ('django.db.models.fields.IntegerField', [], {'default': '50'}),
-            'hpmax': ('django.db.models.fields.IntegerField', [], {'default': '51'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'level': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
-            'name': ('django.db.models.fields.TextField', [], {'default': "'The Stranger'"}),
-            'next_levelup': ('django.db.models.fields.IntegerField', [], {'default': '100'}),
-            'num_armor': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'renown': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'xp': ('django.db.models.fields.IntegerField', [], {'default': '0'})
+            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'type': ('django.db.models.fields.TextField', [], {'default': "'InventoryItem'"})
         },
         'arenafighter.profile': {
             'Meta': {'object_name': 'Profile'},
-            'current_character': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'current_player'", 'to': "orm['arenafighter.Player']"}),
+            'current_character': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'current_character'", 'null': 'True', 'to': "orm['arenafighter.Character']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'profile'", 'unique': 'True', 'to': u"orm['auth.User']"})
         },
@@ -194,10 +236,11 @@ class Migration(SchemaMigration):
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'equipped': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'inventory': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'related_name': "'weapons'", 'null': 'True', 'blank': 'True', 'to': "orm['arenafighter.Inventory']"}),
+            'inventory': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'weapons'", 'default': 'None', 'to': "orm['arenafighter.Inventory']", 'blank': 'True', 'symmetrical': 'False', 'null': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {}),
             'sell_value': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '1'})
+            'slots_required': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
+            'type': ('django.db.models.fields.TextField', [], {'default': "'Weapon'"})
         },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},

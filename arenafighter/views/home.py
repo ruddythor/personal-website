@@ -1,13 +1,8 @@
-#!/usr/bin/env python
-'''
-Created on Oct 3, 2012
-
-@author: josh
-'''
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from arenafighter.forms import CreateCharacterForm, LoginForm
 from arenafighter.models.character import Character
+from arenafighter.models.profile_model import User
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
 from django.forms.models import inlineformset_factory
@@ -74,12 +69,12 @@ def log_out(request):
 
 def info(request, id):
     try:
-        character = Character.objects.get(id=id)
+        character = Character.objects.select_related('inventory').get(id=id)
+        context = {'character': character,
+                   'current_character': request.user.get_profile().current_character,
+                   }
     except:
         return redirect('home')
-    context = {
-        'character': character,
-    }
     return render(request, 'info.html', context)
 
 def delete(request, id):

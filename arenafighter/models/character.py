@@ -12,6 +12,11 @@ class Equipped(models.Model):
     armor = models.ForeignKey('InventoryItem', default=None, related_name='character')
     shield = models.OneToOneField('InventoryItem', default=None, related_name='character')
 
+#    class Meta:
+#        app_label = 'arenafighter'
+#
+#Character.equipped = property(lambda u: Character.objects.get_or_create(user=u)[0])
+#
 
 class Character(models.Model):
     level = models.IntegerField(default=1)
