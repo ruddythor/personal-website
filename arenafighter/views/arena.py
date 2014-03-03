@@ -11,7 +11,7 @@ from arenafighter.utils import dice
 
 def fight(request):
     enemy = generate_enemy('weak')
-    character = Character.objects.get(id=request.user.profile.current_character.id)
+    character = Character.objects.get(id=request.user.profile.current_character_id)
     context = {
         'enemy': enemy,
     }
