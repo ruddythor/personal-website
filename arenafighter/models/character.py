@@ -9,6 +9,7 @@ class Character(models.Model):
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
     hpmax = models.IntegerField(default=dice.roll(15, 6))
+    equipped_armor = models.ForeignKey('Armor', default=None, related_name='equipped_on', blank=True, null=True)
     current_hp = models.IntegerField()
     base_attack = models.IntegerField(default=2)
     base_defense = models.IntegerField(default=3)
@@ -39,8 +40,7 @@ class Character(models.Model):
 
     def defense_value(self):
         defense_value = self.base_defense
-        for armor in self.equipped_armor.all():
-            defense_value += armor.defense_value
+        defense_value += self.equipped_armor.defense_value
         return defense_value
 
 
@@ -53,11 +53,11 @@ class Character(models.Model):
         self.save()
 
     def equip_armor(self, armor):
-        armor.equipped_armor.add(self.equipped)
+        armor.equipped_on.add(self)
         self.save()
 
     def Unequip_armor(self, armor):
-        armor.equipped_armor.remove(self.equipped)
+        armor.equipped_on.remove(self)
         self.save()
 
     def equip_item(self, item):

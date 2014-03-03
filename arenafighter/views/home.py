@@ -69,7 +69,7 @@ def log_out(request):
 
 def info(request, id):
     try:
-        character = Character.objects.select_related('inventory', 'inventory__items', 'weapons').prefetch_related().filter(id=id)[0]
+        character = Character.objects.select_related('equipped_armor', 'profile').filter(id=id).prefetch_related()[0]
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
                    }

@@ -31,9 +31,7 @@
 {% for item in character.equipped_weapon.all %}
 <p> **  {{ item }}</p>
 {% endfor %}
-{% for item in character.equipped_armor.all %}
-<p> **  {{ item }}</p>
-{% endfor %}
+<p> **  {{ character.equipped_armor }}</p>
 <p></p>
 <p></p>
 {% if character == current_character %}

@@ -38,8 +38,6 @@ class Armor(models.Model):
     buy_value = models.IntegerField(default=0)
     sell_value = models.IntegerField(default=0)
     defense_value = models.IntegerField(default=2)
-    is_armor = models.BooleanField(default=True)
-    equipped_on = models.ForeignKey('Character', default=None, related_name='equipped_armor', blank=True, null=True)
     slots_required = models.IntegerField(default=2)
     inventory = models.ManyToManyField('Inventory', default=None, related_name='armor', blank=True, null=True)
     type = models.TextField(default='Armor', editable=False)
