@@ -12,19 +12,28 @@
 <p>FIGHTS LOST {{ character.fights_lost }}</p>
 -----------------------------
 <p>INVENTORY: </p>
-{% for item in inventory.items %}
+{% for item in character.inventory.items.all %}
 <p> **  {{ item }}</p>
 {% endfor %}
-{% for item in inventory.weapons %}
+{% for item in character.inventory.weapons.all %}
 <p> **  {{ item }}</p>
 {% endfor %}
-{% for item in inventory.armor %}
+{% for item in character.inventory.armor.all %}
 <p> **  {{ item }}</p>
 {% endfor %}
 <p></p>
 <p></p>
+<p>EQUIPPED ITEMS:</p>
 <p></p>
-<p></p>
+{% for item in character.equipped_items.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
+{% for item in character.equipped_weapon.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
+{% for item in character.equipped_armor.all %}
+<p> **  {{ item }}</p>
+{% endfor %}
 <p></p>
 <p></p>
 {% if character == current_character %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from arenafighter.models.character import Character, Equipped
+from arenafighter.models.character import Character
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 from arenafighter.models.enemy import Enemy
 from arenafighter.models.profile_model import Profile
@@ -41,8 +41,8 @@ admin.site.register(Profile, ProfileAdmin)
 
 
 
-class EquippedAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Equipped, EquippedAdmin)
+#class EquippedAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(Equipped, EquippedAdmin)
 
 

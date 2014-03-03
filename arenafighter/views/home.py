@@ -69,13 +69,9 @@ def log_out(request):
 
 def info(request, id):
     try:
-        character = Character.objects.select_related('inventory', 'equipped').get(id=id)
-        inventory = character.all_inventory()
-        equipped = character.all_equipped()
+        character = Character.objects.select_related('inventory', 'inventory__items', 'weapons').prefetch_related().filter(id=id)[0]
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
-                   'inventory': inventory,
-                   'equipped': equipped,
                    }
     except:
         return redirect('home')

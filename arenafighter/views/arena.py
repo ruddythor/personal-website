@@ -23,12 +23,15 @@ def fight(request):
             character_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
-                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
+                message = "You really showed that ass who's boss!! Good job, mate"
+                context['message'] = message
+
                 return render(request, 'fight.html', context)
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
                 character.current_hp = character.hpmax
-                request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                message = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                context['message'] = message
                 character.fights_lost += 1
                 character.save()
                 return render(request, 'fight.html', context)
@@ -36,17 +39,18 @@ def fight(request):
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
                 character.current_hp = character.hpmax
-                request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                message = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
+                context['message'] = message
                 character.fights_lost += 1
                 character.save()
                 return render(request, 'fight.html', context)
             character_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
-                request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
+                message = "You really showed that ass who's boss!! Good job, mate"
+                context['message'] = message
                 return render(request, 'fight.html', context)
 
-    context['message'] = message
     return render(request, 'fight.html', context)
 
 
