@@ -12,6 +12,7 @@ class Equipped(models.Model):
     armor = models.ForeignKey('Armor', default=None, null=True, related_name='equipped_on')
 
     class Meta:
+        verbose_name_plural = "Equipped Objects"
         app_label = 'arenafighter'
 
 
@@ -43,54 +44,48 @@ class Character(models.Model):
 
     def attack(self):
         attack_value = self.base_attack
-#        for item in self.equipped_items:
-#            attack_value+=item.attack_value
+#        for weapon in self.equipped.weapons:
+        attack_value += self.equipped.weapons.attack_value
         attack = dice.roll(attack_value, 6)
         return attack
 
     def defense_value(self):
         defense_value = self.base_defense
-#        for item in self.equipped_items:
-#            defense_value+=item.defense_value
+        defense_value += self.equipped.armor.defense_value
         return defense_value
 
-    def add(self, item):
-        self.equipment.append(item)
 
-    def drop(self, item):
-        self.equipment.remove(item)
+    def equip_weapon(self, weapon):
+        weapon.equipped_on.add(self.equipped)
+        self.save()
 
-    def equip(self, item):
-        weapons=0
-        armors=0
-        for x in self.equipped_items:
-            if x.is_armor==True:
-                armors+=1
-            else:
-                weapons+=1
-        if len(self.equipped_items)>2:
-            self.equipped_items.pop(0)
-#            self.equipped_items.append(item)
+    def unequip_weapon(self, weapon):
+        weapon.equipped_on.remove(self.equipped)
+        self.save()
 
-        if armors<2 and item.is_armor==True:
-            self.equipped_items.append(item)
-        if weapons<2 and item.is_armor==False:
-            self.equipped_items.append(item)
+    def equip_armor(self, armor):
+        armor.equipped_on.add(self.equipped)
+        self.save()
 
-    def unequip(self, item):
-        self.equipped_items.remove(item)
+    def Unequip_armor(self, armor):
+        armor.equipped_on.remove(self.equipped)
+        self.save()
 
-    def display_inventory(self):
-        for item in self.equipment:
-            print "\t", item
-        return
+    def equip_item(self, item):
+        item.equipped_on.add(self.equipped)
+        self.save()
 
-    def display_equipped(self):
-        print "\nThese are your equipped items:\n"
-        for item in self.equipped_items:
-            print "\t", item, "attack value: ", item.attack_value, "defense value: ", item.defense_value
-#            print "\t", item
-        return
+    def Unequip_item(self, item):
+        item.equipped_on.remove(self.equipped)
+        self.save()
+
+    def all_equipped(self):
+        equipment_dict = {'weapons': self.equipped.weapons, 'armor': self.equipped.armor, 'items': self.equipped.items}
+        return equipment_dict
+
+    def all_inventory(self):
+        inventory_dict = {'weapons': self.inventory.weapons.all(), 'armor': self.inventory.armor.all(), 'items': self.inventory.items.all()}
+        return inventory_dict
 
     def purchase(self, item):
         self.inventory.add(item)
@@ -106,3 +101,4 @@ class Character(models.Model):
 Character.equipped = property(lambda c: Equipped.objects.get_or_create(character=c)[0])
 Character.inventory = property(lambda c: Inventory.objects.get_or_create(character=c)[0])
 
+###c = Character.objects.get(id=1)

@@ -8,11 +8,11 @@ class Inventory(models.Model):
     character = models.OneToOneField('Character', default=None, related_name='inventory', blank=True, null=True)
 
     class Meta:
+        verbose_name_plural = "inventories"
         app_label = 'arenafighter'
 
     def __unicode__(self):
         return self.character.name
-        verbose_name_plural = "inventories"
 
 
 class InventoryItem(models.Model):
@@ -29,7 +29,6 @@ class InventoryItem(models.Model):
 
     def __unicode__(self):
         return self.name
-        verbose_name_plural = "inventory items"
 
 
 class Armor(models.Model):

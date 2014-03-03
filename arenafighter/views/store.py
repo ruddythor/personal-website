@@ -47,7 +47,7 @@ def weapon_detail(request, id):
 def buy_armor(request, id):
     object = Armor.objects.get(id=id)
     character = Character.objects.get(id=request.user.profile.current_character.id)
-    character.inventory.armors.add(object)
+    character.inventory.armor.add(object)
     character.gold -= object.buy_value
     character.save()
     context = {

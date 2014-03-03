@@ -12,7 +12,9 @@ from arenafighter.utils import dice
 def fight(request):
     enemy = generate_enemy('weak')
     character = Character.objects.get(id=request.user.profile.current_character.id)
-
+    context = {
+        'enemy': enemy,
+    }
     while enemy.current_hp > 0 or character.current_hp > 0:
         message = "Looks like you're both about evenly matched"
         character_initiative = dice.roll(1, 21)
@@ -22,14 +24,14 @@ def fight(request):
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
                 request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                return redirect('arena')
+                return render(request, 'fight.html', context)
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
                 character.current_hp = character.hpmax
                 request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
                 character.fights_lost += 1
                 character.save()
-                return redirect('arena')
+                return render(request, 'fight.html', context)
         elif opponent_initiative > character_initiative:
             enemy_attacks(enemy, character)
             if character.current_hp <= 0:
@@ -37,17 +39,14 @@ def fight(request):
                 request.session['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
                 character.fights_lost += 1
                 character.save()
-                return redirect('arena')
+                return render(request, 'fight.html', context)
             character_attacks(character, enemy)
             if enemy.current_hp <= 0:
                 won_fight(character, enemy)
                 request.session['message'] = "You really showed that ass who's boss!! Good job, mate"
-                return redirect('arena')
+                return render(request, 'fight.html', context)
 
-    context = {
-        'enemy': enemy,
-        'message': message,
-    }
+    context['message'] = message
     return render(request, 'fight.html', context)
 
 
@@ -61,6 +60,8 @@ def enemy_attacks(enemy, character):
 def character_attacks(character, enemy):
     if character.attack() > enemy.defense_value():
         attack_value = character.attack() - enemy.defense_value()
+        print 'base attack', character.attack()
+        print 'character attack value!', attack_value
         enemy.current_hp -= attack_value
         return enemy
 
