@@ -109,3 +109,5 @@ def generate_armor(store_level):
         for x in range(0, 2):
             armor = Armor(name='The Protector', description='A basic set of armor, providing minimal protection', buy_value=14, sell_value=3)
             armor.save()
+            armor2 = Armor(name='Gladatorius', description='Basic armor that provides a small amount of protection', buy_value=14, sell_value=3, defense_value=2)
+            armor2.save()
