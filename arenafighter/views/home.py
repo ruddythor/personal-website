@@ -13,7 +13,7 @@ import collections
 def home(request):
     characters = Character.objects.all()
     if request.POST:
-
+        # TODO: De-suckify this. inventory is lambda'd elsewhere so can probably get rid of it.
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
             character = Character(name=request.POST['name'])
@@ -66,7 +66,7 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
-
+# TODO: clean this view up a bit
 def info(request, id):
     try:
         character = Character.objects.select_related('equipped_armor', 'equipped_armor__inventory', 'profile__user', 'user__profile', 'user').filter(id=id)[0]
@@ -110,12 +110,7 @@ def equip(request, item_type, item_id):
     return redirect('home')
 
 def go_to_arena(request):
-    if request.session.get('message'):
-        message = request.session.get('message')
-        context = {'message': message}
-        del(request.session['message'])
-    else:
-        context = {}
+    context = {}
     return render(request, 'arena.html', context)
 
 

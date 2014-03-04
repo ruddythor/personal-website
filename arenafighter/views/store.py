@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.inventory import Inventory, InventoryItem, Weapon, Armor
 
+# TODO: DE-uglify this view function
 def shop(request, store_level):
     items = InventoryItem.objects.exclude(inventory__isnull=False)
     weapons = Weapon.objects.exclude(inventory__isnull=False)
@@ -25,6 +26,7 @@ def shop(request, store_level):
                }
     return render(request, 'store.html', context)
 
+# TODO: combine these *_detail views to be better
 def item_detail(request, name, store):
     if store:
         object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
