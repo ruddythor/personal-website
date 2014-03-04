@@ -26,7 +26,7 @@ def shop(request, store_level):
     return render(request, 'store.html', context)
 
 def item_detail(request, name):
-    object = InventoryItem.objects.filter(name=name)[0]
+    object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
     context = {
             'item': object,
             }
@@ -35,7 +35,7 @@ def item_detail(request, name):
 
 
 def armor_detail(request, name):
-    object = Armor.objects.filter(name=name)[0]
+    object = Armor.objects.filter(name=name).filter(inventory_id=None)[0]
     context = {
             'item': object,
             }
@@ -44,7 +44,7 @@ def armor_detail(request, name):
 
 
 def weapon_detail(request, name):
-    object = Weapon.objects.filter(name=name)[0]
+    object = Weapon.objects.filter(name=name).filter(inventory_id=None)[0]
     context = {'item': object,
                }
 
@@ -62,6 +62,7 @@ def buy_armor(request, id):
 
 def buy_weapon(request, id):
     object = Weapon.objects.get(id=id)
+    print object
     character = Character.objects.get(id=request.user.profile.current_character_id)
     character.inventory.weapons.add(object)
     character.gold -= object.buy_value
@@ -74,6 +75,7 @@ def buy_weapon(request, id):
 
 def buy_item(request, id):
     object = InventoryItem.objects.get(id=id)
+    print object.name, object.id
     character = Character.objects.get(id=request.user.profile.current_character_id)
     character.inventory.items.add(object)
     character.gold -= object.buy_value

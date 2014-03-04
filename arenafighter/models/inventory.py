@@ -21,8 +21,8 @@ class InventoryItem(models.Model):
     buy_value = models.IntegerField(default=0)
     sell_value = models.IntegerField(default=0)
     slots_required = models.IntegerField(default=1)
-    equipped_on = models.ForeignKey('Character', default=None, related_name='equipped_items', blank=True, null=True)
-    inventory = models.ManyToManyField('Inventory', default=None, related_name='items', blank=True, null=True)
+    equipped_on = models.OneToOneField('Character', default=None, related_name='equipped_items', blank=True, null=True)
+    inventory = models.ForeignKey('Inventory', default=None, related_name='items', blank=True, null=True)
     type = models.TextField(default='InventoryItem', editable=False)
 
     class Meta:
@@ -39,7 +39,7 @@ class Armor(models.Model):
     sell_value = models.IntegerField(default=0)
     defense_value = models.IntegerField(default=2)
     slots_required = models.IntegerField(default=2)
-    inventory = models.ManyToManyField('Inventory', default=None, related_name='armor', blank=True, null=True)
+    inventory = models.ForeignKey('Inventory', default=None, related_name='armor', blank=True, null=True)
     type = models.TextField(default='Armor', editable=False)
 
     class Meta:
@@ -56,7 +56,7 @@ class Weapon(models.Model):
     attack_value = models.IntegerField(default=2)
     equipped_on = models.ManyToManyField('Character', default=None, related_name='equipped_weapon', blank=True, null=True)
     slots_required = models.IntegerField(default=1)
-    inventory = models.ManyToManyField('Inventory', default=None, related_name='weapons', blank=True, null=True)
+    inventory = models.ForeignKey('Inventory', default=None, related_name='weapons', blank=True, null=True)
     type = models.TextField(default='Weapon', editable=False)
 
     class Meta:
