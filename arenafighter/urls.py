@@ -6,7 +6,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'arenafighter.views.home.home', name='home'),
-    url(r'^store$', 'arenafighter.views.store.shop', name='store'),
+    url(r'^store$', 'arenafighter.views.store.shop', {'store_level': 1}, name='store'),
     url(r'^info/(\d+)/$', 'arenafighter.views.home.info', name='player_info'),
     url(r'^arena$', 'arenafighter.views.home.go_to_arena', name='arena'),
 
@@ -14,8 +14,8 @@ urlpatterns = patterns('',
     url(r'^armor/purchase/(\d+)$', 'arenafighter.views.store.buy_armor', name='buy_armor'),
     url(r'^weapon/purchase/(\d+)$', 'arenafighter.views.store.buy_weapon', name='buy_weapon'),
     url(r'^item/purchase/(\d+)$', 'arenafighter.views.store.buy_item', name='buy_item'),
-    url(r'^item(\d+)$', 'arenafighter.views.store.item_detail', name='item_info'),
-    url(r'^weapon(\d+)$', 'arenafighter.views.store.weapon_detail', name='weapon_info'),
+    url(r'^item/(\d+)$', 'arenafighter.views.store.item_detail', name='item_info'),
+    url(r'^weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', name='weapon_info'),
     url(r'^armor/(\d+)$', 'arenafighter.views.store.armor_detail', name='armor_info'),
 
     url(r'^fight', 'arenafighter.views.arena.fight', name='fight'),
