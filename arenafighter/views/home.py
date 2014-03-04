@@ -2,10 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from arenafighter.forms import CreateCharacterForm, LoginForm
 from arenafighter.models.character import Character
-from arenafighter.models.profile_model import User
 from django.contrib.auth import authenticate, login, logout
-from arenafighter.models.profile_model import Profile
-from django.forms.models import inlineformset_factory
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 import collections
 
@@ -13,16 +10,10 @@ import collections
 def home(request):
     characters = Character.objects.all()
     if request.POST:
-        # TODO: De-suckify this. inventory is lambda'd elsewhere so can probably get rid of it.
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
             character = Character(name=request.POST['name'])
-            request.user.profile.current_character = character
-            inventory = Inventory()
             character.save()
-            request.user.profile.save()
-            inventory.character = character
-            inventory.save()
             return redirect('home')
     else:
         form = CreateCharacterForm()
