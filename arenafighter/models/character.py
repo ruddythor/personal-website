@@ -53,11 +53,11 @@ class Character(models.Model):
         self.save()
 
     def equip_armor(self, armor):
-        armor.equipped_on.add(self)
+        self.equipped_armor = armor
         self.save()
 
     def Unequip_armor(self, armor):
-        armor.equipped_on.remove(self)
+        self.equipped_armor = None
         self.save()
 
     def equip_item(self, item):
