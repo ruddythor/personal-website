@@ -14,7 +14,7 @@
 </p>
 {% if item.inventory %}
 <p>OWNER:  {{ item.inventory }}</p>
-{% if not item.equipped_on.all %}
+{% if not item.equipped_on.all and item.type == 'Weapon' %}
 <a href="{% url 'equip' item.type item.id %}">EQUIP THIS ITEM</a>
 {% endif %}
 {% endif %}

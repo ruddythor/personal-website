@@ -59,21 +59,18 @@ def weapon_detail(request, name, store):
 
 def buy_armor(request, id):
     object = Armor.objects.get(id=id)
-    character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.purchase(object)
+    request.user.profile.current_character.purchase(object)
     return redirect('store')
 
 def buy_weapon(request, id):
     object = Weapon.objects.get(id=id)
-    character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.purchase(object)
+    request.user.profile.current_character.purchase(object)
     return redirect('store')
 
 
 def buy_item(request, id):
     object = InventoryItem.objects.get(id=id)
-    character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.purchase(object)
+    request.user.profile.current_character.purchase(object)
     return redirect('store')
 
 
@@ -97,5 +94,5 @@ def generate_armor(store_level):
         for x in range(0, 2):
             armor = Armor(name='The Protector', description='A basic set of armor, providing minimal protection', buy_value=14, sell_value=3)
             armor.save()
-            armor2 = Armor(name='Gladatorius', description='Basic armor that provides a small amount of protection', buy_value=14, sell_value=3, defense_value=2)
+            armor2 = Armor(name='Gladatorius', description='Basic armor that provides a small amount of protection', buy_value=20, sell_value=5, defense_value=3)
             armor2.save()
