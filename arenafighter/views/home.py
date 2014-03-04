@@ -95,17 +95,10 @@ def delete(request, id):
     return redirect('home')
 
 def play_as_character(request, id):
-#    if request.user.profile:
     character = Character.objects.get(id=id)
     character.current_character.add(request.user.profile)
     character.save()
     return redirect('player_info', character.id)
-#    else:
-#        profile = Profile(user=request.user)
-#        profile.save()
-#        request.user.profile.current_character = Character.objects.get(id=id)
-#        request.user.save()
-#    return render(request, 'home.html')
 
 def go_to_store(request):
     context = {}
