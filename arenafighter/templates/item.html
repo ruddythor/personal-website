@@ -20,8 +20,9 @@
 {% endif %}
 <p>ITEM TYPE:  {{ item.type }}
 </p>
-<p>{% if item.equipped_on.all %}
+<p>{% if user.profile.current_character not in item.equipped_on.all %}
 THIS ITEM EQUIPPED ON:  {{ item.equipped_on.all }}
+<a href="{% url 'equip' item.type item.id %}">EQUIP THIS ITEM</a>
 {% endif %}
 </p>
 

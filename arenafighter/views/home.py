@@ -99,7 +99,7 @@ def play_as_character(request, id):
     character = Character.objects.get(id=id)
     character.current_character.add(request.user.profile)
     character.save()
-    return redirect('home')
+    return redirect('player_info', character.id)
 #    else:
 #        profile = Profile(user=request.user)
 #        profile.save()
