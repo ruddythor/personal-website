@@ -4,13 +4,26 @@
 {% block content %}
 
 {{ item }}
-
-
-
-
-
+{{ item.name }}
+{{ item.description }}
 {{ item.buy_value }}
+{{ item.slots_required }}
+{{ item.inventory }}
+{{ item.type }}
 {{ item.sell_value }}
+
+{% if item.equipped_on %}
+{{ item.equipped_on.all }}
+{% endif %}
+
+{% if item.defense_value %}
+{{ item.defense_value }}
+{% endif %}
+
+{% if item.attack_value %}
+{{ item.attack_value }}
+{% endif %}
+
 
 {% if store %}
 {% if item.type == 'Weapon' %}
@@ -21,8 +34,6 @@
 <a href="{% url 'buy_armor' item.id %}">{% endif %}
 Purchase</a>
 {% endif %}
-
-
 
 
 
