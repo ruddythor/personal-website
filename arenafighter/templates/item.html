@@ -13,8 +13,10 @@
 <p>INVENTORY SLOTS REQUIRED:  {{ item.slots_required }}
 </p>
 {% if item.inventory %}
-<p>OWNER:  {{ item.inventory }}
-</p>
+<p>OWNER:  {{ item.inventory }}</p>
+{% if not item.equipped_on.all %}
+<a href="{% url 'equip' item.type item.id %}">EQUIP THIS ITEM</a>
+{% endif %}
 {% endif %}
 <p>ITEM TYPE:  {{ item.type }}
 </p>

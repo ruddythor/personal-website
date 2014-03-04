@@ -46,27 +46,27 @@ class Character(models.Model):
 
 
     def equip_weapon(self, weapon):
-        weapon.equipped_weapon.add(self.equipped)
+        weapon.equipped_on.add(self)
         self.save()
 
     def unequip_weapon(self, weapon):
-        weapon.equipped_weapon.remove(self.equipped)
+        weapon.equipped_on.remove(self.equipped)
         self.save()
 
 
     def equip_item(self, item):
-        item.equipped_items.add(self.equipped)
+        item.equipped_on = self#.add(self.equipped)
         self.save()
 
     def Unequip_item(self, item):
-        item.equipped_items.remove(self.equipped)
+        item.equipped_on = None#items.remove(self.equipped)
         self.save()
 
     def equip_armor(self, armor):
         self.equipped_armor = armor
         self.save()
 
-    def Unequip_armor(self, armor):
+    def unequip_armor(self, armor):
         self.equipped_armor = None
         self.save()
 
