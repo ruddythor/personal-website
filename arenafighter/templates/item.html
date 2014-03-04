@@ -4,10 +4,15 @@
 {% block content %}
 
 {{ item }}
+
+
+
+
+
 {{ item.buy_value }}
 {{ item.sell_value }}
 
-
+{% if store %}
 {% if item.type == 'Weapon' %}
 <a href="{% url 'buy_weapon' item.id %}">
 {% elif item.type == 'InventoryItem' %}
@@ -15,7 +20,7 @@
 {% elif item.type == 'Armor' %}
 <a href="{% url 'buy_armor' item.id %}">{% endif %}
 Purchase</a>
-
+{% endif %}
 
 
 
