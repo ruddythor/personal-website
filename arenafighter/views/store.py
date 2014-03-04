@@ -28,45 +28,33 @@ def shop(request, store_level):
 def item_detail(request, name, store):
     if store:
         object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
-        context = {'item': object,
-                   'store': store
-                   }
     else:
         object = InventoryItem.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
-        context = {'item': object,
-                   'store': store
-                   }
-
+    context = {'item': object,
+               'store': store,
+               }
     return render(request, 'item.html', context)
 
 
 def armor_detail(request, name, store):
     if store:
         object = Armor.objects.filter(name=name).filter(inventory_id=None)[0]
-        context = {'item': object,
-                   'store': store
-                   }
     else:
         object = Armor.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
-        context = {'item': object,
-                   'store': store
-                   }
-
+    context = {'item': object,
+               'store': store,
+               }
     return render(request, 'item.html', context)
 
 
 def weapon_detail(request, name, store):
     if store:
         object = Weapon.objects.filter(name=name).filter(inventory_id=None)[0]
-        context = {'item': object,
-                   'store': store
-                   }
     else:
         object = Weapon.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
-        context = {'item': object,
-                   'store': store
-                   }
-
+    context = {'item': object,
+               'store': store,
+               }
     return render(request, 'item.html', context)
 
 def buy_armor(request, id):
