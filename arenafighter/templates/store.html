@@ -4,18 +4,18 @@ Well, hello there, stranger! Welcome to the shop.
 
 <br/><br/><br/>
 <p>ITEMS:</p>
-{% for item in items %}
-<p>** <a href="{% url 'item_info' item.name %}">{{ item }}</a></p>
+{% for item, value in items.items %}
+<p>** <a href="{% url 'item_info' item %}">{{ item }}</a> x {{ value }}</p>
 {% endfor %}
 <br/><br/><br/>
 <p>WEAPONS:</p>
-{% for weapon in weapons %}
-<p>** <a href="{% url 'weapon_info' weapon.name %}">{{ weapon }}</a></p>
+{% for weapon, value in weapons.items %}
+<p>** <a href="{% url 'weapon_info' weapon %}">{{ weapon }}</a> x {{ value }}</p>
 {% endfor %}
 <br/><br/><br/>
 <p>ARMORS:</p>
-{% for armor in armors %}
-<p>**  <a href="{% url 'armor_info' armor.name %}">{{ armor }}</a></p>
+{% for armor, value in armors.items %}
+<p>**  <a href="{% url 'armor_info' armor %}">{{ armor }}</a> x {{ value }}</p>
 {% endfor %}
 
 

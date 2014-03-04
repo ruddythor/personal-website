@@ -52,13 +52,6 @@ class Character(models.Model):
         weapon.equipped_weapon.remove(self.equipped)
         self.save()
 
-    def equip_armor(self, armor):
-        self.equipped_armor = armor
-        self.save()
-
-    def Unequip_armor(self, armor):
-        self.equipped_armor = None
-        self.save()
 
     def equip_item(self, item):
         item.equipped_items.add(self.equipped)
@@ -67,6 +60,15 @@ class Character(models.Model):
     def Unequip_item(self, item):
         item.equipped_items.remove(self.equipped)
         self.save()
+
+    def equip_armor(self, armor):
+        self.equipped_armor = armor
+        self.save()
+
+    def Unequip_armor(self, armor):
+        self.equipped_armor = None
+        self.save()
+
 
     def purchase(self, item):
         self.inventory.add(item)

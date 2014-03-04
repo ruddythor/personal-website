@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-'''
-Created on Oct 2, 2012
-
-@author: josh
-'''
+import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.inventory import Inventory, InventoryItem, Weapon, Armor
@@ -21,6 +16,9 @@ def shop(request, store_level):
     items = InventoryItem.objects.exclude(inventory__isnull=False)
     weapons = Weapon.objects.exclude(inventory__isnull=False)
     armors = Armor.objects.exclude(inventory__isnull=False)
+    items = dict(collections.Counter([item.name for item in items]))
+    weapons = dict(collections.Counter([item.name for item in weapons]))
+    armors = dict(collections.Counter([item.name for item in armors]))
     context = {'items': items,
                'weapons': weapons,
                'armors': armors,
