@@ -2,35 +2,35 @@
 
 
 {% block content %}
-<p>{{ item.name }}
+<p>ITEM:  {{ item.name }}
 </p>
-<p>{{ item.description }}
+<p>DESCRIPTION: {{ item.description }}
 </p>
-<p>{{ item.buy_value }}
+<p>PURCHASE VALUE:  {{ item.buy_value }}
 </p>
-<p>{{ item.slots_required }}
+<p>SELL VALUE: {{ item.sell_value }}
+</p>
+<p>INVENTORY SLOTS REQUIRED:  {{ item.slots_required }}
 </p>
 {% if item.inventory %}
-<p>{{ item.inventory }}
+<p>OWNER:  {{ item.inventory }}
 </p>
 {% endif %}
-<p>{{ item.type }}
-</p>
-<p>{{ item.sell_value }}
+<p>ITEM TYPE:  {{ item.type }}
 </p>
 <p>{% if item.equipped_on.all %}
-{{ item.equipped_on.all }}
+THIS ITEM EQUIPPED ON:  {{ item.equipped_on.all }}
 {% endif %}
 </p>
 
 <p>
 {% if item.defense_value %}
-{{ item.defense_value }}
+DEFENSE VALUE:  {{ item.defense_value }}
 {% endif %}
 </p>
 <p>
 {% if item.attack_value %}
-{{ item.attack_value }}
+ATTACK VALUE:  {{ item.attack_value }}
 {% endif %}
 </p>
 
