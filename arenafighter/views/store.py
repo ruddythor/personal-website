@@ -72,36 +72,20 @@ def weapon_detail(request, name, store):
 def buy_armor(request, id):
     object = Armor.objects.get(id=id)
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.inventory.armor.add(object)
-    character.gold -= object.buy_value
-    character.save()
-    context = {'item': object,
-               }
+    character.purchase(object)
     return redirect('store')
 
 def buy_weapon(request, id):
     object = Weapon.objects.get(id=id)
-    print object
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.inventory.weapons.add(object)
-    character.gold -= object.buy_value
-    character.save()
-    context = {
-            'item': object,
-            }
+    character.purchase(object)
     return redirect('store')
 
 
 def buy_item(request, id):
     object = InventoryItem.objects.get(id=id)
-    print object.name, object.id
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.inventory.items.add(object)
-    character.gold -= object.buy_value
-    character.save()
-    context = {
-            'item': object,
-            }
+    character.purchase(object)
     return redirect('store')
 
 
@@ -117,6 +101,8 @@ def generate_weapons(store_level):
         for x in range(0, 2):
             weapon = Weapon(name='Cutter', description='A basic sword', buy_value=12, sell_value=3, attack_value=1)
             weapon.save()
+            weapon2 = Weapon(name='Kamikaze', description='A low-end sword', buy_value=20, sell_value=5, attack_value=2)
+            weapon2.save()
 
 def generate_armor(store_level):
     if store_level == 1:

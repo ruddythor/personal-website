@@ -72,27 +72,18 @@ class Character(models.Model):
 
 
     def purchase(self, item):
-        self.inventory.add(item)
+        if item.type == 'InventoryItem':
+            self.inventory.items.add(item)
+        elif item.type == 'Weapon':
+            self.inventory.weapons.add(item)
+        elif item.type == 'Armor':
+            self.inventory.armor.add(item)
         self.gold -= item.buy_value
         self.save()
 
     def sell(self, item):
-        self.equipment.remove(item)
+        self.inventory.remove(item)
         self.gold += item.sell_value
         self.save()
 
-#def character_equipped(character):
-#    character = Character.objects.select_related('equipped').get(id=character.id)
-#    equipment_dict = {'weapons': character.equipped.weapons, 'armor': character.equipped.armor, 'items': character.equipped.items}
-#    return equipment_dict
-
-#def character_inventory(character):
-#    character = Character.objects.prefetch_related().get(id=character.id)
-#    inventory_dict = {'weapons': character.inventory.weapons.all(), 'armor': character.inventory.armor.all(), 'items': character.inventory.items.all()}
-#    return inventory_dict
-
-
-#Character.equipped = property(lambda c: Equipped.objects.get_or_create(character=c)[0])
 Character.inventory = property(lambda c: Inventory.objects.get_or_create(character=c)[0])
-
-###c = Character.objects.get(id=1)
