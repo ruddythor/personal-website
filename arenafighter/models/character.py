@@ -44,6 +44,17 @@ class Character(models.Model):
             defense_value += self.equipped_armor.defense_value
         return defense_value
 
+    def equip(self, item_type, item_id):
+        if item_type == 'Weapon':
+            weapon = Weapon.objects.get(id=item_id)
+            weapon.equipped_on.add(self)
+        elif item_type == 'InventoryItem':
+            item = InventoryItem.objects.get(id=item_id)
+            item.equipped_on = self
+        elif item_type == 'Armor':
+            armor = Armor.objects.get(id=item_id)
+            self.equipped_armor = armor
+        self.save()
 
     def equip_weapon(self, weapon):
         weapon.equipped_on.add(self)

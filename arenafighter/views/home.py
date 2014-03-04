@@ -113,15 +113,7 @@ def go_to_store(request):
 
 def equip(request, item_type, item_id):
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    if item_type == 'Weapon':
-        weapon = Weapon.objects.get(id=item_id)
-        character.equip_weapon(weapon)
-    elif item_type == 'InventoryItem':
-        item = InventoryItem.objects.get(id=item_id)
-        character.equip_item(item)
-    elif item_type == 'Armor':
-        armor = Armor.objects.get(id=item_id)
-        character.equip_armor(armor)
+    character.equip(item_type, item_id)
     return redirect('home')
 
 def go_to_arena(request):
