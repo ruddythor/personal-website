@@ -25,8 +25,11 @@ def shop(request, store_level):
                }
     return render(request, 'store.html', context)
 
-def item_detail(request, name):
-    object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
+def item_detail(request, name, store):
+    if store:
+        object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
+    else:
+        object = InventoryItem.objects.filter(name=name)[0]
     context = {
             'item': object,
             }
@@ -34,8 +37,11 @@ def item_detail(request, name):
     return render(request, 'item.html', context)
 
 
-def armor_detail(request, name):
-    object = Armor.objects.filter(name=name).filter(inventory_id=None)[0]
+def armor_detail(request, name, store):
+    if store:
+        object = Armor.objects.filter(name=name).filter(inventory_id=None)[0]
+    else:
+        object = Armor.objects.filter(name=name)[0]
     context = {
             'item': object,
             }
@@ -43,8 +49,11 @@ def armor_detail(request, name):
     return render(request, 'item.html', context)
 
 
-def weapon_detail(request, name):
-    object = Weapon.objects.filter(name=name).filter(inventory_id=None)[0]
+def weapon_detail(request, name, store):
+    if store:
+        object = Weapon.objects.filter(name=name).filter(inventory_id=None)[0]
+    else:
+        object = Weapon.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     context = {'item': object,
                }
 

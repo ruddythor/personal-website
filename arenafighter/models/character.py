@@ -40,7 +40,8 @@ class Character(models.Model):
 
     def defense_value(self):
         defense_value = self.base_defense
-        defense_value += self.equipped_armor.defense_value
+        if self.equipped_armor:
+            defense_value += self.equipped_armor.defense_value
         return defense_value
 
 
