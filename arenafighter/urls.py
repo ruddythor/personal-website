@@ -10,10 +10,7 @@ urlpatterns = patterns('',
     url(r'^info/(\d+)/$', 'arenafighter.views.home.info', name='player_info'),
     url(r'^arena$', 'arenafighter.views.home.go_to_arena', name='arena'),
 
-
-    url(r'^armor/purchase/(\d+)$', 'arenafighter.views.store.buy_armor', name='buy_armor'),
-    url(r'^weapon/purchase/(\d+)$', 'arenafighter.views.store.buy_weapon', name='buy_weapon'),
-    url(r'^item/purchase/(\d+)$', 'arenafighter.views.store.buy_item', name='buy_item'),
+    url(r'^purchase/(?P<item_type>.+)/(?P<id>\d+)$', 'arenafighter.views.store.buy', name='buy'),
 
     url(r'^shop_item/(.+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='shop_item'),
     url(r'^shop_weapon/(.+)$', 'arenafighter.views.store.weapon_detail', {'store': True}, name='shop_weapon'),

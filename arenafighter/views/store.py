@@ -57,22 +57,15 @@ def weapon_detail(request, name, store):
                }
     return render(request, 'item.html', context)
 
-def buy_armor(request, id):
-    object = Armor.objects.get(id=id)
+def buy(request, item_type, id):
+    if item_type == 'Armor':
+        object = Armor.objects.get(id=id)
+    elif item_type == 'Weapon':
+        object = Weapon.objects.get(id=id)
+    elif item_type == 'InventoryItem':
+        object = InventoryItem.objects.get(id=id)
     request.user.profile.current_character.purchase(object)
     return redirect('store')
-
-def buy_weapon(request, id):
-    object = Weapon.objects.get(id=id)
-    request.user.profile.current_character.purchase(object)
-    return redirect('store')
-
-
-def buy_item(request, id):
-    object = InventoryItem.objects.get(id=id)
-    request.user.profile.current_character.purchase(object)
-    return redirect('store')
-
 
 
 def generate_items(store_level):

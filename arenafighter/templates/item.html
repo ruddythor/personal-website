@@ -40,12 +40,7 @@ ATTACK VALUE:  {{ item.attack_value }}
 </p>
 
 {% if store %}
-{% if item.type == 'Weapon' %}
-<a href="{% url 'buy_weapon' item.id %}">
-{% elif item.type == 'InventoryItem' %}
-<a href="{% url 'buy_item' item.id %}">
-{% elif item.type == 'Armor' %}
-<a href="{% url 'buy_armor' item.id %}">{% endif %}
+<a href="{% url 'buy' item.type item.id %}">
 Purchase</a>
 {% endif %}
 
