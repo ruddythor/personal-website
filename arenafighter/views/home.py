@@ -96,7 +96,7 @@ def delete(request, id):
 
 def play_as_character(request, id):
     character = Character.objects.get(id=id)
-    character.current_character.add(request.user.profile)
+    character.profile.add(request.user.profile)
     character.save()
     return redirect('player_info', character.id)
 
