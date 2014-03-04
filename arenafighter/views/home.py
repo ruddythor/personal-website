@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.profile_model import Profile
 from django.forms.models import inlineformset_factory
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
-
+import collections
 
 
 def home(request):
@@ -73,12 +73,17 @@ def info(request, id):
         inventory_items = InventoryItem.objects.filter(inventory=character)
         inventory_weapons = Weapon.objects.prefetch_related('inventory__character').filter(inventory=character)
         inventory_armor = Armor.objects.filter(inventory=character)
-
+        item_count = dict(collections.Counter([item.name for item in inventory_items]))
+        weapons_count = dict(collections.Counter(inventory_weapons))
+        armor_count = dict(collections.Counter(inventory_armor))
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
                    'items': inventory_items,
                    'armor': inventory_armor,
                    'weapons': inventory_weapons,
+                   'item_count': item_count,
+                   'weapons_count': weapons_count,
+                   'armor_count': armor_count,
                    }
     except:
         return redirect('home')

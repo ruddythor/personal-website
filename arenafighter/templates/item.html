@@ -7,6 +7,7 @@
 {{ item.buy_value }}
 {{ item.sell_value }}
 
+
 {% if item.type == 'Weapon' %}
 <a href="{% url 'buy_weapon' item.id %}">
 {% elif item.type == 'InventoryItem' %}
