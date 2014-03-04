@@ -27,8 +27,8 @@ def shop(request, store_level):
                }
     return render(request, 'store.html', context)
 
-def item_detail(request, id):
-    object = InventoryItem.objects.get(id=id)
+def item_detail(request, name):
+    object = InventoryItem.objects.filter(name=name)[0]
     context = {
             'item': object,
             }
@@ -36,8 +36,8 @@ def item_detail(request, id):
     return render(request, 'item.html', context)
 
 
-def armor_detail(request, id):
-    object = Armor.objects.get(id=id)
+def armor_detail(request, name):
+    object = Armor.objects.filter(name=name)[0]
     context = {
             'item': object,
             }
@@ -45,8 +45,8 @@ def armor_detail(request, id):
     return render(request, 'item.html', context)
 
 
-def weapon_detail(request, id):
-    object = Weapon.objects.get(id=id)
+def weapon_detail(request, name):
+    object = Weapon.objects.filter(name=name)[0]
     context = {'item': object,
                }
 
