@@ -20,7 +20,6 @@ def home(request):
             character.save()
             inventory = Inventory(character=character)
             inventory.save()
-            print character.id, inventory.id, inventory.character_id
             return redirect('home')
     else:
         form = CreateCharacterForm()
