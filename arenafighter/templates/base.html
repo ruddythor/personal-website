@@ -12,13 +12,11 @@
 {% block footer_nav %}
 <center>
 {% if user.is_authenticated %}
+{% with character_id=user.profile.current_character_id %}
 You are currently logged in as {{ user.username }}
-{% endif %}
 <br/>
 <a href="{% url 'home' %}">HOME</a>
 
-{% if user.is_authenticated %}
-{% with character_id=user.profile.current_character_id %}
     {% if character_id %}
      | <a href="{% url 'player_info' character_id %}">CHARACTER INFO</a>
  | <a href="{% url 'arena' %}">TO BATTLE!!</a> |

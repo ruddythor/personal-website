@@ -84,4 +84,3 @@ class Character(models.Model):
         self.gold += item.sell_value
         self.save()
 
-Character.inventory = property(lambda c: Inventory.objects.get_or_create(character=c)[0])
