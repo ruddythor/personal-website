@@ -2,10 +2,10 @@ from django.db import models
 
 from arenafighter.utils import dice
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
-from arenafighter.models.profile_model import Profile
 
 
 class Character(models.Model):
+    created_by = models.ForeignKey('Profile', null=False, related_name='created_characters')
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
     hpmax = models.IntegerField(default=dice.roll(15, 6))
