@@ -1,6 +1,5 @@
 import collections
 from django.shortcuts import render, redirect
-from arenafighter.models.character import Character
 from arenafighter.models.inventory import Inventory, InventoryItem, Weapon, Armor
 
 # TODO: DE-uglify this view function

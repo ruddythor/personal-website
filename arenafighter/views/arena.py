@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-'''
-Created on Oct 1, 2012
-
-@author: josh
-'''
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
@@ -16,7 +10,6 @@ def fight(request):
         'enemy': enemy,
     }
     while enemy.current_hp > 0 or character.current_hp > 0:
-        message = "Looks like you're both about evenly matched"
         character_initiative = dice.roll(1, 21)
         opponent_initiative = dice.roll(1, 21)
         if character_initiative > opponent_initiative:
