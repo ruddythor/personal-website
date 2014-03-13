@@ -60,18 +60,14 @@ def log_out(request):
 # TODO: clean this view up a bit
 def info(request, id):
     try:
-        character = Character.objects.select_related('equipped_armor', 'equipped_armor__inventory', 'profile__user', 'user__profile', 'user').filter(id=id)[0]
-        inventory_items = InventoryItem.objects.filter(inventory=character)
-        inventory_weapons = Weapon.objects.prefetch_related('inventory__character').filter(inventory=character)
-        inventory_armor = Armor.objects.filter(inventory=character)
-        item_count = dict(collections.Counter([item.name for item in inventory_items]))
-        weapons_count = dict(collections.Counter([item.name for item in inventory_weapons]))
-        armor_count = dict(collections.Counter([item.name for item in inventory_armor]))
+        character = Character.objects.select_related('equipped_armor', 'profile__user', 'user').filter(id=id)[0]
+        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons')
+        inventory = inventory.get(character_id=character.id)
+        item_count = dict(collections.Counter([item.name for item in inventory.items.all()]))
+        weapons_count = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
+        armor_count = dict(collections.Counter([item.name for item in inventory.armor.all()]))
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
-                   'items': inventory_items,
-                   'armor': inventory_armor,
-                   'weapons': inventory_weapons,
                    'item_count': item_count,
                    'weapons_count': weapons_count,
                    'armor_count': armor_count,
