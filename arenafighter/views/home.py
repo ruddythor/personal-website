@@ -8,12 +8,19 @@ import collections
 
 
 def home(request):
-    characters = Character.objects.all()
+    characters = []
+    if request.user.is_authenticated():
+        characters = Character.objects.filter(created_by=request.user.get_profile())
+
     if request.POST:
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
             character = Character(name=request.POST['name'])
+            request.user.profile.created_characters.add(character)
             character.save()
+            inventory = Inventory(character=character)
+            inventory.save()
+            print character.id, inventory.id, inventory.character_id
             return redirect('home')
     else:
         form = CreateCharacterForm()
@@ -60,9 +67,8 @@ def log_out(request):
 # TODO: clean this view up a bit
 def info(request, id):
     try:
-        character = Character.objects.select_related('equipped_armor', 'profile__user', 'user').filter(id=id)[0]
-        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons')
-        inventory = inventory.get(character_id=character.id)
+        character = Character.objects.select_related('inventory').get(id=id)
+        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
         item_count = dict(collections.Counter([item.name for item in inventory.items.all()]))
         weapons_count = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
         armor_count = dict(collections.Counter([item.name for item in inventory.armor.all()]))
