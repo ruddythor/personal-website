@@ -15,3 +15,9 @@ If you want to play the game as a command line version, go to the old-arena dire
 arena fighter before porting it to Django. This will not be updated.
 
 
+TODO
+--------------
+Make characters only available to the person who created them
+Combat Round system
+flesh out item use
+
