@@ -66,7 +66,7 @@ def log_out(request):
 # TODO: clean this view up a bit
 def info(request, id):
     try:
-        character = Character.objects.select_related('inventory').get(id=id)
+        character = Character.objects.get(id=id)
         inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
         item_count = dict(collections.Counter([item.name for item in inventory.items.all()]))
         weapons_count = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
