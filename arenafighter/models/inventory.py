@@ -5,7 +5,7 @@ class Inventory(models.Model):
     slots = models.IntegerField(default=10)
     slots_filled = models.IntegerField(default=0)
     slots_empty = models.IntegerField(default=10)
-    character = models.OneToOneField('Character', default=None, related_name='inventory', blank=True, null=True)
+    character = models.OneToOneField('Character', default=None, related_name='inventory', blank=False, null=False)
 
     class Meta:
         verbose_name_plural = "inventories"
