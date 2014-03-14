@@ -70,14 +70,14 @@ def info(request, id):
     try:
         character = Character.objects.get(id=id)
         inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
-        item_count = dict(collections.Counter([item.name for item in inventory.items.all()]))
-        weapons_count = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
-        armor_count = dict(collections.Counter([item.name for item in inventory.armor.all()]))
+        items = dict(collections.Counter([item.name for item in inventory.items.all()]))
+        weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
+        armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
-                   'item_count': item_count,
-                   'weapons_count': weapons_count,
-                   'armor_count': armor_count,
+                   'items': items,
+                   'weapons': weapons,
+                   'armor': armor,
                    }
     except:
         return redirect('home')
