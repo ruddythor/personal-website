@@ -56,7 +56,7 @@ class Character(models.Model):
         self.save()
 
     def unequip_weapon(self, weapon):
-        weapon.equipped_on.remove(self.equipped)
+        self.equipped_weapon.remove(weapon)
         self.save()
 
     def Unequip_item(self, item):
@@ -79,7 +79,14 @@ class Character(models.Model):
         self.save()
 
     def sell(self, item):
-        self.inventory.remove(item)
+        if item.type == 'InventoryItem':
+            self.inventory.items.remove(item)
+        elif item.type == 'Weapon':
+            self.inventory.weapons.remove(item)
+            self.unequip_weapon(item)
+        elif item.type == 'Armor':
+            self.inventory.armor.remove(item)
+            self.unequip_armor(item)
         self.gold += item.sell_value
         self.save()
 
