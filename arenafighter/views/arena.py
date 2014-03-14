@@ -42,22 +42,6 @@ def fight(request):
     return render(request, 'fight.html', context)
 
 
-
-def enemy_attacks(enemy, character):
-    if enemy.attack() > character.defense_value():
-        attack_value = enemy.attack() - character.defense_value()
-        character.current_hp -= attack_value
-        return character
-
-def character_attacks(character, enemy):
-    if character.attack() > enemy.defense_value():
-        attack_value = character.attack() - enemy.defense_value()
-        print 'base attack', character.attack()
-        print 'character attack value!', attack_value
-        enemy.current_hp -= attack_value
-        return enemy
-
-
 def fight_over(character, opponent, win_or_lose):
     if win_or_lose == 'win':
         character.xp += opponent.xp_value
@@ -119,14 +103,6 @@ def attack_round(aggressor, defender):
     else:
         return defender
 
-
-def victory(player, opponent):
-    player.current_hp = player.hpmax
-    player.fights_won += 1
-    player.xp += opponent.xp_value
-
-def loss(player, opponent):
-    pass
 
 
 
