@@ -3,7 +3,7 @@
 {% block content %}
 <p>NAME: {{ character.name }}</p>
 <p>LEVEL {{ character.level }}</p>
-<p>HP {{ character.hpmax }}</p>
+<p>HP: {{ character.current_hp}}/{{ character.hpmax }}</p>
 <p>base attack {{ character.base_attack }}</p>
 <p>base defense {{ character.base_defense }}</p>
 <p>GOLD {{ character.gold }}</p>

@@ -11,6 +11,11 @@ They've got<br/>
 <br/>
 HP!
 <br/><br/><br/>
+
+You have: {{ user.profile.current_character.current_hp }}/{{ user.profile.current_character.hpmax }}
+<br/><br/><br/>
+
+
 {{ message }}
 <br/><br/><br/>
 
@@ -18,6 +23,12 @@ HP!
 <input type="hidden" name="keep_fighting" value="True" />
 <input type="hidden" value="{{ enemy_id }}" name="enemy_id"/>
 <input type="submit" value="KEEP FIGHTIN', BITCH!"/>
+</form>
+
+<form action="{% url 'player_info' user.profile.current_character_id %}" method="get">{% csrf_token %}
+<input type="submit" value="RUN AWAY LIKE A MUTHAFUCKER!"/>
+</form>
+
 {% endblock %}
 
 

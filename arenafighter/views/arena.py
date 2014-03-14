@@ -83,6 +83,7 @@ def check_for_levelup(character):
 
 
 def combat_round(character, enemy):
+    attack_round(enemy, character)
     if dead(character):
         fight_over(character, enemy, 'lose')
         return {'message': "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."}
