@@ -8,18 +8,14 @@ def fight(request):
     if request.POST:
         form = ContinueFightForm(request.POST)
         if form.is_valid:
-            print request.POST.get('enemy_id', None)
             if request.POST.get('enemy_id'):
                 enemy = Enemy.objects.get(id=int(request.POST.get('enemy_id')))
-                print enemy, enemy.id, 'HP:', enemy.current_hp, "/", enemy.hpmax
     else:
         enemy = generate_enemy('weak')
 
 
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    context = {
-        'enemy': enemy,
-    }
+    context = {'enemy': enemy}
     while enemy.current_hp > 0 or character.current_hp > 0:
         character_initiative = dice.roll(1, 21)
         opponent_initiative = dice.roll(1, 21)
@@ -104,7 +100,10 @@ def initiative_winner(player, opponent):
 def attack_round(aggressor, defender):
     if aggressor.attack() > defender.defense_value():
         attack_value = aggressor.attack() - defender.defense_value()
-        defender.current_hp = defender.current_hp - attack_value
+        if attack_value <= 0:
+            pass
+        else:
+            defender.current_hp = defender.current_hp - attack_value
         defender.save()
         return defender
     else:

@@ -11,7 +11,7 @@ import collections
 def home(request):
     characters = []
     if request.user.is_authenticated():
-        characters = Character.objects.filter(created_by=request.user.get_profile())
+        characters = Character.objects.filter(created_by=request.user.profile.id)
 
     if request.POST:
         form = CreateCharacterForm(request.POST)

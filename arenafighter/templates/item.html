@@ -12,6 +12,14 @@
 </p>
 <p>INVENTORY SLOTS REQUIRED:  {{ item.slots_required }}
 </p>
+
+
+
+
+
+
+
+
 {% if item.inventory %}
 <p>OWNER:  {{ item.inventory }}</p>
 {% if not item.equipped_on.all and item.type == 'Weapon' %}
@@ -20,6 +28,12 @@
 {% endif %}
 <p>ITEM TYPE:  {{ item.type }}
 </p>
+
+
+
+
+
+
 <p>{% if user.profile.current_character not in item.equipped_on.all %}
 THIS ITEM EQUIPPED ON:  {{ item.equipped_on.all }}
 {% if not store %}
@@ -27,6 +41,14 @@ THIS ITEM EQUIPPED ON:  {{ item.equipped_on.all }}
 {% endif %}
 {% endif %}
 </p>
+
+
+
+
+
+
+
+
 
 <p>
 {% if item.defense_value %}
