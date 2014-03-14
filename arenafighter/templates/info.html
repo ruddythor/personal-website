@@ -12,14 +12,14 @@
 <p>FIGHTS LOST {{ character.fights_lost }}</p>
 -----------------------------
 <p>INVENTORY: </p>
-{% for item, value in item_count.items %}
+{% for item, value in items.items %}
 <p> **  <a href="{% url 'item_detail' item %}">{{ item }}</a> x {{ value }}</p>
 {% endfor %}
-{% for item,value in weapons_count.items %}
+{% for item,value in weapons.items %}
 <p> **  <a href="{% url 'weapon_detail' item %}">{{ item }}</a> x {{ value }}</p>
 {#<p> **  {{ item.inventory.all }}</p> endcomment #}
 {% endfor %}
-{% for item, value in armor_count.items %}
+{% for item, value in armor.items %}
 <p> **  <a href="{% url 'armor_detail' item %}">{{ item }}</a> x {{ value }}</p>
 {% endfor %}
 <p></p>

@@ -40,9 +40,14 @@ ATTACK VALUE:  {{ item.attack_value }}
 </p>
 
 {% if store %}
-<a href="{% url 'buy' item.type item.id %}">
+<a href="{% url 'buy_item' item.type item.id %}">
 Purchase</a>
 {% endif %}
+
+{% if sell %}
+<a href="{% url 'sell_item' item.type item.id %}">Sell</a>
+{% endif %}
+
 
 
 
