@@ -13,33 +13,28 @@ def fight(request):
         character_initiative = dice.roll(1, 21)
         opponent_initiative = dice.roll(1, 21)
         if character_initiative > opponent_initiative:
-            character_attacks(character, enemy)
-            if enemy.current_hp <= 0:
-                won_fight(character, enemy)
+            attack_round(character, enemy)
+            if dead(enemy):
+                fight_over(character, enemy, 'win')
                 message = "You really showed that ass who's boss!! Good job, mate"
                 context['message'] = message
-
                 return render(request, 'fight.html', context)
-            enemy_attacks(enemy, character)
-            if character.current_hp <= 0:
-                character.current_hp = character.hpmax
+            attack_round(enemy, character)
+            if dead(character):
                 message = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
                 context['message'] = message
-                character.fights_lost += 1
-                character.save()
+                fight_over(character, enemy, 'lose')
                 return render(request, 'fight.html', context)
         elif opponent_initiative > character_initiative:
-            enemy_attacks(enemy, character)
-            if character.current_hp <= 0:
-                character.current_hp = character.hpmax
+            attack_round(enemy, character)
+            if dead(character):
+                fight_over(character, enemy, 'lose')
                 message = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
                 context['message'] = message
-                character.fights_lost += 1
-                character.save()
                 return render(request, 'fight.html', context)
-            character_attacks(character, enemy)
-            if enemy.current_hp <= 0:
-                won_fight(character, enemy)
+            attack_round(character, enemy)
+            if dead(enemy):
+                fight_over(character, enemy, 'win')
                 message = "You really showed that ass who's boss!! Good job, mate"
                 context['message'] = message
                 return render(request, 'fight.html', context)
@@ -63,15 +58,21 @@ def character_attacks(character, enemy):
         return enemy
 
 
-def won_fight(character, opponent):
-    character.xp += opponent.xp_value
-    character.gold += opponent.gold
-    character.renown += opponent.renown_value
-    check_for_levelup(character)
-    character.current_hp = character.hpmax
-    character.fights_won += 1
-    character.save()
-    return character
+def fight_over(character, opponent, win_or_lose):
+    if win_or_lose == 'win':
+        character.xp += opponent.xp_value
+        character.gold += opponent.gold
+        character.renown += opponent.renown_value
+        check_for_levelup(character)
+        character.current_hp = character.hpmax
+        character.fights_won += 1
+        character.save()
+        return character
+    elif win_or_lose == 'lose':
+        character.fights_lost += 1
+        character.current_hp = character.hpmax
+        character.save()
+        return character
 
 
 def check_for_levelup(character):
@@ -84,6 +85,50 @@ def check_for_levelup(character):
         return character
     else:
         return character
+
+
+def combat_round(character, enemy):
+    if dead(character):
+        fight_over(character, enemy, 'lose')
+        return {'message': "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."}
+    attack_round(character, enemy)
+    if dead(enemy):
+        fight_over(character, enemy, 'win')
+        return {'message': "You really showed that ass who's boss!! Good job, mate"}
+    return render(request, 'fight.html', context)
+#    initiative_winner(player, opponent)#
+#
+#    get initiative winner attack value
+#    check initiative_loser health, if dead, return
+#    initiative loser attacks
+#    check initiative_winner health, if dead return
+
+
+def dead(person):
+    if person.current_hp <= 0:
+        return True
+
+def initiative_winner(player, opponent):
+    return max(player, opponent)
+
+def attack_round(aggressor, defender):
+    if aggressor.attack() > defender.defense_value():
+        attack_value = aggressor.attack() - defender.defense_value()
+        defender.current_hp -= attack_value
+        return defender
+    else:
+        return defender
+
+
+def victory(player, opponent):
+    player.current_hp = player.hpmax
+    player.fights_won += 1
+    player.xp += opponent.xp_value
+
+def loss(player, opponent):
+    pass
+
+
 
 # This defines an enemy strength definition where the key is the relative strength of the enemy
 # and the value is a dict of attributes for that enemy, where the dict key corresponds to an attribute
