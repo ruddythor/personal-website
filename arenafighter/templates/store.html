@@ -5,17 +5,17 @@ Well, hello there, stranger! Welcome to the shop.
 <br/><br/><br/>
 <p>ITEMS:</p>
 {% for item, value in items.items %}
-<p>** <a href="{% url 'shop_item' item %}">{{ item }}</a> x {{ value }}</p>
+<p>** <a href="{% url 'shop_item_detail' item %}">{{ item }}</a> x {{ value }}</p>
 {% endfor %}
 <br/><br/><br/>
 <p>WEAPONS:</p>
 {% for weapon, value in weapons.items %}
-<p>** <a href="{% url 'shop_weapon' weapon %}">{{ weapon }}</a> x {{ value }}</p>
+<p>** <a href="{% url 'shop_weapon_detail' weapon %}">{{ weapon }}</a> x {{ value }}</p>
 {% endfor %}
 <br/><br/><br/>
 <p>ARMORS:</p>
 {% for armor, value in armors.items %}
-<p>**  <a href="{% url 'shop_armor' armor %}">{{ armor }}</a> x {{ value }}</p>
+<p>**  <a href="{% url 'shop_armor_detail' armor %}">{{ armor }}</a> x {{ value }}</p>
 {% endfor %}
 
 

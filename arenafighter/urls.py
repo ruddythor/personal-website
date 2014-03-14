@@ -12,12 +12,12 @@ urlpatterns = patterns('',
 
     url(r'^purchase/(?P<item_type>.+)/(?P<id>\d+)$', 'arenafighter.views.store.buy', name='buy'),
 
-    url(r'^shop_item/(.+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='shop_item'),
-    url(r'^shop_weapon/(.+)$', 'arenafighter.views.store.weapon_detail', {'store': True}, name='shop_weapon'),
-    url(r'^shop_armor/(.+)$', 'arenafighter.views.store.armor_detail', {'store': True}, name='shop_armor'),
-    url(r'^item/(.+)$', 'arenafighter.views.store.item_detail', {'store': False}, name='item_info'),
-    url(r'^weapon/(.+)$', 'arenafighter.views.store.weapon_detail', {'store': False}, name='weapon_info'),
-    url(r'^armor/(.+)$', 'arenafighter.views.store.armor_detail', {'store': False}, name='armor_info'),
+    url(r'^shop_item/(.+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='shop_item_detail'),
+    url(r'^shop_weapon/(.+)$', 'arenafighter.views.store.weapon_detail', {'store': True}, name='shop_weapon_detail'),
+    url(r'^shop_armor/(.+)$', 'arenafighter.views.store.armor_detail', {'store': True}, name='shop_armor_detail'),
+    url(r'^item/(.+)$', 'arenafighter.views.store.item_detail', {'store': False}, name='item_detail'),
+    url(r'^weapon/(.+)$', 'arenafighter.views.store.weapon_detail', {'store': False}, name='weapon_detail'),
+    url(r'^armor/(.+)$', 'arenafighter.views.store.armor_detail', {'store': False}, name='armor_detail'),
 
     url(r'^equip/(?P<item_type>.+)/(?P<item_id>\d+)$', 'arenafighter.views.home.equip', name='equip'),
 
