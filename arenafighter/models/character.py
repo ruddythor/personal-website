@@ -26,7 +26,6 @@ class Character(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Character, self).__init__(*args, **kwargs)
-        self.current_hp = self.hpmax
 
     def __unicode__(self):
         return self.name

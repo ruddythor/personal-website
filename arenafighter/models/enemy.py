@@ -27,7 +27,6 @@ class Enemy(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
-        self.current_hp = self.hpmax
 
     def attack(self):
         attack_value=self.base_attack
@@ -77,9 +76,33 @@ class Enemy(models.Model):
 
 
 enemy_strength_dict = {
-    'weak': {'name': 'An Enemy!', 'xp_value': 5, 'renown_value': 7, 'hpmax': dice.roll(10, 7), 'current_hp': 0, 'base_attack': 4, 'base_defense': 5, 'gold': dice.roll(5, 7)},
-    'medium': {'name': 'An Enemy!', 'xp_value': 15, 'renown_value': 14, 'hpmax': dice.roll(15, 7), 'current_hp': 0, 'base_attack': 8, 'base_defense': 8, 'gold': dice.roll(9, 7)},
-    'strong': {'name': 'An Enemy!', 'xp_value': 45, 'renown_value': 21, 'hpmax': dice.roll(25, 5), 'current_hp': 0, 'base_attack': 15, 'base_defense': 15, 'gold': dice.roll(15, 5)},
+    'weak': {'name': 'An Enemy!',
+             'xp_value': 5,
+             'renown_value': 7,
+             'hpmax': dice.roll(10, 7),
+             'current_hp': 0,
+             'base_attack': 4,
+             'base_defense': 5,
+             'gold': dice.roll(5, 7)
+             },
+    'medium': {'name': 'An Enemy!',
+               'xp_value': 15,
+               'renown_value': 14,
+               'hpmax': dice.roll(15, 7),
+               'current_hp': 0,
+               'base_attack': 8,
+               'base_defense': 8,
+               'gold': dice.roll(9, 7)
+                },
+    'strong': {'name': 'An Enemy!',
+               'xp_value': 45,
+               'renown_value': 21,
+               'hpmax': dice.roll(25, 5),
+               'current_hp': 0,
+               'base_attack': 15,
+               'base_defense': 15,
+               'gold': dice.roll(15, 5)
+                },
     'very strong': {'name': 'An Enemy!', 'xp_value': 65, 'renown_value': 28, 'hpmax': dice.roll(35, 5), 'current_hp': 0, 'base_attack': 25, 'base_defense': 25, 'gold': dice.roll(20, 5)},
     'exceptionally strong': {'name': 'An Enemy!', 'xp_value': 95, 'renown_value': 35, 'hpmax': dice.roll(50, 5), 'current_hp': 0, 'base_attack': 40, 'base_defense': 45, 'gold': dice.roll(30, 5)},
     'powerful': {'name': 'An Enemy!', 'xp_value': 145, 'renown_value': 42, 'hpmax': dice.roll(65, 4), 'current_hp': 0, 'base_attack': 75, 'base_defense': 75, 'gold': dice.roll(45, 4)},
@@ -93,7 +116,7 @@ def generate_enemy(strength):
                   xp_value=enemy_strength_dict[strength]['xp_value'],
                   renown_value=enemy_strength_dict[strength]['renown_value'],
                   hpmax=enemy_strength_dict[strength]['hpmax'],
-                  current_hp=enemy_strength_dict[strength]['current_hp'],
+                  current_hp=enemy_strength_dict[strength]['hpmax'],
                   base_attack=enemy_strength_dict[strength]['base_attack'],
                   base_defense=enemy_strength_dict[strength]['base_defense'],
                   gold=enemy_strength_dict[strength]['gold']

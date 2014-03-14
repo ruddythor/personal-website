@@ -4,6 +4,7 @@ from arenafighter.forms import CreateCharacterForm, LoginForm
 from arenafighter.models.character import Character
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.utils import dice
 import collections
 
 
@@ -15,7 +16,8 @@ def home(request):
     if request.POST:
         form = CreateCharacterForm(request.POST)
         if form.is_valid():
-            character = Character(name=request.POST['name'])
+            hp = dice.roll(18, 5)
+            character = Character(name=request.POST['name'], hpmax=hp, current_hp=hp)
             request.user.profile.created_characters.add(character)
             character.save()
             inventory = Inventory(character=character)

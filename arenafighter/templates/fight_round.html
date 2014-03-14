@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+You're fighting: {{ enemy }}<br/>
+enemy ID:  {{ enemy.id }}
+<br/><br/><br/>
+They've got<br/>
+{{ enemy.current_hp }}/{{ enemy.hpmax }}
+<br/>
+HP!
+<br/><br/><br/>
+{{ message }}
+<br/><br/><br/>
+
+<form action="" method="post">{% csrf_token %}
+<input type="hidden" name="keep_fighting" value="True" />
+<input type="hidden" value="{{ enemy_id }}" name="enemy_id"/>
+<input type="submit" value="KEEP FIGHTIN', BITCH!"/>
+{% endblock %}
+
+
