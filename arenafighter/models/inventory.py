@@ -21,26 +21,20 @@ class InventoryItem(models.Model):
     buy_value = models.IntegerField(default=0)
     sell_value = models.IntegerField(default=0)
     slots_required = models.IntegerField(default=1)
-    equipped_on = models.OneToOneField('Character', default=None, related_name='equipped_items', blank=True, null=True)
-    inventory = models.ForeignKey('Inventory', default=None, related_name='items', blank=True, null=True)
-    type = models.TextField(default='InventoryItem', editable=False)
+    inventory = models.ForeignKey('Inventory', default=None, related_name='%(class)s', blank=True, null=True)
+    equipped = models.BooleanField(default=False)
 
     class Meta:
+        abstract = True
         app_label = 'arenafighter'
 
     def __unicode__(self):
         return self.name
 
 
-class Armor(models.Model):
-    name = models.TextField(blank=False, null=False)
-    description = models.TextField(blank=True, null=False)
-    buy_value = models.IntegerField(default=0)
-    sell_value = models.IntegerField(default=0)
+class Armor(InventoryItem):
     defense_value = models.IntegerField(default=2)
-    slots_required = models.IntegerField(default=1)
-    inventory = models.ForeignKey('Inventory', default=None, related_name='armor', blank=True, null=True)
-    type = models.TextField(default='Armor', editable=False)
+    type = models.TextField(default='armor', editable=False)
 
     class Meta:
         app_label = 'arenafighter'
@@ -48,19 +42,23 @@ class Armor(models.Model):
     def __unicode__(self):
         return self.name
 
-class Weapon(models.Model):
-    name = models.TextField(blank=False, null=False)
-    description = models.TextField(blank=True, null=False)
-    buy_value = models.IntegerField(default=0)
-    sell_value = models.IntegerField(default=0)
+class Weapon(InventoryItem):
     attack_value = models.IntegerField(default=2)
-    equipped_on = models.ManyToManyField('Character', default=None, related_name='equipped_weapon', blank=True, null=True)
-    slots_required = models.IntegerField(default=1)
-    inventory = models.ForeignKey('Inventory', default=None, related_name='weapons', blank=True, null=True)
-    type = models.TextField(default='Weapon', editable=False)
+    type = models.TextField(default='weapon', editable=False)
 
     class Meta:
         app_label = 'arenafighter'
 
     def __unicode__(self):
         return self.name
+
+class Potion(InventoryItem):
+    heal_percent = models.IntegerField(default=20)
+    type = models.TextField(default='potion', editable=False)
+
+    class Meta:
+        app_label = 'arenafighter'
+
+    def __unicode__(self):
+        return self.name
+

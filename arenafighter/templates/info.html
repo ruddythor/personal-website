@@ -13,19 +13,21 @@
 -----------------------------
 <p>INVENTORY: </p>
 {% for item, value in items.items %}
+{% if item.type == "potion" %}
 <p> **  <a href="{% url 'item_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{% endfor %}
-{% for item,value in weapons.items %}
+{% endif %}
+{% if item.type == "weapon" %}
 <p> **  <a href="{% url 'weapon_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{#<p> **  {{ item.inventory.all }}</p> endcomment #}
-{% endfor %}
-{% for item, value in armor.items %}
+{% endif %}
+{% if item.type == "armor" %}
 <p> **  <a href="{% url 'armor_detail' item %}">{{ item }}</a> x {{ value }}</p>
+{% endif %}
 {% endfor %}
 <p></p>
 <p></p>
-<p>EQUIPPED ITEMS:</p>
 <p></p>
+
+{% comment %}
 {% for item in character.equipped_items.all %}
 <p> **  {{ item }}</p>
 {% endfor %}
@@ -33,8 +35,12 @@
 <p> **  {{ item }}</p>
 {% endfor %}
 <p> **  {{ character.equipped_armor }}</p>
+{% endcomment %}
+
 <p></p>
 <p></p>
+
+<p>EQUIPPED ITEMS:</p>
 {% if character == current_character %}
 *** THIS IS YOUR CURRENT CHARACTER ***
 {% endif %}

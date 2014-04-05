@@ -69,15 +69,15 @@ def log_out(request):
 def info(request, id):
     try:
         character = Character.objects.get(id=id)
-        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
-        items = dict(collections.Counter([item.name for item in inventory.items.all()]))
-        weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
-        armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
+#        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
+        items = dict(collections.Counter([item for item in character.items]))
+#        weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
+#        armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
         context = {'character': character,
                    'current_character': request.user.get_profile().current_character,
                    'items': items,
-                   'weapons': weapons,
-                   'armor': armor,
+#                   'weapons': weapons,
+#                   'armor': armor,
                    }
     except:
         return redirect('home')

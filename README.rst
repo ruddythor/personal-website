@@ -17,7 +17,13 @@ arena fighter before porting it to Django. This will not be updated.
 
 TODO
 --------------
-Make characters only available to the person who created them
-Combat Round system
+Make characters only available to the person who created them -- DONE (i think)
+Combat Round system -- DONE
 flesh out item use
+Improve battle algorithm/enemy vitals
+Implement a .defend() action to boost defense for 1 turn
+
+
+
+
 

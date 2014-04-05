@@ -1,26 +1,26 @@
 import collections
 from django.shortcuts import render, redirect
-from arenafighter.models.inventory import Inventory, InventoryItem, Weapon, Armor
+from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
-    items = InventoryItem.objects.exclude(inventory__isnull=False)
+    potions = Potion.objects.exclude(inventory__isnull=False)
     weapons = Weapon.objects.exclude(inventory__isnull=False)
     armor = Armor.objects.exclude(inventory__isnull=False)
-    if not items:
+    if not potions:
         generate_items(store_level)
     if not armor:
         generate_armor(store_level)
     if not weapons:
         generate_weapons(store_level)
-    items = InventoryItem.objects.exclude(inventory__isnull=False)
+    potions = Potion.objects.exclude(inventory__isnull=False)
     weapons = Weapon.objects.exclude(inventory__isnull=False)
     armor = Armor.objects.exclude(inventory__isnull=False)
-    items = dict(collections.Counter([item.name for item in items]))
+    potions = dict(collections.Counter([item.name for item in potions]))
     weapons = dict(collections.Counter([item.name for item in weapons]))
     armor = dict(collections.Counter([item.name for item in armor]))
-    context = {'items': items,
+    context = {'items': potions,
                'weapons': weapons,
                'armor': armor,
                }
@@ -30,11 +30,11 @@ def shop(request, store_level):
 def character_inventory(request):
     character = Character.objects.get(id=request.user.profile.current_character_id)
     inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
-    items = dict(collections.Counter([item.name for item in inventory.items.all()]))
+    potions = dict(collections.Counter([item.name for item in inventory.potions.all()]))
     weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
     armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
     context = {'character': character,
-               'items': items,
+               'items': potions,
                'weapons': weapons,
                'armor': armor,
                }
@@ -44,11 +44,11 @@ def character_inventory(request):
 # TODO: combine these *_detail views to be better
 def item_detail(request, name, store=False, sell=False):
     if store:
-        object = InventoryItem.objects.filter(name=name).filter(inventory_id=None)[0]
+        object = Potion.objects.filter(name=name).filter(inventory_id=None)[0]
     elif sell:
-        object = InventoryItem.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
+        object = Potion.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     else:
-        object = InventoryItem.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
+        object = Potion.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     context = {'item': object,
                'store': store,
                'sell': sell,
@@ -84,22 +84,22 @@ def weapon_detail(request, name, store=False, sell=False):
     return render(request, 'item.html', context)
 
 def buy(request, item_type, id):
-    if item_type == 'Armor':
+    if item_type == 'armor':
         object = Armor.objects.get(id=id)
-    elif item_type == 'Weapon':
+    elif item_type == 'weapon':
         object = Weapon.objects.get(id=id)
-    elif item_type == 'InventoryItem':
-        object = InventoryItem.objects.get(id=id)
+    elif item_type == 'potion':
+        object = Potion.objects.get(id=id)
     request.user.profile.current_character.purchase(object)
     return redirect('store')
 
 
 def sell(request, item_type, id):
-    if item_type == 'Armor':
+    if item_type == 'armor':
         object = Armor.objects.get(id=id)
-    elif item_type == 'Weapon':
+    elif item_type == 'weapon':
         object = Weapon.objects.get(id=id)
-    elif item_type == 'InventoryItem':
+    elif item_type == 'potion':
         object = InventoryItem.objects.get(id=id)
     request.user.profile.current_character.sell(object)
     return redirect('store')
@@ -109,7 +109,7 @@ def sell(request, item_type, id):
 def generate_items(store_level):
     if store_level == 1:
         for x in range(0, 10):
-            potion = InventoryItem(name='Health Potion', description='potion', buy_value=10, sell_value=2)
+            potion = Potion(name='Health Potion', description='potion', buy_value=10, sell_value=2)
             potion.save()
 
 def generate_weapons(store_level):

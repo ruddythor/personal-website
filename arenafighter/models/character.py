@@ -44,13 +44,13 @@ class Character(models.Model):
         return defense_value
 
     def equip(self, item_type, item_id):
-        if item_type == 'Weapon':
+        if item_type == 'weapon':
             weapon = Weapon.objects.get(id=item_id)
             weapon.equipped_on.add(self)
-        elif item_type == 'InventoryItem':
-            item = InventoryItem.objects.get(id=item_id)
+        elif item_type == 'potion':
+            item = Potion.objects.get(id=item_id)
             item.equipped_on = self
-        elif item_type == 'Armor':
+        elif item_type == 'armor':
             armor = Armor.objects.get(id=item_id)
             self.equipped_armor = armor
         self.save()
@@ -69,24 +69,34 @@ class Character(models.Model):
 
 
     def purchase(self, item):
-        if item.type == 'InventoryItem':
-            self.inventory.items.add(item)
-        elif item.type == 'Weapon':
-            self.inventory.weapons.add(item)
-        elif item.type == 'Armor':
+        if item.type == 'potion':
+            self.inventory.potion.add(item)
+        elif item.type == 'weapon':
+            self.inventory.weapon.add(item)
+        elif item.type == 'armor':
             self.inventory.armor.add(item)
         self.gold -= item.buy_value
         self.save()
 
     def sell(self, item):
-        if item.type == 'InventoryItem':
-            self.inventory.items.remove(item)
-        elif item.type == 'Weapon':
+        if item.type == 'potion':
+            self.inventory.potion.remove(item)
+        elif item.type == 'weapon':
             self.inventory.weapons.remove(item)
             self.unequip_weapon(item)
-        elif item.type == 'Armor':
+        elif item.type == 'armor':
             self.inventory.armor.remove(item)
             self.unequip_armor(item)
         self.gold += item.sell_value
         self.save()
 
+    @property
+    def items(self):
+        weapons = self.inventory.weapon.all()
+        armor = self.inventory.armor.all()
+        potions = self.inventory.potion.all()
+        items = []
+        items.extend(weapons)
+        items.extend(armor)
+        items.extend(potions)
+        return items

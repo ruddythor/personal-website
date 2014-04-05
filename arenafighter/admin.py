@@ -10,14 +10,14 @@ class CharacterAdmin(admin.ModelAdmin):
 admin.site.register(Character, CharacterAdmin)
 
 
-class InventoryAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Inventory, InventoryAdmin)
+#class InventoryAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(Inventory, InventoryAdmin)
 
 
-class InventoryItemAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(InventoryItem, InventoryItemAdmin)
+#class InventoryItemAdmin(admin.ModelAdmin):
+#    pass
+#admin.site.register(InventoryItem, InventoryItemAdmin)
 
 
 class ArmorAdmin(admin.ModelAdmin):
