@@ -65,22 +65,19 @@ def log_out(request):
     logout(request)
     return redirect('home')
 
-# TODO: clean this view up a bit
 def info(request, id):
     try:
         character = Character.objects.get(id=id)
-#        inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
         items = dict(collections.Counter([item for item in character.items]))
-#        weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
-#        armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
+        equipped_items = dict(collections.Counter([item for item in character.equipped_items]))
         context = {'character': character,
-                   'current_character': request.user.get_profile().current_character,
+                   'current_character': request.user.profile.current_character,
                    'items': items,
-#                   'weapons': weapons,
-#                   'armor': armor,
+                   'equipped_items': equipped_items,
                    }
     except:
-        return redirect('home')
+        return redirect('info')
+
     return render(request, 'info.html', context)
 
 def delete(request, id):
@@ -97,11 +94,6 @@ def play_as_character(request, id):
 def go_to_store(request):
     context = {}
     return render(request, 'store.html', context)
-
-def equip(request, item_type, item_id):
-    character = Character.objects.get(id=request.user.profile.current_character_id)
-    character.equip(item_type, item_id)
-    return redirect('home')
 
 def go_to_arena(request):
     context = {}

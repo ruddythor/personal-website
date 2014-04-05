@@ -37,35 +37,24 @@ class Character(models.Model):
         attack = dice.roll(attack_value, 6)
         return attack
 
-    def defense_value(self):
-        defense_value = self.base_defense
-        if self.equipped_armor:
-            defense_value += self.equipped_armor.defense_value
-        return defense_value
 
-    def equip(self, item_type, item_id):
-        if item_type == 'weapon':
-            weapon = Weapon.objects.get(id=item_id)
-            weapon.equipped_on.add(self)
-        elif item_type == 'potion':
-            item = Potion.objects.get(id=item_id)
-            item.equipped_on = self
-        elif item_type == 'armor':
-            armor = Armor.objects.get(id=item_id)
-            self.equipped_armor = armor
+    def equip(self, item):
+        if item.type == 'weapon':
+            if len(self.inventory.weapon.filter(equipped=True)) < 2:
+                item.equipped = True
+                item.save()
+            else:
+                weapon = self.inventory.weapon.filter(equipped=True)[0]
+                self.unequip(weapon)
+                item.equipped = True
+                item.save()
+        elif item.type == 'armor':
+            item.equipped = True
         self.save()
 
-    def unequip_weapon(self, weapon):
-        self.equipped_weapon.remove(weapon)
-        self.save()
-
-    def Unequip_item(self, item):
-        item.equipped_on = None#items.remove(self.equipped)
-        self.save()
-
-    def unequip_armor(self, armor):
-        self.equipped_armor = None
-        self.save()
+    def unequip(self, item):
+        item.equipped = False
+        item.save()
 
 
     def purchase(self, item):
@@ -82,11 +71,12 @@ class Character(models.Model):
         if item.type == 'potion':
             self.inventory.potion.remove(item)
         elif item.type == 'weapon':
-            self.inventory.weapons.remove(item)
-            self.unequip_weapon(item)
+            self.inventory.weapon.remove(item)
         elif item.type == 'armor':
             self.inventory.armor.remove(item)
-            self.unequip_armor(item)
+        self.unequip(item)
+        item.equipped = False
+        item.save()
         self.gold += item.sell_value
         self.save()
 
@@ -100,3 +90,21 @@ class Character(models.Model):
         items.extend(armor)
         items.extend(potions)
         return items
+
+    @property
+    def equipped_items(self):
+        equipped_items = []
+        weapons = self.inventory.weapon.filter(equipped=True)
+        armors = self.inventory.armor.filter(equipped=True)
+        potions = self.inventory.potion.filter(equipped=True)
+        equipped_items.extend(weapons)
+        equipped_items.extend(armors)
+        equipped_items.extend(potions)
+        return equipped_items
+
+    @property
+    def defense_value(self):
+        defense_value = self.base_defense
+        if self.equipped_armor:
+            defense_value += self.equipped_armor.defense_value
+        return defense_value

@@ -15,31 +15,16 @@
 
 
 
-
-
-
-
-
-{% if item.inventory %}
+{% if item.inventory and not store and form %}
 <p>OWNER:  {{ item.inventory }}</p>
-{% if not item.equipped_on.all and item.type == 'Weapon' %}
-<a href="{% url 'equip' item.type item.id %}">EQUIP THIS ITEM</a>
-{% endif %}
+<form action="" method="post">{% csrf_token %}
+<input type="hidden" value="{{ item.id }}" name="item_id"/>
+<input type="submit" value="EQUIP THIS ITEM"/>
+</form>
 {% endif %}
 <p>ITEM TYPE:  {{ item.type }}
 </p>
 
-
-
-
-
-
-<p>{% if user.profile.current_character not in item.equipped_on.all %}
-THIS ITEM EQUIPPED ON:  {{ item.equipped_on.all }}
-{% if not store %}
-<a href="{% url 'equip' item.type item.id %}">EQUIP THIS ITEM</a>
-{% endif %}
-{% endif %}
 </p>
 
 

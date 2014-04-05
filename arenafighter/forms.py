@@ -26,3 +26,10 @@ class LoginForm(forms.Form):
 class SignupForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
+
+class EquipArmorForm(forms.Form):
+    item_id = forms.IntegerField()
+
+class EquipWeaponForm(forms.Form):
+    item_id = forms.IntegerField()
+

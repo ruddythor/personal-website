@@ -26,21 +26,13 @@
 <p></p>
 <p></p>
 <p></p>
-
-{% comment %}
-{% for item in character.equipped_items.all %}
-<p> **  {{ item }}</p>
-{% endfor %}
-{% for item in character.equipped_weapon.all %}
-<p> **  {{ item }}</p>
-{% endfor %}
-<p> **  {{ character.equipped_armor }}</p>
-{% endcomment %}
-
-<p></p>
-<p></p>
-
 <p>EQUIPPED ITEMS:</p>
+{% for item in equipped_items %}
+<p> **  {{ item }}</p>
+{% endfor %}
+
+<p></p>
+<p></p>
 {% if character == current_character %}
 *** THIS IS YOUR CURRENT CHARACTER ***
 {% endif %}

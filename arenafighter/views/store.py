@@ -2,6 +2,7 @@ import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
+from arenafighter.forms import EquipArmorForm, EquipWeaponForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
@@ -29,9 +30,9 @@ def shop(request, store_level):
 
 def character_inventory(request):
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    inventory = Inventory.objects.prefetch_related('items', 'armor', 'weapons').filter(character=character)[0]
-    potions = dict(collections.Counter([item.name for item in inventory.potions.all()]))
-    weapons = dict(collections.Counter([item.name for item in inventory.weapons.all()]))
+    inventory = Inventory.objects.prefetch_related('potion', 'armor', 'weapon').filter(character=character)[0]
+    potions = dict(collections.Counter([item.name for item in inventory.potion.all()]))
+    weapons = dict(collections.Counter([item.name for item in inventory.weapon.all()]))
     armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
     context = {'character': character,
                'items': potions,
@@ -45,8 +46,6 @@ def character_inventory(request):
 def item_detail(request, name, store=False, sell=False):
     if store:
         object = Potion.objects.filter(name=name).filter(inventory_id=None)[0]
-    elif sell:
-        object = Potion.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     else:
         object = Potion.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     context = {'item': object,
@@ -57,31 +56,46 @@ def item_detail(request, name, store=False, sell=False):
 
 
 def armor_detail(request, name, store=False, sell=False):
+    if request.POST:
+        form = EquipArmorForm(request.POST)
+        if form.is_valid():
+            item = Armor.objects.get(id=request.POST['item_id'])
+            print item
+            request.user.profile.current_character.equip(item)
+            print request.user.profile.current_character.equipped_items
+            return redirect('player_info', request.user.profile.current_character_id)
     if store:
         object = Armor.objects.filter(name=name).filter(inventory_id=None)[0]
-    elif sell:
-        object = Armor.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     else:
         object = Armor.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
+    form = EquipArmorForm()
     context = {'item': object,
                'store': store,
                'sell': sell,
+               'form': form,
                }
     return render(request, 'item.html', context)
 
 
 def weapon_detail(request, name, store=False, sell=False):
+    if request.POST:
+        form = EquipWeaponForm(request.POST)
+        if form.is_valid():
+            item = Weapon.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.equip(item)
+            return redirect('player_info', request.user.profile.current_character_id)
     if store:
         object = Weapon.objects.filter(name=name).filter(inventory_id=None)[0]
-    elif sell:
-        object = Weapon.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
     else:
         object = Weapon.objects.filter(name=name).filter(inventory_id=request.user.profile.current_character.inventory.id)[0]
+    form = EquipWeaponForm()
     context = {'item': object,
                'store': store,
                'sell': sell,
+               'form': form,
                }
     return render(request, 'item.html', context)
+
 
 def buy(request, item_type, id):
     if item_type == 'armor':
@@ -103,7 +117,6 @@ def sell(request, item_type, id):
         object = InventoryItem.objects.get(id=id)
     request.user.profile.current_character.sell(object)
     return redirect('store')
-
 
 
 def generate_items(store_level):
