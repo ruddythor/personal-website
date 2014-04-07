@@ -2,13 +2,19 @@
 
 <p>INVENTORY: </p>
 {% for item, value in items.items %}
-{% if item.type == "potion" %}
+{% if item.type == "potion" and not sell %}
 <p> **  <a href="{% url 'item_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
+{% elif item.type == "potion" and sell %}
+<p> **  <a href="{% url 'sell_item_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
 {% endif %}
-{% if item.type == "weapon" %}
+{% if item.type == "weapon" and not sell %}
 <p> **  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
+{% elif item.type == "weapon" and sell %}
+<p> **  <a href="{% url 'sell_weapon_detail' item.id %}">{{ item }}</a> x {{ value }}poop</p>
 {% endif %}
-{% if item.type == "armor" %}
+{% if item.type == "armor" and sell %}
+<p> **  <a href="{% url 'sell_armor_detail' item.id %}">{{ item }}</a> x {{ value }}poop</p>
+{% elif item.type == "armor" and not sell %}
 <p> **  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
 {% endif %}
 {% endfor %}

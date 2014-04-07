@@ -32,3 +32,6 @@ class EquipWeaponForm(forms.Form):
 
 class PurchaseForm(forms.Form):
     item_id = forms.IntegerField()
+
+class SellForm(forms.Form):
+    item_id = forms.IntegerField()

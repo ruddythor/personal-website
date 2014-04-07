@@ -13,18 +13,7 @@
 <p>INVENTORY SLOTS REQUIRED:  {{ item.slots_required }}
 </p>
 
-
-
-{% if item.inventory and not store and form %}
-<p>OWNER:  {{ item.inventory }}</p>
-<form action="" method="post">{% csrf_token %}
-<input type="hidden" value="{{ item.id }}" name="item_id"/>
-<input type="submit" value="EQUIP THIS ITEM"/>
-</form>
-{% endif %}
 <p>ITEM TYPE:  {{ item.type }}
-</p>
-
 </p>
 
 
@@ -45,6 +34,15 @@ ATTACK VALUE:  {{ item.attack_value }}
     <input type="hidden" value="{{item.id}}" name="item_id"/>
     <input type="hidden" value="purchase" name="purchase"/>
     <input type="submit" value="Purchase"/>
+</form>
+{% endif %}
+
+{% if sell_form %}
+<form action="" method="post">
+{% csrf_token %}
+    <input type="hidden" value="{{item.id}}" name="item_id"/>
+    <input type="hidden" value="sell" name="sell"/>
+    <input type="submit" value="Sell"/>
 </form>
 {% endif %}
 

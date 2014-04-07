@@ -2,7 +2,7 @@ import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
-from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm
+from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
@@ -37,6 +37,7 @@ def character_inventory(request):
     items = dict(collections.Counter([item for item in character.items]))
     context = {'character': character,
                'items': items,
+               'sell': True,
                }
     return render(request, 'inventory_list.html', context)
 
@@ -48,15 +49,26 @@ def item_detail(request, id, store=False, sell=False):
         if form.is_valid():
             object = Potion.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.purchase(object)
-            return redirect('player_info', request.user.profile.current_character_id)
+            return redirect('store')
+    elif request.POST.get('sell'):
+        form = SellForm(request.POST)
+        if form.is_valid():
+            object = Potion.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.sell(object)
+            return redirect('store')
 
     object = Potion.objects.get(id=id)
     if store:
         purchase_form = PurchaseForm()
     else:
-        purchase_form = False
+        purchase_form = None
+    if sell:
+        sell_form = SellForm()
+    else:
+        sell_form = None
     context = {'item': object,
                'purchase_form': purchase_form,
+               'sell_form': sell_form,
                }
     return render(request, 'item.html', context)
 
@@ -67,22 +79,34 @@ def armor_detail(request, id, store=False, sell=False):
         if form.is_valid():
             object = Armor.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.purchase(object)
-            return redirect('player_info', request.user.profile.current_character_id)
+            return redirect('store')
     elif request.POST.get('equip'):
         form = EquipArmorForm(request.POST)
         if form.is_valid():
             item = Armor.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
             return redirect('player_info', request.user.profile.current_character_id)
+    elif request.POST.get('sell'):
+        form = SellForm(request.POST)
+        if form.is_valid():
+            object = Armor.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.sell(object)
+            return redirect('store')
     object = Armor.objects.get(id=id)
     equip_form = EquipArmorForm()
+
     if store:
         purchase_form = PurchaseForm()
     else:
-        purchase_form = False
+        purchase_form = None
+    if sell:
+        sell_form = SellForm()
+    else:
+        sell_form = None
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
+               'sell_form': sell_form,
                }
     return render(request, 'item.html', context)
 
@@ -93,22 +117,33 @@ def weapon_detail(request, id, store=False, sell=False):
         if form.is_valid():
             object = Weapon.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.purchase(object)
-            return redirect('player_info', request.user.profile.current_character_id)
+            return redirect('store')
     elif request.POST.get('equip'):
         form = EquipWeaponForm(request.POST)
         if form.is_valid():
             item = Weapon.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
             return redirect('player_info', request.user.profile.current_character_id)
+    elif request.POST.get('sell'):
+        form = SellForm(request.POST)
+        if form.is_valid():
+            object = Weapon.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.sell(object)
+            return redirect('store')
     object = Weapon.objects.get(id=id)
     equip_form = EquipWeaponForm()
     if store:
         purchase_form = PurchaseForm()
     else:
-        purchase_form = False
+        purchase_form = None
+    if sell:
+        sell_form = SellForm()
+    else:
+        sell_form = None
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
+               'sell_form': sell_form,
                }
     return render(request, 'item.html', context)
 
