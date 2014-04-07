@@ -106,28 +106,6 @@ def weapon_detail(request, id, store=False, sell=False):
     return render(request, 'item.html', context)
 
 
-def buy(request, item_type, id):
-    if item_type == 'armor':
-        object = Armor.objects.get(id=id)
-    elif item_type == 'weapon':
-        object = Weapon.objects.get(id=id)
-    elif item_type == 'potion':
-        object = Potion.objects.get(id=id)
-    request.user.profile.current_character.purchase(object)
-    return redirect('store')
-
-
-def sell(request, item_type, id):
-    if item_type == 'armor':
-        object = Armor.objects.get(id=id)
-    elif item_type == 'weapon':
-        object = Weapon.objects.get(id=id)
-    elif item_type == 'potion':
-        object = Potion.objects.get(id=id)
-    request.user.profile.current_character.sell(object)
-    return redirect('store')
-
-
 def generate_items(store_level):
     if store_level == 1:
         for x in range(0, 10):
