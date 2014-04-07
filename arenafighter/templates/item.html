@@ -48,7 +48,7 @@ ATTACK VALUE:  {{ item.attack_value }}
 </form>
 {% endif %}
 
-{% if equip_form %}
+{% if equip_form and item.inventory == user.profile.current_character.inventory %}
 <form action="" method="post">
     {% csrf_token %}
     <input type="hidden" value="{{item.id}}" name="item_id"/>

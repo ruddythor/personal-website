@@ -14,8 +14,11 @@ urlpatterns = patterns('',
 
 
     url(r'^item/(\d+)$', 'arenafighter.views.store.item_detail', name='item_detail'),
+    url(r'^store/item/(\d+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='store_item_detail'),
     url(r'^weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', name='weapon_detail'),
+    url(r'^store/weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', {'store': True}, name='store_weapon_detail'),
     url(r'^armor/(\d+)$', 'arenafighter.views.store.armor_detail', name='armor_detail'),
+    url(r'^store/armor/(\d+)$', 'arenafighter.views.store.armor_detail', {'store': True}, name='store_armor_detail'),
 
     url(r'^fight', 'arenafighter.views.arena.fight', name='fight'),
     url(r'^fight/(?P<enemy_id>\d+)$', 'arenafighter.views.arena.fight', name='continued_fight'),

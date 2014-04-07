@@ -26,28 +26,24 @@ def shop(request, store_level):
                'weapons': weapons,
                'num_weapons': num_weapons.values(),
                'armors': armor,
-               'num_armors': num_armor.values()
+               'num_armors': num_armor.values(),
+               'store': True,
                }
     return render(request, 'store.html', context)
 
 
 def character_inventory(request):
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    inventory = Inventory.objects.prefetch_related('potion', 'armor', 'weapon').filter(character=character)[0]
-    potions = dict(collections.Counter([item.name for item in inventory.potion.all()]))
-    weapons = dict(collections.Counter([item.name for item in inventory.weapon.all()]))
-    armor = dict(collections.Counter([item.name for item in inventory.armor.all()]))
+    items = dict(collections.Counter([item for item in character.items]))
     context = {'character': character,
-               'items': potions,
-               'weapons': weapons,
-               'armor': armor,
+               'items': items,
                }
-    return render(request, 'sell_items.html', context)
+    return render(request, 'inventory_list.html', context)
 
 
 # TODO: combine these *_detail views to be better
 def item_detail(request, id, store=False, sell=False):
-    if request.POST['purchase']:
+    if request.POST.get('purchase'):
         form = PurchaseForm(request.POST)
         if form.is_valid():
             object = Potion.objects.get(id=request.POST['item_id'])
@@ -55,9 +51,12 @@ def item_detail(request, id, store=False, sell=False):
             return redirect('player_info', request.user.profile.current_character_id)
 
     object = Potion.objects.get(id=id)
-    purchase_form = PurchaseForm()
+    if store:
+        purchase_form = PurchaseForm()
+    else:
+        purchase_form = False
     context = {'item': object,
-               'form': purchase_form,
+               'purchase_form': purchase_form,
                }
     return render(request, 'item.html', context)
 
@@ -74,9 +73,13 @@ def armor_detail(request, id, store=False, sell=False):
         if form.is_valid():
             item = Armor.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
+            return redirect('player_info', request.user.profile.current_character_id)
     object = Armor.objects.get(id=id)
     equip_form = EquipArmorForm()
-    purchase_form = PurchaseForm()
+    if store:
+        purchase_form = PurchaseForm()
+    else:
+        purchase_form = False
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
@@ -96,9 +99,13 @@ def weapon_detail(request, id, store=False, sell=False):
         if form.is_valid():
             item = Weapon.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
+            return redirect('player_info', request.user.profile.current_character_id)
     object = Weapon.objects.get(id=id)
     equip_form = EquipWeaponForm()
-    purchase_form = PurchaseForm()
+    if store:
+        purchase_form = PurchaseForm()
+    else:
+        purchase_form = False
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
