@@ -28,13 +28,6 @@
 </p>
 
 
-
-
-
-
-
-
-
 <p>
 {% if item.defense_value %}
 DEFENSE VALUE:  {{ item.defense_value }}
@@ -46,9 +39,22 @@ ATTACK VALUE:  {{ item.attack_value }}
 {% endif %}
 </p>
 
-{% if store %}
-<a href="{% url 'buy_item' item.type item.id %}">
-Purchase</a>
+{% if purchase_form %}
+<form action="" method="post">
+{% csrf_token %}
+    <input type="hidden" value="{{item.id}}" name="item_id"/>
+    <input type="hidden" value="purchase" name="purchase"/>
+    <input type="submit" value="Purchase"/>
+</form>
+{% endif %}
+
+{% if equip_form %}
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{item.id}}" name="item_id"/>
+    <input type="hidden" value="equip" name="equip"/>
+    <input type="submit" value="Equip"/>
+</form>
 {% endif %}
 
 {% if sell %}

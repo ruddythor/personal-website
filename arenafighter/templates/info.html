@@ -11,18 +11,7 @@
 <p>FIGHTS WON {{ character.fights_won }}</p>
 <p>FIGHTS LOST {{ character.fights_lost }}</p>
 -----------------------------
-<p>INVENTORY: </p>
-{% for item, value in items.items %}
-{% if item.type == "potion" %}
-<p> **  <a href="{% url 'item_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{% endif %}
-{% if item.type == "weapon" %}
-<p> **  <a href="{% url 'weapon_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{% endif %}
-{% if item.type == "armor" %}
-<p> **  <a href="{% url 'armor_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{% endif %}
-{% endfor %}
+{% include 'sell_items.html' with items=items %}
 <p></p>
 <p></p>
 <p></p>

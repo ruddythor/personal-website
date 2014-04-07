@@ -1,20 +1,15 @@
-{% extends 'base.html' %}
-{% block content %}
-<p>ITEMS:</p>
+
+
+<p>INVENTORY: </p>
 {% for item, value in items.items %}
-<p>** <a href="{% url 'sell_item_detail' item %}">{{ item }}</a> x {{ value }}</p>
-{% endfor %}
-<br/><br/><br/>
-<p>WEAPONS:</p>
-{% for weapon, value in weapons.items %}
-<p>** <a href="{% url 'sell_weapon_detail' weapon %}">{{ weapon }}</a> x {{ value }}</p>
-{% endfor %}
-<br/><br/><br/>
-<p>ARMORS:</p>
-{% for armor, value in armor.items %}
-<p>**  <a href="{% url 'sell_armor_detail' armor %}">{{ armor }}</a> x {{ value }}</p>
+{% if item.type == "potion" %}
+<p> **  <a href="{% url 'item_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
+{% endif %}
+{% if item.type == "weapon" %}
+<p> **  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
+{% endif %}
+{% if item.type == "armor" %}
+<p> **  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a> x {{ value }}</p>
+{% endif %}
 {% endfor %}
 
-
-
-{% endblock %}

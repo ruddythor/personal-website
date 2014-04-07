@@ -1,7 +1,4 @@
 from django import forms
-from arenafighter.models.character import Character, Inventory, InventoryItem, Armor, Weapon
-from arenafighter.models.profile_model import Profile
-from django.contrib.auth.models import User
 
 
 
@@ -33,3 +30,5 @@ class EquipArmorForm(forms.Form):
 class EquipWeaponForm(forms.Form):
     item_id = forms.IntegerField()
 
+class PurchaseForm(forms.Form):
+    item_id = forms.IntegerField()

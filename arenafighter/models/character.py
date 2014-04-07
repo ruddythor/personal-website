@@ -1,7 +1,6 @@
 from django.db import models
 
 from arenafighter.utils import dice
-from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 
 
 class Character(models.Model):
@@ -44,12 +43,17 @@ class Character(models.Model):
                 item.equipped = True
                 item.save()
             else:
-                weapon = self.inventory.weapon.filter(equipped=True)[0]
-                self.unequip(weapon)
+                for weapon in self.inventory.weapon.filter(equipped=True):
+                    self.unequip(weapon)
+                    weapon.save()
                 item.equipped = True
                 item.save()
         elif item.type == 'armor':
+            if len(self.inventory.armor.filter(equipped=True)) > 0:
+                armor = self.inventory.armor.filter(equipped=True)[0]
+                self.unequip(armor)
             item.equipped = True
+            item.save()
         self.save()
 
     def unequip(self, item):

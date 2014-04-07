@@ -76,7 +76,7 @@ def info(request, id):
                    'equipped_items': equipped_items,
                    }
     except:
-        return redirect('info')
+        return redirect('player_info')
 
     return render(request, 'info.html', context)
 
