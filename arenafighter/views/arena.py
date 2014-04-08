@@ -57,9 +57,6 @@ def attack(request):
     return render(request, 'fight_round.html', context)
 
 
-
-
-# TODO: fix this so that if you use potions you dont make an attack
 def fight(request):
     if request.POST.get('enemy_id'):
         form = ContinueFightForm(request.POST)
@@ -77,23 +74,6 @@ def fight(request):
     return render(request, 'fight_round.html', context)
 
 
-def fight_over(character, opponent, win_or_lose):
-    if win_or_lose == 'win':
-        character.xp += opponent.xp_value
-        character.gold += opponent.gold
-        character.renown += opponent.renown_value
-        check_for_levelup(character)
-        character.current_hp = character.hpmax
-        character.fights_won += 1
-        character.save()
-        return character
-    elif win_or_lose == 'lose':
-        character.fights_lost += 1
-        character.current_hp = character.hpmax
-        character.save()
-        return character
-
-
 def check_for_levelup(character):
     if character.xp >= character.next_levelup:
         character.level += 1
@@ -109,11 +89,18 @@ def check_for_levelup(character):
 def death_check(character, enemy):
     if character.current_hp <= 0:
         character.dead = True
+        character.fights_lost += 1
         character.save()
         message = "Ouch, son. Looks like that fella did a number on you. You'll need to get some healin' before you come back."
     elif enemy.current_hp <= 0:
         enemy.dead = True
-        enemy.save()
+        character.xp += enemy.xp_value
+        character.gold += enemy.gold
+        character.renown += enemy.renown_value
+        check_for_levelup(character)
+        character.fights_won += 1
+        character.save()
+        enemy.delete()
         message = "Nice fightin' there, fella! Took care of that bout nice and clean-like."
     else:
         message = "Aye, keep at it!! Fight another round ??"

@@ -35,7 +35,6 @@ urlpatterns = patterns('',
 
 
     url(r'^fight', 'arenafighter.views.arena.fight', name='fight'),
-    url(r'^fight/(?P<enemy_id>\d+)$', 'arenafighter.views.arena.fight', name='continued_fight'),
     url(r'^attack$', 'arenafighter.views.arena.attack', name='attack'),
 
     url(r'^use-potion$', 'arenafighter.views.arena.use_potion', name='use_potion'),
