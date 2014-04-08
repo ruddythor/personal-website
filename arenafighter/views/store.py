@@ -164,6 +164,24 @@ def weapon_detail(request, id, store=False, sell=False):
     return render(request, 'item.html', context)
 
 
+def purchase_potion(request, item_id):
+    item = Potion.objects.get(id=item_id)
+    request.user.profile.current_character.purchase(item)
+    return redirect('store')
+
+
+def purchase_weapon(request, item_id):
+    item = Weapon.objects.get(id=item_id)
+    request.user.profile.current_character.purchase(item)
+    return redirect('store')
+
+
+def purchase_armor(request, item_id):
+    item = Armor.objects.get(id=item_id)
+    request.user.profile.current_character.purchase(item)
+    return redirect('store')
+
+
 def generate_items(store_level):
     if store_level == 1:
         for x in range(0, 10):
@@ -177,6 +195,9 @@ def generate_weapons(store_level):
             weapon.save()
             weapon2 = Weapon(name='Kamikaze', description='A low-end sword', buy_value=20, sell_value=5, attack_value=2)
             weapon2.save()
+            weapon3 = Weapon(name='Bloody Mary', description='A low-end sword', buy_value=65, sell_value=15, attack_value=5)
+            weapon3.save()
+
 
 def generate_armor(store_level):
     if store_level == 1:

@@ -6,10 +6,9 @@
 <body>
 <p><center><h2>Welcome to Arena-Fighter! The lamest game you'll ever play! (not really)</h2></center></p>
 
-{% block content %}{% endblock %}
 
 
-{% block footer_nav %}
+{% block header_nav %}
 <center>
 {% if user.is_authenticated %}
 {% with character_id=user.profile.current_character_id %}
@@ -28,6 +27,10 @@ You are currently logged in as {{ user.username }}
 <br/>
 </center>
 {% endblock %}
+<br/>
+{% block content %}{% endblock %}
+
+
 </body>
 
 </html>

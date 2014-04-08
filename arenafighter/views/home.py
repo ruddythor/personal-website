@@ -100,3 +100,17 @@ def go_to_arena(request):
     return render(request, 'arena.html', context)
 
 
+def equip_weapon(request, character_id, weapon_id):
+    return redirect('player_info', character_id)
+
+
+
+def equip_armor(request, character_id, weapon_id):
+    return redirect('player_info', character_id)
+
+
+
+
+
+
+
