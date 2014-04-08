@@ -9,8 +9,6 @@
     **  <a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
     </td>
         {% if sell %}
-    <td></td>
-    <td></td>
     <td>
         <form action="{% url 'sell_potion' item.id %}" method="post">
         {% csrf_token %}
@@ -28,6 +26,7 @@
     <td>
         **  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
     </td>
+    {% if not sell %}
     <td>
         <form action="{% url 'equip_weapon' item.id %}" method="post">
         {% csrf_token %}
@@ -44,6 +43,7 @@
         <input type="submit" value="Un-Equip"/>
         </form>
     </td>
+    {% endif %}
         {% if sell %}
     <td>
         <form action="{% url 'sell_weapon' item.id %}" method="post">
@@ -63,6 +63,7 @@
     <td>
         **  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
     </td>
+    {% if not sell %}
     <td>
         <form action="{% url 'equip_armor' item.id %}" method="post">
         {% csrf_token %}
@@ -78,7 +79,8 @@
         <input type="hidden" value="purchase" name="purchase"/>
         <input type="submit" value="Un-Equip"/>
         </form>
-        </td>
+    </td>
+    {% endif %}
         {% if sell %}
     <td>
         <form action="{% url 'sell_armor' item.id %}" method="post">

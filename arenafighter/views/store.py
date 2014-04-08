@@ -43,24 +43,20 @@ def character_inventory(request):
 
 
 # TODO: combine these *_detail views to be better
-def potion_detail(request, id, store=False, sell=False):
+def potion_detail(request, id, store=False):
     object = Potion.objects.get(id=id)
     if store:
         purchase_form = PurchaseForm()
     else:
         purchase_form = None
-    if sell:
-        sell_form = SellForm()
-    else:
-        sell_form = None
     context = {'item': object,
                'purchase_form': purchase_form,
-               'sell_form': sell_form,
+               'store': store,
                }
     return render(request, 'item.html', context)
 
 
-def armor_detail(request, id, store=False, sell=False):
+def armor_detail(request, id, store=False):
     object = Armor.objects.get(id=id)
     equip_form = EquipArmorForm()
     unequip_form = UnequipForm()
@@ -69,20 +65,16 @@ def armor_detail(request, id, store=False, sell=False):
         purchase_form = PurchaseForm()
     else:
         purchase_form = None
-    if sell:
-        sell_form = SellForm()
-    else:
-        sell_form = None
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
-               'sell_form': sell_form,
                'unequip_form': unequip_form,
+               'store': store,
                }
     return render(request, 'item.html', context)
 
 
-def weapon_detail(request, id, store=False, sell=False):
+def weapon_detail(request, id, store=False):
     object = Weapon.objects.get(id=id)
     equip_form = EquipWeaponForm()
     unequip_form = UnequipForm()
@@ -90,15 +82,11 @@ def weapon_detail(request, id, store=False, sell=False):
         purchase_form = PurchaseForm()
     else:
         purchase_form = None
-    if sell:
-        sell_form = SellForm()
-    else:
-        sell_form = None
     context = {'item': object,
                'equip_form': equip_form,
                'purchase_form': purchase_form,
-               'sell_form': sell_form,
                'unequip_form': unequip_form,
+               'store': store,
                }
     return render(request, 'item.html', context)
 
