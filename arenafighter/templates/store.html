@@ -12,7 +12,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     </tr>
     {% for potion in potions %}
     <tr>
-        <td>** <a href="{% url 'store_item_detail' potion.id %}">{{ potions.0 }}</a></td>
+        <td>** <a href="{% url 'store_potion_detail' potion.id %}">{{ potions.0 }}</a></td>
         <td><center>{{potion.buy_value}}</center></td>
         <td><form action="{% url 'purchase_potion' potion.id %}" method="post">
             {% csrf_token %}

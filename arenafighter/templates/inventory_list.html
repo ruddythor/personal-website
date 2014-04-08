@@ -3,71 +3,95 @@
 {% for item, value in items.items %}
 
 
+{% if item.type == "potion" %}
 <tr>
     <td>
-{% if item.type == "potion" and not sell %}
-**  <a href="{% url 'item_detail' item.id %}">{{ item }}</a><br/>
-{% elif item.type == "potion" and sell %}
-**  <a href="{% url 'sell_item' item.id %}">{{ item }}</a><br/>
-{% endif %}
-</td>
+    **  <a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
+    </td>
+        {% if sell %}
+    <td></td>
+    <td></td>
+    <td>
+        <form action="{% url 'sell_potion' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Sell"/>
+        </form>
+    </td>
+        {% endif %}
 </tr>
-
-<tr>
-<td>
-    {% if item.type == "weapon" and not sell %}
-**  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
-{% elif item.type == "weapon" and sell %}
-**  <a href="{% url 'sell_weapon' item.id %}">{{ item }}</a><br/>
 {% endif %}
+
+{% if item.type == "weapon" %}
+<tr>
     <td>
-    {% if item.type == "weapon" %}
-            <form action="{% url 'equip_weapon' item.id %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" value="{{item.id}}" name="item_id"/>
-            <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Equip"/>
-            </form>
+        **  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
     </td>
     <td>
-            <form action="{% url 'unequip_weapon' item.id %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" value="{{item.id}}" name="item_id"/>
-            <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Un-Equip"/>
-            </form>
-    {% endif %}
-</td>
-    </tr>
-
-
-    <tr>
-        <td>
-{% if item.type == "armor" and sell %}
-**  <a href="{% url 'sell_armor' item.id %}">{{ item }}</a><br/>
-{% elif item.type == "armor" and not sell %}
-**  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
+        <form action="{% url 'equip_weapon' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Equip"/>
+        </form>
+    </td>
+    <td>
+        <form action="{% url 'unequip_weapon' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Un-Equip"/>
+        </form>
+    </td>
+        {% if sell %}
+    <td>
+        <form action="{% url 'sell_weapon' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Sell"/>
+        </form>
+    </td>
+        {% endif %}
+</tr>
 {% endif %}
-</td>
+
+
 {% if item.type == "armor" %}
-        <td>
-            <form action="{% url 'equip_armor' item.id %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" value="{{item.id}}" name="item_id"/>
-            <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Equip"/>
-            </form>
+<tr>
+    <td>
+        **  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
+    </td>
+    <td>
+        <form action="{% url 'equip_armor' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Equip"/>
+        </form>
+    </td>
+    <td>
+        <form action="{% url 'unequip_armor' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Un-Equip"/>
+        </form>
         </td>
-        <td>
-            <form action="{% url 'unequip_armor' item.id %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" value="{{item.id}}" name="item_id"/>
-            <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Un-Equip"/>
-            </form>
-            </td>
+        {% if sell %}
+    <td>
+        <form action="{% url 'sell_armor' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Sell"/>
+        </form>
+    </td>
+        {% endif %}
+</tr>
 {% endif %}
-        </tr>
-    {% endfor %}
+
+{% endfor %}
 
 </table>

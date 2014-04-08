@@ -18,9 +18,9 @@ urlpatterns = patterns('',
     url(r'^unequip/armor/(\d+)$', 'arenafighter.views.home.unequip_armor', name='unequip_armor'),
 
 
-    url(r'^item/(\d+)$', 'arenafighter.views.store.item_detail', name='item_detail'),
-    url(r'^store/item/(\d+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='store_item_detail'),
-    url(r'^store/sell/item/(\d+)$', 'arenafighter.views.store.sell_potion', name='sell_item'),
+    url(r'^item/(\d+)$', 'arenafighter.views.store.potion_detail', name='potion_detail'),
+    url(r'^store/item/(\d+)$', 'arenafighter.views.store.potion_detail', {'store': True}, name='store_potion_detail'),
+    url(r'^store/sell/item/(\d+)$', 'arenafighter.views.store.sell_potion', name='sell_potion'),
     url(r'^store/buy/item/(\d+)$', 'arenafighter.views.store.purchase_potion', name='purchase_potion'),
 
     url(r'^weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', name='weapon_detail'),

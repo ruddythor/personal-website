@@ -43,7 +43,7 @@ def character_inventory(request):
 
 
 # TODO: combine these *_detail views to be better
-def item_detail(request, id, store=False, sell=False):
+def potion_detail(request, id, store=False, sell=False):
     object = Potion.objects.get(id=id)
     if store:
         purchase_form = PurchaseForm()
