@@ -44,19 +44,6 @@ def character_inventory(request):
 
 # TODO: combine these *_detail views to be better
 def item_detail(request, id, store=False, sell=False):
-    if request.POST.get('purchase'):
-        form = PurchaseForm(request.POST)
-        if form.is_valid():
-            object = Potion.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.purchase(object)
-            return redirect('store')
-    elif request.POST.get('sell'):
-        form = SellForm(request.POST)
-        if form.is_valid():
-            object = Potion.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.sell(object)
-            return redirect('store')
-
     object = Potion.objects.get(id=id)
     if store:
         purchase_form = PurchaseForm()
@@ -74,30 +61,6 @@ def item_detail(request, id, store=False, sell=False):
 
 
 def armor_detail(request, id, store=False, sell=False):
-    if request.POST.get('purchase'):
-        form = PurchaseForm(request.POST)
-        if form.is_valid():
-            object = Armor.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.purchase(object)
-            return redirect('store')
-    elif request.POST.get('equip'):
-        form = EquipArmorForm(request.POST)
-        if form.is_valid():
-            item = Armor.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.equip(item)
-            return redirect('player_info', request.user.profile.current_character_id)
-    elif request.POST.get('unequip'):
-        form = UnequipForm(request.POST)
-        if form.is_valid():
-            item = Armor.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.unequip(item)
-            return redirect('player_info', request.user.profile.current_character_id)
-    elif request.POST.get('sell'):
-        form = SellForm(request.POST)
-        if form.is_valid():
-            object = Armor.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.sell(object)
-            return redirect('store')
     object = Armor.objects.get(id=id)
     equip_form = EquipArmorForm()
     unequip_form = UnequipForm()
@@ -120,30 +83,6 @@ def armor_detail(request, id, store=False, sell=False):
 
 
 def weapon_detail(request, id, store=False, sell=False):
-    if request.POST.get('purchase'):
-        form = PurchaseForm(request.POST)
-        if form.is_valid():
-            object = Weapon.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.purchase(object)
-            return redirect('store')
-    elif request.POST.get('equip'):
-        form = EquipWeaponForm(request.POST)
-        if form.is_valid():
-            item = Weapon.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.equip(item)
-            return redirect('player_info', request.user.profile.current_character_id)
-    elif request.POST.get('unequip'):
-        form = UnequipForm(request.POST)
-        if form.is_valid():
-            item = Weapon.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.unequip(item)
-            return redirect('player_info', request.user.profile.current_character_id)
-    elif request.POST.get('sell'):
-        form = SellForm(request.POST)
-        if form.is_valid():
-            object = Weapon.objects.get(id=request.POST['item_id'])
-            request.user.profile.current_character.sell(object)
-            return redirect('store')
     object = Weapon.objects.get(id=id)
     equip_form = EquipWeaponForm()
     unequip_form = UnequipForm()
@@ -165,21 +104,45 @@ def weapon_detail(request, id, store=False, sell=False):
 
 
 def purchase_potion(request, item_id):
-    item = Potion.objects.get(id=item_id)
-    request.user.profile.current_character.purchase(item)
+    if request.POST:
+        item = Potion.objects.get(id=item_id)
+        request.user.profile.current_character.purchase(item)
     return redirect('store')
 
 
 def purchase_weapon(request, item_id):
-    item = Weapon.objects.get(id=item_id)
-    request.user.profile.current_character.purchase(item)
+    if request.POST:
+        item = Weapon.objects.get(id=item_id)
+        request.user.profile.current_character.purchase(item)
     return redirect('store')
 
 
 def purchase_armor(request, item_id):
-    item = Armor.objects.get(id=item_id)
-    request.user.profile.current_character.purchase(item)
+    if request.POST:
+        item = Armor.objects.get(id=item_id)
+        request.user.profile.current_character.purchase(item)
     return redirect('store')
+
+def sell_potion(request, item_id):
+    if request.POST:
+        item = Potion.objects.get(id=item_id)
+        request.user.profile.current_character.sell(item)
+    return redirect('store')
+
+
+def sell_weapon(request, item_id):
+    if request.POST:
+        item = Weapon.objects.get(id=item_id)
+        request.user.profile.current_character.sell(item)
+    return redirect('store')
+
+
+def sell_armor(request, item_id):
+    if request.POST:
+        item = Armor.objects.get(id=item_id)
+        request.user.profile.current_character.sell(item)
+    return redirect('store')
+
 
 
 def generate_items(store_level):

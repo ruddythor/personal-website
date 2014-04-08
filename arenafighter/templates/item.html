@@ -65,24 +65,6 @@
 </form>
 {% endif %}
 
-{% if equip_form and item.inventory == user.profile.current_character.inventory and item.equipped == False %}
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="hidden" value="{{item.id}}" name="item_id"/>
-    <input type="hidden" value="equip" name="equip"/>
-    <input type="submit" value="Equip"/>
-</form>
-{% endif %}
-
-{% if unequip_form and item.inventory == user.profile.current_character.inventory and item.equipped == True %}
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="hidden" value="{{item.id}}" name="item_id"/>
-    <input type="hidden" value="unequip" name="unequip"/>
-    <input type="submit" value="Un-Equip"/>
-</form>
-{% endif %}
-
 {% if sell %}
 <a href="{% url 'sell_item' item.type item.id %}">Sell</a>
 {% endif %}

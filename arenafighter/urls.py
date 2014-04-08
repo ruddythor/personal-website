@@ -12,23 +12,25 @@ urlpatterns = patterns('',
 
     url(r'^store/sell$', 'arenafighter.views.store.character_inventory', name='sell_detail'),
 
-    url(r'^weapon/equip/(\d+)$', 'arenafighter.views.home.equip_weapon', name='equip_weapon'),
-    url(r'^armor/equip/(\d+)$', 'arenafighter.views.home.equip_armor', name='equip_armor'),
+    url(r'^equip/weapon/(\d+)$', 'arenafighter.views.home.equip_weapon', name='equip_weapon'),
+    url(r'^equip/armor/(\d+)$', 'arenafighter.views.home.equip_armor', name='equip_armor'),
+    url(r'^unequip/weapon/(\d+)$', 'arenafighter.views.home.unequip_weapon', name='unequip_weapon'),
+    url(r'^unequip/armor/(\d+)$', 'arenafighter.views.home.unequip_armor', name='unequip_armor'),
 
 
     url(r'^item/(\d+)$', 'arenafighter.views.store.item_detail', name='item_detail'),
     url(r'^store/item/(\d+)$', 'arenafighter.views.store.item_detail', {'store': True}, name='store_item_detail'),
-    url(r'^store/sell/item/(\d+)$', 'arenafighter.views.store.item_detail', {'sell': True}, name='sell_item_detail'),
+    url(r'^store/sell/item/(\d+)$', 'arenafighter.views.store.sell_potion', name='sell_item'),
     url(r'^store/buy/item/(\d+)$', 'arenafighter.views.store.purchase_potion', name='purchase_potion'),
 
     url(r'^weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', name='weapon_detail'),
     url(r'^store/weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', {'store': True}, name='store_weapon_detail'),
-    url(r'^store/sell/weapon/(\d+)$', 'arenafighter.views.store.weapon_detail', {'sell': True}, name='sell_weapon_detail'),
+    url(r'^store/sell/weapon/(\d+)$', 'arenafighter.views.store.sell_weapon', name='sell_weapon'),
     url(r'^store/buy/weapon/(\d+)$', 'arenafighter.views.store.purchase_weapon', name='purchase_weapon'),
 
     url(r'^armor/(\d+)$', 'arenafighter.views.store.armor_detail', name='armor_detail'),
     url(r'^store/armor/(\d+)$', 'arenafighter.views.store.armor_detail', {'store': True}, name='store_armor_detail'),
-    url(r'^store/sell/armor/(\d+)$', 'arenafighter.views.store.armor_detail', {'sell': True}, name='sell_armor_detail'),
+    url(r'^store/sell/armor/(\d+)$', 'arenafighter.views.store.sell_armor', name='sell_armor'),
     url(r'^store/buy/armor/(\d+)$', 'arenafighter.views.store.purchase_armor', name='purchase_armor'),
 
 

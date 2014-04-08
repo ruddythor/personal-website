@@ -14,7 +14,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     <tr>
         <td>** <a href="{% url 'store_item_detail' potion.id %}">{{ potions.0 }}</a></td>
         <td><center>{{potion.buy_value}}</center></td>
-        <td><form action="{% url 'purchase_potion' potion.id%}" method="post">
+        <td><form action="{% url 'purchase_potion' potion.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{item.id}}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>
@@ -36,7 +36,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     <tr>
         <td>** <a href="{% url 'store_weapon_detail' weapon.id %}">{{ weapon }}</a></td>
         <td><center>{{ weapon.buy_value }}</center></td>
-        <td><form action="{% url 'purchase_weapon' weapon.id%}" method="post">
+        <td><form action="{% url 'purchase_weapon' weapon.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{ weapon.id }}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>
@@ -60,7 +60,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     <tr>
         <td>** <a href="{% url 'store_armor_detail' armor.id %}">{{ armor }}</a><br/></td>
         <td><center>{{ armor.buy_value }}</center></td>
-        <td><form action="{% url 'purchase_armor' armor.id%}" method="post">
+        <td><form action="{% url 'purchase_armor' armor.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{ armor.id }}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>

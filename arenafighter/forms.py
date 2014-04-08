@@ -24,6 +24,8 @@ class SignupForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField()
 
+
+#TODO: look at changing these equip/purchase forms to model forms?
 class EquipArmorForm(forms.Form):
     item_id = forms.IntegerField()
 

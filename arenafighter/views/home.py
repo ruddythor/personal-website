@@ -100,14 +100,29 @@ def go_to_arena(request):
     return render(request, 'arena.html', context)
 
 
-def equip_weapon(request, character_id, weapon_id):
-    return redirect('player_info', character_id)
+def equip_weapon(request, weapon_id):
+    if request.POST:
+        weapon = Weapon.objects.get(id=weapon_id)
+        request.user.profile.current_character.equip(weapon)
+    return redirect('player_info', request.user.profile.current_character_id)
 
+def equip_armor(request, armor_id):
+    if request.POST:
+        armor = Armor.objects.get(id=armor_id)
+        request.user.profile.current_character.equip(armor)
+    return redirect('player_info', request.user.profile.current_character_id)
 
+def unequip_weapon(request, armor_id):
+    if request.POST:
+        weapon = Weapon.objects.get(id=armor_id)
+        request.user.profile.current_character.unequip(weapon)
+    return redirect('player_info', request.user.profile.current_character_id)
 
-def equip_armor(request, character_id, weapon_id):
-    return redirect('player_info', character_id)
-
+def unequip_armor(request, armor_id):
+    if request.POST:
+        armor = Armor.objects.get(id=armor_id)
+        request.user.profile.current_character.unequip(armor)
+    return redirect('player_info', request.user.profile.current_character_id)
 
 
 
