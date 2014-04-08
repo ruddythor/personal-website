@@ -56,20 +56,8 @@
 </form>
 {% endif %}
 
-{% if sell_form %}
-<form action="" method="post">
-{% csrf_token %}
-    <input type="hidden" value="{{item.id}}" name="item_id"/>
-    <input type="hidden" value="sell" name="sell"/>
-    <input type="submit" value="Sell"/>
-</form>
-{% endif %}
 
-{% if sell %}
-<a href="{% url 'sell_item' item.type item.id %}">Sell</a>
-{% endif %}
-
-{% if not store and item.type != "potion" %}
+{% if not purchase_form and item.type != "potion" %}
 
     {% if item.type == "armor" %}
     <form action="{% url 'equip_armor' item.id %}" method="post">

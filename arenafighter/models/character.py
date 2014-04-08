@@ -85,6 +85,13 @@ class Character(models.Model):
         self.gold += item.sell_value
         self.save()
 
+    def use_health_potion(self, potion):
+        self.current_hp += int((float(potion.heal_percent)/100) * float(self.hpmax))
+        potion.delete()
+        if self.current_hp > self.hpmax:
+            self.current_hp = self.hpmax
+        self.save()
+
     @property
     def items(self):
         weapons = self.inventory.weapon.all()

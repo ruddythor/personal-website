@@ -1,12 +1,25 @@
 from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
+from arenafighter.models.inventory import Potion
 from arenafighter.utils import dice
-from arenafighter.forms import ContinueFightForm
+from arenafighter.forms import ContinueFightForm, GetItemForm
 
-# TODO: make this long freaking view shorter some how
+def use_potion(request):
+    if request.POST.get('item_id'):
+        form = GetItemForm(request.POST)
+        if form.is_valid:
+            potion = Potion.objects.get(id=request.POST.get('item_id'))
+            request.user.profile.current_character.use_health_potion(potion)
+            if request.POST.get('battle') == True:
+                return redirect('continued_fight', request.POST.get('enemy_id'))
+            else:
+                return redirect('player_info', request.user.profile.current_character_id)
+
+
+# TODO: fix this so that if you use potions you dont make an attack
 def fight(request):
-    if request.POST:
+    if request.POST.get('enemy_id'):
         form = ContinueFightForm(request.POST)
         if form.is_valid:
             if request.POST.get('enemy_id'):

@@ -40,3 +40,7 @@ class PurchaseForm(forms.Form):
 
 class SellForm(forms.Form):
     item_id = forms.IntegerField()
+
+class GetItemForm(forms.Form):
+    item_id = forms.IntegerField()
+

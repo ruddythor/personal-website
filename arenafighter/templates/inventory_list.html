@@ -18,6 +18,17 @@
         </form>
     </td>
         {% endif %}
+    {% if not sell %}
+    <td>
+        <form action="{% url 'use_potion' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="False" name="battle"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Use Potion"/>
+        </form>
+    </td>
+    {% endif %}
 </tr>
 {% endif %}
 

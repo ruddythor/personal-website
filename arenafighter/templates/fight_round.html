@@ -17,17 +17,37 @@ You have: {{ user.profile.current_character.current_hp }}/{{ user.profile.curren
 
 
 {{ message }}
-<br/><br/><br/>
-
+<br/><br/>
 <form action="" method="post">{% csrf_token %}
 <input type="hidden" name="keep_fighting" value="True" />
 <input type="hidden" value="{{ enemy_id }}" name="enemy_id"/>
 <input type="submit" value="KEEP FIGHTIN', BITCH!"/>
 </form>
-
 <form action="{% url 'player_info' user.profile.current_character_id %}" method="get">{% csrf_token %}
 <input type="submit" value="RUN AWAY LIKE A MUTHAFUCKER!"/>
 </form>
+
+Or, use a potion if you have one?
+
+<table border="1px">
+{% for item in user.profile.current_character.items %}
+    <tr>
+    {% if item.type == "potion" %}
+        <td>{{ item }}</td>
+        <td>
+            <form action="{% url 'use_potion' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ enemy_id }}" name="enemy_id"/>
+                <input type="hidden" value="True" name="battle"/>
+                <input type="hidden" value="{{ item.id }}" name="item_id"/>
+                <input type="submit" value="Use Potion" name="use_potion"/>
+            </form>
+        </td>
+    {% endif %}
+    </tr>
+{% endfor %}
+</table>
+
 
 {% endblock %}
 
