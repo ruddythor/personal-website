@@ -36,8 +36,7 @@ Or, use a potion if you have one?
         <td>
             <form action="{% url 'use_potion' %}" method="post">
                 {% csrf_token %}
-                <input type="hidden" value="{{ enemy_id }}" name="enemy_id"/>
-                <input type="hidden" value="True" name="battle"/>
+                <input type="hidden" value="{{ enemy.id }}" name="enemy_id"/>
                 <input type="hidden" value="{{ item.id }}" name="item_id"/>
                 <input type="submit" value="Use Potion" name="use_potion"/>
             </form>

@@ -8,12 +8,27 @@ def use_potion(request):
     if request.POST.get('item_id'):
         form = GetItemForm(request.POST)
         if form.is_valid:
+            enemy = None
+            if request.POST.get('enemy_id'):
+                enemy = Enemy.objects.get(id=request.POST.get('enemy_id'))
             potion = Potion.objects.get(id=request.POST.get('item_id'))
-            request.user.profile.current_character.use_health_potion(potion)
-            if request.POST.get('battle') == 'True':
-                return redirect('fight')
+            character = Character.objects.get(id=request.user.profile.current_character_id)
+            character.use_health_potion(potion)
+            if character.dead:
+                character.dead = False
+                character.current_hp = character.hpmax
+                character.save()
+            message = "Ya been patched up. Now go get 'em, mate!"
+            context = {'enemy': enemy,
+                       'message': message,
+                       }
+            if enemy:
+                context['enemy_id'] = enemy.id
+
+            if request.POST.get('enemy_id'):
+                return render(request, 'fight_round.html', context)
             else:
-                return redirect('player_info', request.user.profile.current_character_id)
+                return redirect('player_info', character.id)
 
 def attack(request):
     if request.POST:
@@ -30,13 +45,15 @@ def attack(request):
                 enemy.attack(character)
                 character.attack(enemy)
             message = death_check(character, enemy)
-            if character.dead or enemy.dead:
-                return redirect('player_info', character.id )
-
             context = {'enemy': enemy,
                        'message': message,
                        'enemy_id': enemy.id,
                        }
+            if character.dead:
+                return redirect('player_info', character.id)
+            elif enemy.dead:
+                return render(request, 'fight.html', context)
+
     return render(request, 'fight_round.html', context)
 
 
@@ -54,7 +71,9 @@ def fight(request):
 
 
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    context = {'enemy': enemy}
+    context = {'enemy': enemy,
+               'character': character,
+               }
     return render(request, 'fight_round.html', context)
 
 

@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block title %}Your Character's Information{% endblock %}
 {% block content %}
+
+{% if character.dead %}
+    *** THIS CHARACTER IS INCAPACITATED. USE A HEALING POTION TO FULLY CURE HIM/HER ***
+{% endif %}
+{% if message %}
+    {{ message }}
+{% endif %}
 <table border="1px">
     <tr>
         <td>NAME</td>

@@ -16,6 +16,7 @@ class Enemy(models.Model):
     base_attack = models.IntegerField(default=4)
     base_defense = models.IntegerField(default=5)
     gold = models.IntegerField(default=dice.roll(5, 6))
+    dead = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
