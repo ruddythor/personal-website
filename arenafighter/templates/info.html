@@ -1,23 +1,53 @@
 {% extends 'base.html' %}
 {% block title %}Your Character's Information{% endblock %}
 {% block content %}
-<p>NAME: {{ character.name }}</p>
-<p>LEVEL {{ character.level }}</p>
-<p>HP: {{ character.current_hp}}/{{ character.hpmax }}</p>
-<p>base attack {{ character.base_attack }}</p>
-<p>base defense {{ character.base_defense }}</p>
-<p>GOLD {{ character.gold }}</p>
-<p>XP {{ character.xp }}</p>
-<p>FIGHTS WON {{ character.fights_won }}</p>
-<p>FIGHTS LOST {{ character.fights_lost }}</p>
+<table border="1px">
+    <tr>
+        <td>NAME</td>
+        <td>{{ character.name }}</td>
+    </tr>
+    <tr>
+        <td>LEVEL</td>
+        <td>{{ character.level }}</td>
+    </tr>
+    <tr>
+        <td>HP</td>
+        <td>{{ character.current_hp}}/{{ character.hpmax }}</td>
+    </tr>
+    <tr>
+        <td>base attack</td>
+        <td>{{ character.base_attack }}</td>
+    </tr>
+    <tr>
+        <td>base defense</td>
+        <td>{{ character.base_defense }}</td>
+    </tr>
+    <tr>
+        <td>GOLD</td>
+        <td>{{ character.gold }}</td>
+    </tr>
+    <tr>
+        <td>XP</td>
+        <td>{{ character.xp }}</td>
+    </tr>
+    <tr>
+        <td>FIGHTS WON</td>
+        <td>{{ character.fights_won }}</td>
+    </tr>
+    <tr>
+        <td>FIGHTS LOST</td>
+        <td>{{ character.fights_lost }}</td>
+    </tr>
+</table>
 -----------------------------
+<p>INVENTORY:</p>
 {% include 'inventory_list.html' with items=items %}
 <p></p>
 <p></p>
 <p></p>
 <p>EQUIPPED ITEMS:</p>
 {% for item in equipped_items %}
-<p> **  {{ item }}</p>
+**  {{ item }}<br/>
 {% endfor %}
 
 <p></p>

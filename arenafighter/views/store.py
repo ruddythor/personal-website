@@ -39,7 +39,7 @@ def character_inventory(request):
                'items': items,
                'sell': True,
                }
-    return render(request, 'inventory_list.html', context)
+    return render(request, 'character_sell_list.html', context)
 
 
 # TODO: combine these *_detail views to be better

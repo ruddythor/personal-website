@@ -2,31 +2,50 @@
 
 
 {% block content %}
-<p>ITEM:  {{ item.name }}
-</p>
-<p>DESCRIPTION: {{ item.description }}
-</p>
-<p>PURCHASE VALUE:  {{ item.buy_value }}
-</p>
-<p>SELL VALUE: {{ item.sell_value }}
-</p>
-<p>INVENTORY SLOTS REQUIRED:  {{ item.slots_required }}
-</p>
+<table border="1px">
+    <tr>
+        <td>ITEM</td>
+        <td>{{ item.name }}</td>
+    </tr>
+    <tr>
+        <td>DESCRIPTION</td>
+        <td>{{ item.description }}</td>
+    </tr>
+    <tr>
+        <td>ITEM TYPE</td>
+        <td>{{ item.type }}</td>
+    </tr>
+    <tr>
+        <td>PURCHASE VALUE</td>
+        <td>{{ item.buy_value }}</td>
+    </tr>
+    <tr>
+        <td>SELL VALUE</td>
+        <td>{{ item.sell_value }}</td>
+    </tr>
 
-<p>ITEM TYPE:  {{ item.type }}
-</p>
+    <tr>
+        <td>INVENTORY SLOTS REQUIRED</td>
+        <td>{{ item.slots_required }}</td>
+    </tr>
+
+    {% if item.defense_value %}
+    <tr>
+        <td>DEFENSE VALUE</td>
+        <td>{{ item.defense_value }}</td>
+    </tr>
+    {% endif %}
+
+    {% if item.defense_value %}
+    <tr>
+        <td>ATTACK VALUE</td>
+        <td>{{ item.attack_value }}</td>
+    </tr>
+    {% endif %}
+</table>
 
 
-<p>
-{% if item.defense_value %}
-DEFENSE VALUE:  {{ item.defense_value }}
-{% endif %}
-</p>
-<p>
-{% if item.attack_value %}
-ATTACK VALUE:  {{ item.attack_value }}
-{% endif %}
-</p>
+
 
 {% if purchase_form %}
 <form action="" method="post">
@@ -46,7 +65,7 @@ ATTACK VALUE:  {{ item.attack_value }}
 </form>
 {% endif %}
 
-{% if equip_form and item.inventory == user.profile.current_character.inventory %}
+{% if equip_form and item.inventory == user.profile.current_character.inventory and item.equipped == False %}
 <form action="" method="post">
     {% csrf_token %}
     <input type="hidden" value="{{item.id}}" name="item_id"/>
@@ -55,7 +74,7 @@ ATTACK VALUE:  {{ item.attack_value }}
 </form>
 {% endif %}
 
-{% if unequip_form and item.inventory == user.profile.current_character.inventory %}
+{% if unequip_form and item.inventory == user.profile.current_character.inventory and item.equipped == True %}
 <form action="" method="post">
     {% csrf_token %}
     <input type="hidden" value="{{item.id}}" name="item_id"/>

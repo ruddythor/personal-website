@@ -5,22 +5,17 @@ Well, hello there, stranger! Welcome to the shop.
 If yer in the mood to make some coin, you can always <a href="{% url 'sell_detail' %}">SELL</a> some items from your inventory.
 <p>ITEMS:</p>
 {% for potion in potions %}
-<p>** <a href="{% url 'store_item_detail' potion.id %}">{{ potions.0 }}</a> x {{ num_potions }}</p>
+** <a href="{% url 'store_item_detail' potion.id %}">{{ potions.0 }}</a><br/>
 {% endfor %}
-<br/><br/><br/>
+<br/>
 <p>WEAPONS:</p>
 {% for weapon in weapons %}
-<p>** <a href="{% url 'store_weapon_detail' weapon.id %}">{{ weapon }}</a> x {{ num_weapons }}</p>
+** <a href="{% url 'store_weapon_detail' weapon.id %}">{{ weapon }}</a><br/>
 {% endfor %}
-<br/><br/><br/>
+<br/>
 <p>ARMORS:</p>
 {% for armor in armors %}
-<p>** <a href="{% url 'store_armor_detail' armor.id %}">{{ armor }}</a> x
-    {% for value in num_armors %}
-    {% if forloop.counter == forloop.parentloop.counter %}
-        {{value}}
-    {%endif%}
-    {% endfor %}</p>
+** <a href="{% url 'store_armor_detail' armor.id %}">{{ armor }}</a><br/>
 {% endfor %}
 
 
