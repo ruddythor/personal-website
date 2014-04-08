@@ -31,8 +31,9 @@ class Character(models.Model):
 
     def attack(self):
         attack_value = self.base_attack
-        for weapon in self.equipped_weapon.all():
-            attack_value += weapon.attack_value
+        for item in self.equipped_items:
+            if hasattr(item, 'attack_value'):
+                attack_value += item.attack_value
         attack = dice.roll(attack_value, 6)
         return attack
 
@@ -111,4 +112,4 @@ class Character(models.Model):
         defense_value = self.base_defense
         if self.equipped_armor:
             defense_value += self.equipped_armor.defense_value
-        return defense_value
+        return int(defense_value)

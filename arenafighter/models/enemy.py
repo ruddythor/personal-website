@@ -35,11 +35,12 @@ class Enemy(models.Model):
         attack = dice.roll(attack_value, 6)
         return attack
 
+    @property
     def defense_value(self):
         defense_value=self.base_defense
 #        for item in self.equipped_items:
 #            defense_value+=item.defense_value
-        return defense_value
+        return int(defense_value)
 
     def equip(self, item):
         pass

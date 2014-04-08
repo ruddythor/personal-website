@@ -98,8 +98,8 @@ def initiative_winner(player, opponent):
     return max(player, opponent)
 
 def attack_round(aggressor, defender):
-    if aggressor.attack() > defender.defense_value():
-        attack_value = aggressor.attack() - defender.defense_value()
+    if aggressor.attack() > defender.defense_value:
+        attack_value = aggressor.attack() - defender.defense_value
         if attack_value <= 0:
             pass
         else:
