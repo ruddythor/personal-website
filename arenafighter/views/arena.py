@@ -4,6 +4,7 @@ from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.utils import dice
 from arenafighter.forms import ContinueFightForm
 
+# TODO: make this long freaking view shorter some how
 def fight(request):
     if request.POST:
         form = ContinueFightForm(request.POST)

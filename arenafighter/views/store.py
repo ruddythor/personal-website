@@ -2,7 +2,7 @@ import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
-from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm
+from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
@@ -86,6 +86,12 @@ def armor_detail(request, id, store=False, sell=False):
             item = Armor.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
             return redirect('player_info', request.user.profile.current_character_id)
+    elif request.POST.get('unequip'):
+        form = UnequipForm(request.POST)
+        if form.is_valid():
+            item = Armor.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.unequip(item)
+            return redirect('player_info', request.user.profile.current_character_id)
     elif request.POST.get('sell'):
         form = SellForm(request.POST)
         if form.is_valid():
@@ -94,6 +100,7 @@ def armor_detail(request, id, store=False, sell=False):
             return redirect('store')
     object = Armor.objects.get(id=id)
     equip_form = EquipArmorForm()
+    unequip_form = UnequipForm()
 
     if store:
         purchase_form = PurchaseForm()
@@ -107,6 +114,7 @@ def armor_detail(request, id, store=False, sell=False):
                'equip_form': equip_form,
                'purchase_form': purchase_form,
                'sell_form': sell_form,
+               'unequip_form': unequip_form,
                }
     return render(request, 'item.html', context)
 
@@ -124,6 +132,12 @@ def weapon_detail(request, id, store=False, sell=False):
             item = Weapon.objects.get(id=request.POST['item_id'])
             request.user.profile.current_character.equip(item)
             return redirect('player_info', request.user.profile.current_character_id)
+    elif request.POST.get('unequip'):
+        form = UnequipForm(request.POST)
+        if form.is_valid():
+            item = Weapon.objects.get(id=request.POST['item_id'])
+            request.user.profile.current_character.unequip(item)
+            return redirect('player_info', request.user.profile.current_character_id)
     elif request.POST.get('sell'):
         form = SellForm(request.POST)
         if form.is_valid():
@@ -132,6 +146,7 @@ def weapon_detail(request, id, store=False, sell=False):
             return redirect('store')
     object = Weapon.objects.get(id=id)
     equip_form = EquipWeaponForm()
+    unequip_form = UnequipForm()
     if store:
         purchase_form = PurchaseForm()
     else:
@@ -144,6 +159,7 @@ def weapon_detail(request, id, store=False, sell=False):
                'equip_form': equip_form,
                'purchase_form': purchase_form,
                'sell_form': sell_form,
+               'unequip_form': unequip_form,
                }
     return render(request, 'item.html', context)
 
