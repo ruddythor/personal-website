@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.models.inventory import Potion
-from arenafighter.utils import dice
-from arenafighter.forms import ContinueFightForm, GetItemForm
+from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
 
 def use_potion(request):
     if request.POST.get('item_id'):
@@ -11,10 +10,36 @@ def use_potion(request):
         if form.is_valid:
             potion = Potion.objects.get(id=request.POST.get('item_id'))
             request.user.profile.current_character.use_health_potion(potion)
-            if request.POST.get('battle') == True:
-                return redirect('continued_fight', request.POST.get('enemy_id'))
+            if request.POST.get('battle') == 'True':
+                return redirect('fight')
             else:
                 return redirect('player_info', request.user.profile.current_character_id)
+
+def attack(request):
+    if request.POST:
+        form = EnemyLookupForm(request.POST)
+        if form.is_valid():
+            enemy = Enemy.objects.get(id=request.POST.get('enemy_id'))
+            character = Character.objects.get(id=request.user.profile.current_character_id)
+            char_initiative = character.initiative_roll()
+            enemy_initiative = enemy.initiative_roll()
+            if char_initiative >= enemy_initiative:
+                character.attack(enemy)
+                enemy.attack(character)
+            else:
+                enemy.attack(character)
+                character.attack(enemy)
+            message = death_check(character, enemy)
+            if character.dead or enemy.dead:
+                return redirect('player_info', character.id )
+
+            context = {'enemy': enemy,
+                       'message': message,
+                       'enemy_id': enemy.id,
+                       }
+    return render(request, 'fight_round.html', context)
+
+
 
 
 # TODO: fix this so that if you use potions you dont make an attack
@@ -30,37 +55,7 @@ def fight(request):
 
     character = Character.objects.get(id=request.user.profile.current_character_id)
     context = {'enemy': enemy}
-    while enemy.current_hp > 0 or character.current_hp > 0:
-        character_initiative = dice.roll(1, 21)
-        opponent_initiative = dice.roll(1, 21)
-        if character_initiative > opponent_initiative:
-            attack_round(character, enemy)
-            if dead(enemy):
-                fight_over(character, enemy, 'win')
-                context['message'] = "You really showed that ass who's boss!! Good job, mate"
-                return render(request, 'fight.html', context)
-            attack_round(enemy, character)
-            if dead(character):
-                context['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
-                fight_over(character, enemy, 'lose')
-                return render(request, 'fight.html', context)
-        elif opponent_initiative > character_initiative:
-            attack_round(enemy, character)
-            if dead(character):
-                fight_over(character, enemy, 'lose')
-                context['message'] = "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."
-                return render(request, 'fight.html', context)
-            attack_round(character, enemy)
-            if dead(enemy):
-                fight_over(character, enemy, 'win')
-                context['message'] = "You really showed that ass who's boss!! Good job, mate"
-                return render(request, 'fight.html', context)
-        context['message'] = "KEEP FIGHTIN??"
-        form = ContinueFightForm()
-        context['form'] = form
-        context['enemy_id'] = enemy.id
-        return render(request, 'fight_round.html', context)
-    return render(request, 'fight.html', context)
+    return render(request, 'fight_round.html', context)
 
 
 def fight_over(character, opponent, win_or_lose):
@@ -92,36 +87,21 @@ def check_for_levelup(character):
         return character
 
 
-def combat_round(character, enemy):
-    attack_round(enemy, character)
-    if dead(character):
-        fight_over(character, enemy, 'lose')
-        return {'message': "Looks like you lost, boss. Better luck next time. Our healers have fixed you up from the fight."}
-    attack_round(character, enemy)
-    if dead(enemy):
-        fight_over(character, enemy, 'win')
-        return {'message': "You really showed that ass who's boss!! Good job, mate"}
-    return render(request, 'fight.html', context)
-
-
-def dead(person):
-    if person.current_hp <= 0:
-        return True
-
-def initiative_winner(player, opponent):
-    return max(player, opponent)
-
-def attack_round(aggressor, defender):
-    if aggressor.attack() > defender.defense_value:
-        attack_value = aggressor.attack() - defender.defense_value
-        if attack_value <= 0:
-            pass
-        else:
-            defender.current_hp = defender.current_hp - attack_value
-        defender.save()
-        return defender
+def death_check(character, enemy):
+    if character.current_hp <= 0:
+        character.dead = True
+        character.save()
+        message = "Ouch, son. Looks like that fella did a number on you. You'll need to get some healin' before you come back."
+    elif enemy.current_hp <= 0:
+        enemy.dead = True
+        enemy.save()
+        message = "Nice fightin' there, fella! Took care of that bout nice and clean-like."
     else:
-        return defender
+        message = "Aye, keep at it!! Fight another round ??"
+    return message
+
+
+
 
 
 

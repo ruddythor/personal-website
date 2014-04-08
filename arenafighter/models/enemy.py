@@ -28,12 +28,19 @@ class Enemy(models.Model):
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
 
-    def attack(self):
-        attack_value=self.base_attack
+    def attack(self, enemy):
+        attack_value = self.base_attack
 #        for item in self.equipped_items:
-#            attack_value+=item.attack_value
+#            if hasattr(item, 'attack_value'):
+#                attack_value += item.attack_value
         attack = dice.roll(attack_value, 6)
-        return attack
+        attack_val = attack - enemy.defense_value
+        if attack_val <= 0:
+            return
+        if attack_val > 0:
+            enemy.current_hp -= attack_value
+            enemy.save()
+            return
 
     @property
     def defense_value(self):
@@ -75,6 +82,9 @@ class Enemy(models.Model):
 #            print "\t", item
 #        return
 
+    def initiative_roll(self):
+        roll = dice.roll(1, 21)
+        return roll
 
 enemy_strength_dict = {
     'weak': {'name': 'An Enemy!',

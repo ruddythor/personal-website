@@ -19,6 +19,7 @@ class Character(models.Model):
     num_armor = models.IntegerField(default=0)
     fights_won = models.IntegerField(default=0)
     fights_lost = models.IntegerField(default=0)
+    dead = models.BooleanField(default=False)
 
     class Meta:
         app_label = 'arenafighter'
@@ -29,13 +30,19 @@ class Character(models.Model):
     def __unicode__(self):
         return self.name
 
-    def attack(self):
+    def attack(self, enemy):
         attack_value = self.base_attack
         for item in self.equipped_items:
             if hasattr(item, 'attack_value'):
                 attack_value += item.attack_value
         attack = dice.roll(attack_value, 6)
-        return attack
+        attack_val = attack - enemy.defense_value
+        if attack_val <= 0:
+            return
+        if attack_val > 0:
+            enemy.current_hp -= attack_value
+            enemy.save()
+            return
 
 
     def equip(self, item):
@@ -91,6 +98,11 @@ class Character(models.Model):
         if self.current_hp > self.hpmax:
             self.current_hp = self.hpmax
         self.save()
+
+    def initiative_roll(self):
+        roll = dice.roll(1, 21)
+        return roll
+
 
     @property
     def items(self):

@@ -44,3 +44,6 @@ class SellForm(forms.Form):
 class GetItemForm(forms.Form):
     item_id = forms.IntegerField()
 
+class EnemyLookupForm(forms.Form):
+    enemy_id = forms.IntegerField()
+
