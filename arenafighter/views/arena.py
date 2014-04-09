@@ -11,25 +11,17 @@ def use_potion(request):
             enemy = None
             if request.POST.get('enemy_id'):
                 enemy_form = EnemyLookupForm(request.POST)
-                print enemy_form
                 if enemy_form.is_valid():
-                    print enemy_form
                     enemy = Enemy.objects.get(id=enemy_form.cleaned_data['enemy_id'])
             potion = Potion.objects.get(id=form.cleaned_data['item_id'])
             character = Character.objects.get(id=request.user.profile.current_character_id)
             character.use_health_potion(potion)
-            if character.dead:
-                character.dead = False
-                character.current_hp = character.hpmax
-                character.save()
             message = "Ya been patched up. Now go get 'em, mate!"
             context = {'enemy': enemy,
                        'message': message,
                        }
             if enemy:
                 context['enemy_id'] = enemy.id
-
-            if request.POST.get('enemy_id'):
                 return render(request, 'fight_round.html', context)
             else:
                 return redirect('player_info', character.id)
@@ -69,7 +61,6 @@ def fight(request):
                 enemy = Enemy.objects.get(id=form.cleaned_data['enemy_id'])
     else:
         enemy = generate_enemy('weak')
-
 
     character = Character.objects.get(id=request.user.profile.current_character_id)
     context = {'enemy': enemy,

@@ -97,11 +97,10 @@ class Character(models.Model):
         potion.delete()
         if self.current_hp > self.hpmax:
             self.current_hp = self.hpmax
+        if self.dead:
+            self.dead = False
+            self.current_hp = self.hpmax
         self.save()
-#        if self.dead:
-#            self.dead = False
-#            self.current_hp = character.hpmax
-#            self.save()
 
 
     def initiative_roll(self):
