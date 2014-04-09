@@ -1,6 +1,6 @@
 from django.contrib import admin
 from arenafighter.models.character import Character
-from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon, Potion
 from arenafighter.models.enemy import Enemy
 from arenafighter.models.profile_model import Profile
 
@@ -8,6 +8,11 @@ from arenafighter.models.profile_model import Profile
 class CharacterAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Character, CharacterAdmin)
+
+
+class PotionAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Potion, PotionAdmin)
 
 
 #class InventoryAdmin(admin.ModelAdmin):

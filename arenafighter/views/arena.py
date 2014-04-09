@@ -10,8 +10,10 @@ def use_potion(request):
         if form.is_valid:
             enemy = None
             if request.POST.get('enemy_id'):
-                enemy = Enemy.objects.get(id=request.POST.get('enemy_id'))
-            potion = Potion.objects.get(id=request.POST.get('item_id'))
+                enemy_form = EnemyLookupForm(request.POST)
+                if form.is_valid:
+                    enemy = Enemy.objects.get(id=enemy_form.cleaned_data['enemy_id'])
+            potion = Potion.objects.get(id=form.cleaned_data['item_id'])
             character = Character.objects.get(id=request.user.profile.current_character_id)
             character.use_health_potion(potion)
             if character.dead:
@@ -34,7 +36,7 @@ def attack(request):
     if request.POST:
         form = EnemyLookupForm(request.POST)
         if form.is_valid():
-            enemy = Enemy.objects.get(id=request.POST.get('enemy_id'))
+            enemy = Enemy.objects.get(id=form.cleaned_data['enemy_id'])
             character = Character.objects.get(id=request.user.profile.current_character_id)
             char_initiative = character.initiative_roll()
             enemy_initiative = enemy.initiative_roll()
@@ -62,7 +64,7 @@ def fight(request):
         form = ContinueFightForm(request.POST)
         if form.is_valid:
             if request.POST.get('enemy_id'):
-                enemy = Enemy.objects.get(id=int(request.POST.get('enemy_id')))
+                enemy = Enemy.objects.get(id=form.cleaned_data['enemy_id'])
     else:
         enemy = generate_enemy('weak')
 

@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from arenafighter.forms import CreateCharacterForm, LoginForm
+from arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
 from arenafighter.models.character import Character
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
@@ -37,10 +37,11 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            username = request.POST['username']
-            password = request.POST['password1']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password2']
             user = authenticate(username=username, password=password)
-            login(request, user)
+            if user:
+                login(request, user)
             return redirect('home')
     else:
         form = UserCreationForm()
@@ -48,8 +49,10 @@ def signup(request):
 
 def log_in(request):
     if request.POST:
-        username = request.POST['username']
-        password = request.POST['password']
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
