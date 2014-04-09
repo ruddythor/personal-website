@@ -7,11 +7,13 @@ from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
 def use_potion(request):
     if request.POST.get('item_id'):
         form = GetItemForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             enemy = None
             if request.POST.get('enemy_id'):
                 enemy_form = EnemyLookupForm(request.POST)
-                if form.is_valid:
+                print enemy_form
+                if enemy_form.is_valid():
+                    print enemy_form
                     enemy = Enemy.objects.get(id=enemy_form.cleaned_data['enemy_id'])
             potion = Potion.objects.get(id=form.cleaned_data['item_id'])
             character = Character.objects.get(id=request.user.profile.current_character_id)
