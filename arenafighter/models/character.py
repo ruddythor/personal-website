@@ -20,6 +20,7 @@ class Character(models.Model):
     fights_won = models.IntegerField(default=0)
     fights_lost = models.IntegerField(default=0)
     dead = models.BooleanField(default=False)
+    times_died = models.IntegerField(default=0)
 
     class Meta:
         app_label = 'arenafighter'

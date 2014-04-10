@@ -28,7 +28,7 @@ You have: {{ user.profile.current_character.current_hp }}/{{ user.profile.curren
 
 Or, use a potion if you have one?
 
-<table border="1px">
+<table>
 {% for item in user.profile.current_character.items %}
     <tr>
     {% if item.type == "potion" %}

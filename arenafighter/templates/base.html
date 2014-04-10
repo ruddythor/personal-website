@@ -1,6 +1,9 @@
+{% load staticfiles %}
 <html>
 
-<head></head>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/style.css"/>
+</head>
 <title>{% block title %}Josh's ARENA FIGHTER{% endblock %}
 </title>
 <body>
