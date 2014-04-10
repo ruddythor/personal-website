@@ -1,25 +1,24 @@
 body {
-    background-color: #666699;
+    background-color: #9999FF;
 }
 
 a:visited {
-    color: #990033;
+    color: #672B2B;
 }
 
 a {
     color: #CC0000;
 }
 
-td {
+td, th {
     border: 1px solid;
     border-collapse:collapse;
     text-align: center;
     padding: 2px;
-    background-color: #333399;
+    background-color: #4747B2;
 }
 
 table {
-    border-collapse: collapse;
     border: 1px solid;
 }
 
@@ -36,3 +35,12 @@ table {
     text-decoration: none;
     cursor: pointer;
 }
+
+#submit:hover {
+    background: gray;
+    box-shadow: 0px 0px 1px #777;
+}
+
+
+
+

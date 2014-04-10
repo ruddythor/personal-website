@@ -8,47 +8,8 @@
 {% if message %}
     {{ message }}
 {% endif %}
-<table>
-    <tr>
-        <td>NAME</td>
-        <td>{{ character.name }}</td>
-    </tr>
-    <tr>
-        <td>LEVEL</td>
-        <td>{{ character.level }}</td>
-    </tr>
-    <tr>
-        <td>HP</td>
-        <td>{{ character.current_hp}}/{{ character.hpmax }}</td>
-    </tr>
-    <tr>
-        <td>base attack</td>
-        <td>{{ character.base_attack }}</td>
-    </tr>
-    <tr>
-        <td>base defense</td>
-        <td>{{ character.base_defense }}</td>
-    </tr>
-    <tr>
-        <td>GOLD</td>
-        <td>{{ character.gold }}</td>
-    </tr>
-    <tr>
-        <td>XP</td>
-        <td>{{ character.xp }}</td>
-    </tr>
-    <tr>
-        <td>FIGHTS WON</td>
-        <td>{{ character.fights_won }}</td>
-    </tr>
-    <tr>
-        <td>FIGHTS LOST</td>
-        <td>{{ character.fights_lost }}</td>
-    </tr>
-</table>
-
 <p>INVENTORY:</p>
-{% include 'inventory_list.html' with items=items %}
+{% include 'partials/inventory_list.html' with items=items %}
 <p></p>
 <p></p>
 <p></p>

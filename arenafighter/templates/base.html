@@ -30,9 +30,19 @@ You are currently logged in as {{ user.username }}
 <br/>
 </center>
 {% endblock %}
-<br/>
-{% block content %}{% endblock %}
 
+
+
+<br/>
+<div style="width: 100%">
+
+    <div style="width:20%; float: right;">
+    {% include 'partials/character_info_box.html' with character=user.profile.current_character %}
+    </div>
+    <div style="width:75%; float: left;">
+    {% block content %}{% endblock %}
+    </div>
+</div>
 
 </body>
 
