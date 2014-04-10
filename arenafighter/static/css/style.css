@@ -1,0 +1,38 @@
+body {
+    background-color: #666699;
+}
+
+a:visited {
+    color: #990033;
+}
+
+a {
+    color: #CC0000;
+}
+
+td {
+    border: 1px solid;
+    border-collapse:collapse;
+    text-align: center;
+    padding: 2px;
+    background-color: #333399;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid;
+}
+
+
+
+#submit {
+    background-color: #ccc;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: black;
+    font-family: 'Oswald';
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}

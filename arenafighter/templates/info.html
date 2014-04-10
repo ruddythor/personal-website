@@ -46,7 +46,7 @@
         <td>{{ character.fights_lost }}</td>
     </tr>
 </table>
------------------------------
+
 <p>INVENTORY:</p>
 {% include 'inventory_list.html' with items=items %}
 <p></p>
@@ -54,7 +54,7 @@
 <p></p>
 <p>EQUIPPED ITEMS:</p>
 {% for item in equipped_items %}
-**  {{ item }}<br/>
+{{ item }}<br/>
 {% endfor %}
 
 <p></p>

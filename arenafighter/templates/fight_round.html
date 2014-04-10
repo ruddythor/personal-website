@@ -20,10 +20,10 @@ You have: {{ user.profile.current_character.current_hp }}/{{ user.profile.curren
 <br/><br/>
 <form action="{% url 'attack' %}" method="post">{% csrf_token %}
 <input type="hidden" value="{{ enemy.id }}" name="enemy_id"/>
-<input type="submit" value="KEEP FIGHTIN', BITCH!"/>
+<input type="submit" value="KEEP FIGHTIN', BITCH!" id="submit"/>
 </form>
 <form action="{% url 'player_info' user.profile.current_character_id %}" method="get">{% csrf_token %}
-<input type="submit" value="RUN AWAY LIKE A MUTHAFUCKER!"/>
+<input type="submit" value="RUN AWAY LIKE A MUTHAFUCKER!" id="submit"/>
 </form>
 
 Or, use a potion if you have one?
@@ -38,7 +38,7 @@ Or, use a potion if you have one?
                 {% csrf_token %}
                 <input type="hidden" value="{{ enemy.id }}" name="enemy_id"/>
                 <input type="hidden" value="{{ item.id }}" name="item_id"/>
-                <input type="submit" value="Use Potion" name="use_potion"/>
+                <input type="submit" value="Use Potion" name="use_potion" id="submit"/>
             </form>
         </td>
     {% endif %}

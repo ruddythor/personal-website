@@ -6,7 +6,7 @@
 {% if item.type == "potion" %}
 <tr>
     <td>
-    **  <a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
+        <a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
     </td>
         {% if sell %}
     <td>
@@ -14,7 +14,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Sell"/>
+        <input type="submit" value="Sell" id="submit"/>
         </form>
     </td>
         {% endif %}
@@ -25,7 +25,7 @@
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="False" name="battle"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Use Potion"/>
+        <input type="submit" value="Use Potion" id="submit"/>
         </form>
     </td>
     {% endif %}
@@ -35,7 +35,7 @@
 {% if item.type == "weapon" %}
 <tr>
     <td>
-        **  <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
+        <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
     </td>
     {% if not sell %}
     <td>
@@ -43,7 +43,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Equip"/>
+        <input type="submit" value="Equip" id="submit"/>
         </form>
     </td>
     <td>
@@ -51,7 +51,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Un-Equip"/>
+        <input type="submit" value="Un-Equip" id="submit"/>
         </form>
     </td>
     {% endif %}
@@ -61,7 +61,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Sell"/>
+        <input type="submit" value="Sell" id="submit"/>
         </form>
     </td>
         {% endif %}
@@ -72,7 +72,7 @@
 {% if item.type == "armor" %}
 <tr>
     <td>
-        **  <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
+        <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
     </td>
     {% if not sell %}
     <td>
@@ -80,7 +80,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Equip"/>
+        <input type="submit" value="Equip" id="submit"/>
         </form>
     </td>
     <td>
@@ -88,7 +88,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Un-Equip"/>
+        <input type="submit" value="Un-Equip" id="submit"/>
         </form>
     </td>
     {% endif %}
@@ -98,7 +98,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Sell"/>
+        <input type="submit" value="Sell" id="submit"/>
         </form>
     </td>
         {% endif %}

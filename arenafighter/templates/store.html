@@ -19,7 +19,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
             {% csrf_token %}
             <input type="hidden" value="{{item.id}}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Purchase"/>
+            <input type="submit" value="Purchase" id="submit"/>
             </form>
         </td>
     </tr>
@@ -40,7 +40,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
             {% csrf_token %}
             <input type="hidden" value="{{ weapon.id }}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Purchase"/>
+            <input type="submit" value="Purchase" id="submit"/>
             </form>
         </td>
     </tr>
@@ -62,7 +62,7 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
             {% csrf_token %}
             <input type="hidden" value="{{ armor.id }}" name="item_id"/>
             <input type="hidden" value="purchase" name="purchase"/>
-            <input type="submit" value="Purchase"/>
+            <input type="submit" value="Purchase" id="submit"/>
             </form>
         </td>
     </tr>

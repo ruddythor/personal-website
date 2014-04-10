@@ -52,7 +52,7 @@
 {% csrf_token %}
     <input type="hidden" value="{{item.id}}" name="item_id"/>
     <input type="hidden" value="purchase" name="purchase"/>
-    <input type="submit" value="Purchase"/>
+    <input type="submit" value="Purchase" id="submit"/>
 </form>
 {% endif %}
 
@@ -67,7 +67,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Equip"/>
+        <input type="submit" value="Equip" id="submit"/>
     </form>
 
     {% if item.type == "armor" %}
@@ -78,7 +78,7 @@
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
         <input type="hidden" value="purchase" name="purchase"/>
-        <input type="submit" value="Un-Equip"/>
+        <input type="submit" value="Un-Equip" id="submit"/>
     </form>
 
 
