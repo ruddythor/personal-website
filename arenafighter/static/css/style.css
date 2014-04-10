@@ -42,5 +42,12 @@ table {
 }
 
 
-
+#nav {
+    position:fixed;
+    top: 10px;
+    left: 33%;
+    margin-top: -9px; /*set to a negative number 1/2 of your height*/
+    margin-left: -15px; /*set to a negative number 1/2 of your width*/
+    background-color: #4747B2;
+}
 

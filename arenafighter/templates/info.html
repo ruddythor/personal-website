@@ -9,20 +9,11 @@
     {{ message }}
 {% endif %}
 <p>INVENTORY:</p>
-{% include 'partials/inventory_list.html' with items=items %}
+<p>( an asterisk indicates the item is equipped )</p>
+{% include 'partials/inventory_list.html' with items=items equipped=character.equipped_items%}
 <p></p>
 <p></p>
 <p></p>
-<p>EQUIPPED ITEMS:</p>
-{% for item in equipped_items %}
-{{ item }}<br/>
-{% endfor %}
-
-<p></p>
-<p></p>
-{% if character == current_character %}
-*** THIS IS YOUR CURRENT CHARACTER ***
-{% endif %}
 <br/> <br/>
 
 <a href="{% url 'play_as_character' character.id %}">Play as this Character</a><br/>

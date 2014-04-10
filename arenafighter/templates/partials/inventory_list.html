@@ -6,7 +6,7 @@
 {% if item.type == "potion" %}
 <tr>
     <td>
-        <a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
+        {% if item in equipped %}**{% endif %}<a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
     </td>
         {% if sell %}
     <td>
@@ -35,7 +35,7 @@
 {% if item.type == "weapon" %}
 <tr>
     <td>
-        <a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
+        {% if item in equipped %}**{% endif %}<a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
     </td>
     {% if not sell %}
     <td>
@@ -72,7 +72,7 @@
 {% if item.type == "armor" %}
 <tr>
     <td>
-        <a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
+        {% if item in equipped %}**{% endif %}<a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
     </td>
     {% if not sell %}
     <td>
