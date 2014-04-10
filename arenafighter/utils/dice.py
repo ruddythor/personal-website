@@ -6,10 +6,6 @@ Created on Sep 27, 2012
 '''
 import random
 
-def __str__(self):
-    return 'Dieroll'
-def __repr__(self):
-    return 'Dieroll'
 
 def roll(dice, sides):
     total=0

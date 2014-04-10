@@ -10,7 +10,7 @@ class Character(models.Model):
     hpmax = models.IntegerField(default=dice.roll(15, 6))
     equipped_armor = models.ForeignKey('Armor', default=None, related_name='equipped_on', blank=True, null=True)
     current_hp = models.IntegerField()
-    base_attack = models.IntegerField(default=2)
+    base_attack = models.IntegerField(default=3)
     base_defense = models.IntegerField(default=3)
     gold = models.IntegerField(default=50)
     xp = models.IntegerField(default=0)
@@ -36,11 +36,11 @@ class Character(models.Model):
             if hasattr(item, 'attack_value'):
                 attack_value += item.attack_value
         attack = dice.roll(attack_value, 6)
-        attack_val = attack - enemy.defense_value
-        if attack_val <= 0:
+        damage = attack - enemy.defense_value
+        if damage <= 0:
             return
-        if attack_val > 0:
-            enemy.current_hp -= attack_value
+        if damage > 0:
+            enemy.current_hp -= damage
             enemy.save()
             return
 

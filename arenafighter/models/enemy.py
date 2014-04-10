@@ -35,11 +35,11 @@ class Enemy(models.Model):
 #            if hasattr(item, 'attack_value'):
 #                attack_value += item.attack_value
         attack = dice.roll(attack_value, 6)
-        attack_val = attack - enemy.defense_value
-        if attack_val <= 0:
+        damage = attack - enemy.defense_value
+        if damage <= 0:
             return
-        if attack_val > 0:
-            enemy.current_hp -= attack_value
+        if damage > 0:
+            enemy.current_hp -= damage
             enemy.save()
             return
 
