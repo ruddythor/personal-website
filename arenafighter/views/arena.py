@@ -73,8 +73,7 @@ def check_for_levelup(character):
     if character.xp >= character.next_levelup:
         character.level += 1
         character.hpmax += int(character.hpmax*.15)
-        character.next_levelup = int(character.next_levelup*.2 + character.next_levelup)
-        character.xp = 0
+        character.next_levelup += int(character.next_levelup*.2 + character.next_levelup)
         character.save()
         return character
     else:

@@ -108,6 +108,18 @@ class Character(models.Model):
         roll = dice.roll(1, 21)
         return roll
 
+    def levelup(self):
+        if character.xp >= character.next_levelup:
+            character.level += 1
+            character.hpmax += int(character.hpmax*.15)
+            character.next_levelup += int(character.next_levelup*.2 + character.next_levelup)
+            character.save()
+            return character
+        else:
+            return character
+
+
+
 
     @property
     def items(self):

@@ -1,5 +1,5 @@
 body {
-    background-color: #9999FF;
+    background-color: #E0D1FF;
 }
 
 a:visited {
@@ -15,7 +15,7 @@ td, th {
     border-collapse:collapse;
     text-align: center;
     padding: 2px;
-    background-color: #4747B2;
+    background-color: #9191D1;
 }
 
 table {
@@ -48,6 +48,6 @@ table {
     left: 33%;
     margin-top: -9px; /*set to a negative number 1/2 of your height*/
     margin-left: -15px; /*set to a negative number 1/2 of your width*/
-    background-color: #4747B2;
+    background-color: #9191D1;
 }
 
