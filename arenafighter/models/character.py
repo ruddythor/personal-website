@@ -1,3 +1,4 @@
+import random
 from django.db import models
 
 from arenafighter.utils import dice
@@ -36,8 +37,16 @@ class Character(models.Model):
         for item in self.equipped_items:
             if hasattr(item, 'attack_value'):
                 attack_value += item.attack_value
-        attack = dice.roll(attack_value, 6)
-        damage = attack - enemy.defense_value
+#        attack = dice.roll(attack_value, 6)
+#        damage = attack - enemy.defense_value
+
+        adjustment_min = .9
+        adjustment_max = 1.1
+        wildcard_adjustment = random.uniform(.9, 1.1)
+        damage = attack_value ** 1.5
+        damage = damage * wildcard_adjustment
+        print '\n\n\n\n damage was', damage
+
         if damage <= 0:
             return
         if damage > 0:
@@ -94,7 +103,7 @@ class Character(models.Model):
         self.save()
 
     def use_health_potion(self, potion):
-        self.current_hp += int((float(potion.heal_percent)/100) * float(self.hpmax))
+        self.current_hp += 50#int((float(potion.heal_percent)/100) * float(self.hpmax))
         potion.delete()
         if self.current_hp > self.hpmax:
             self.current_hp = self.hpmax

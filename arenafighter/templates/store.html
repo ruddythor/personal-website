@@ -30,12 +30,13 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     <tr>
         <td>WEAPON NAME</td>
         <td>PURCHASE VALUE</td>
-        <td></td>
+        <td>Attack Value</td>
     </tr>
 {% for weapon in weapons %}
     <tr>
         <td><a href="{% url 'store_weapon_detail' weapon.id %}">{{ weapon }}</a></td>
         <td><center>{{ weapon.buy_value }}</center></td>
+        <td><center>{{ weapon.attack_value}}</center></td>
         <td><form action="{% url 'purchase_weapon' weapon.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{ weapon.id }}" name="item_id"/>
@@ -52,12 +53,14 @@ If yer in the mood to make some coin, you can always <a href="{% url 'sell_detai
     <tr>
         <td>ARMOR NAME</td>
         <td>PURCHASE VALUE</td>
+        <td>Defense Value</td>
         <td></td>
     </tr>
 {% for armor in armors %}
     <tr>
         <td><a href="{% url 'store_armor_detail' armor.id %}">{{ armor }}</a><br/></td>
         <td><center>{{ armor.buy_value }}</center></td>
+        <td><center>{{ armor.defense_value }}</center></td>
         <td><form action="{% url 'purchase_armor' armor.id %}" method="post">
             {% csrf_token %}
             <input type="hidden" value="{{ armor.id }}" name="item_id"/>

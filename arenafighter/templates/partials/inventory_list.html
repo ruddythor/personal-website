@@ -1,5 +1,21 @@
 
 <table>
+<tr>
+    <td>
+        Item Name
+    </td>
+    <td>
+        Attack value
+    </td>
+    <td>
+    </td>
+    <td>
+    </td>
+
+
+</tr>
+
+
 {% for item, value in items.items %}
 
 
@@ -7,6 +23,8 @@
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'potion_detail' item.id %}">{{ item }}</a><br/>
+    </td>
+    <td>
     </td>
         {% if sell %}
     <td>
@@ -36,6 +54,9 @@
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'weapon_detail' item.id %}">{{ item }}</a><br/>
+    </td>
+    <td>
+        {{item.attack_value}}
     </td>
     {% if not sell %}
     <td>
@@ -73,6 +94,8 @@
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'armor_detail' item.id %}">{{ item }}</a><br/>
+    </td>
+    <td>
     </td>
     {% if not sell %}
     <td>
