@@ -3,7 +3,6 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-import random
 from arenafighter.utils import dice
 from django.db import models
 
@@ -12,7 +11,7 @@ class Enemy(models.Model):
     name = models.TextField(default="An Enemy!")
     xp_value = models.IntegerField(default=5)
     renown_value = models.IntegerField(default=10)
-    hpmax = models.IntegerField(default=100)
+    hpmax = models.IntegerField(default=dice.roll(15, 6))
     current_hp = models.IntegerField(default=0)
     base_attack = models.IntegerField(default=4)
     base_defense = models.IntegerField(default=5)
@@ -35,15 +34,8 @@ class Enemy(models.Model):
 #        for item in self.equipped_items:
 #            if hasattr(item, 'attack_value'):
 #                attack_value += item.attack_value
-#        attack = dice.roll(attack_value, 6)
-#        damage = attack - enemy.defense_value
-#-------
-#        adjustment_min = .9
-#        adjustment_max = 1.1
-        wildcard_adjustment = random.uniform(.9, 1.1)
-        damage = attack_value ** 1.5
-        damage = damage * wildcard_adjustment
-
+        attack = dice.roll(attack_value, 6)
+        damage = attack - enemy.defense_value
         if damage <= 0:
             return
         if damage > 0:

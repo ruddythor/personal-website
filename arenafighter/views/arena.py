@@ -82,7 +82,6 @@ def check_for_levelup(character):
 
 def death_check(character, enemy):
     if character.current_hp <= 0:
-        character.hp = 0
         character.dead = True
         character.times_died += 1
         character.fights_lost += 1

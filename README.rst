@@ -26,13 +26,4 @@ Implement a .defend() action to boost defense for 1 turn
 
 
 
-sudo apt-get install libmysqlclient-dev
-sudo apt-get install mysql-client
-sudo apt-get install mysql-server
-mysql> create database arenafighter;
-mysql> create user 'arenafighter'@'localhost' identified by 'arenafighter';
-mysql> grant all on arenafighter.* to 'arenafighter';
-(venv)josh@elcapitan:~/code/arena-fighter$ ./manage.py syncdb
-(venv)josh@elcapitan:~/code/arena-fighter$ ./manage.py migrate
-
 
