@@ -23,6 +23,8 @@ sudo apt-get install mysql-client
 
 sudo apt-get install mysql-server
 
+mysql -u root -p ('root')
+
 mysql> create database arenafighter;
 
 mysql> create user 'arenafighter'@'localhost' identified by 'arenafighter';
