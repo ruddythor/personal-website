@@ -15,6 +15,28 @@ If you want to play the game as a command line version, go to the old-arena dire
 arena fighter before porting it to Django. This will not be updated.
 
 
+The Following comand should get you up and running
+
+sudo apt-get install libmysqlclient-dev
+
+sudo apt-get install mysql-client
+
+sudo apt-get install mysql-server
+
+mysql> create database arenafighter;
+
+mysql> create user 'arenafighter'@'localhost' identified by 'arenafighter';
+
+mysql> grant all on arenafighter.* to 'arenafighter';
+
+(venv)josh@elcapitan:~/code/arena-fighter$ ./manage.py syncdb
+
+(venv)josh@elcapitan:~/code/arena-fighter$ ./manage.py migrate
+
+
+
+
+
 TODO
 --------------
 Make characters only available to the person who created them -- DONE (i think)
