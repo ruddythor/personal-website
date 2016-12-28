@@ -11,19 +11,29 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='location',
+            name='area_difficulty_level',
+            field=models.IntegerField(default=1),
+        ),
+        migrations.AddField(
+            model_name='location',
+            name='name',
+            field=models.TextField(default=b'Random Location'),
+        ),
         migrations.AlterField(
             model_name='character',
             name='hpmax',
-            field=models.IntegerField(default=46),
+            field=models.IntegerField(default=59),
         ),
         migrations.AlterField(
             model_name='enemy',
             name='gold',
-            field=models.IntegerField(default=16),
+            field=models.IntegerField(default=18),
         ),
         migrations.AlterField(
             model_name='enemy',
             name='hpmax',
-            field=models.IntegerField(default=54),
+            field=models.IntegerField(default=52),
         ),
     ]

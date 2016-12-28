@@ -3,6 +3,7 @@ from arenafighter.models.character import Character
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon, Potion
 from arenafighter.models.enemy import Enemy
 from arenafighter.models.profile_model import Profile
+from arenafighter.models.location import Location
 
 
 class CharacterAdmin(admin.ModelAdmin):
@@ -43,6 +44,11 @@ admin.site.register(Enemy, EnemyAdmin)
 class ProfileAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Profile, ProfileAdmin)
+
+
+class LocationAdmin(admin.ModelAdmin):
+	pass
+admin.site.register(Location, LocationAdmin)
 
 
 

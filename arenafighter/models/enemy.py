@@ -11,11 +11,11 @@ class Enemy(models.Model):
     name = models.TextField(default="An Enemy!")
     xp_value = models.IntegerField(default=5)
     renown_value = models.IntegerField(default=10)
-    hpmax = models.IntegerField(default=dice.roll(15, 6))
+    hpmax = models.IntegerField()
     current_hp = models.IntegerField(default=0)
     base_attack = models.IntegerField(default=4)
     base_defense = models.IntegerField(default=5)
-    gold = models.IntegerField(default=dice.roll(5, 6))
+    gold = models.IntegerField()
     dead = models.BooleanField(default=False)
 
     def __str__(self):
@@ -28,6 +28,8 @@ class Enemy(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
+        self.hpmax = dice.roll(15, 6)
+        self.gold = dice.roll(5, 6)
 
     def attack(self, enemy):
         attack_value = self.base_attack

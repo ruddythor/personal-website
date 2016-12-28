@@ -7,7 +7,7 @@ class Character(models.Model):
     created_by = models.ForeignKey('Profile', null=False, related_name='created_characters')
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
-    hpmax = models.IntegerField(default=dice.roll(15, 6))
+    hpmax = models.IntegerField()
     equipped_armor = models.ForeignKey('Armor', default=None, related_name='equipped_on', blank=True, null=True)
     current_hp = models.IntegerField()
     base_attack = models.IntegerField(default=3)
@@ -27,6 +27,7 @@ class Character(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Character, self).__init__(*args, **kwargs)
+        self.hpmax = dice.roll(15, 6)
 
     def __unicode__(self):
         return self.name

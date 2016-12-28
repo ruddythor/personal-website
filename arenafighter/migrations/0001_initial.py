@@ -25,9 +25,6 @@ class Migration(migrations.Migration):
                 ('defense_value', models.IntegerField(default=2)),
                 ('type', models.TextField(default=b'armor', editable=False)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Character',
@@ -35,7 +32,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('level', models.IntegerField(default=1)),
                 ('name', models.TextField(default=b'The Stranger')),
-                ('hpmax', models.IntegerField(default=63)),
+                ('hpmax', models.IntegerField(default=55)),
                 ('current_hp', models.IntegerField()),
                 ('base_attack', models.IntegerField(default=3)),
                 ('base_defense', models.IntegerField(default=3)),
@@ -49,9 +46,6 @@ class Migration(migrations.Migration):
                 ('dead', models.BooleanField(default=False)),
                 ('times_died', models.IntegerField(default=0)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Enemy',
@@ -60,16 +54,13 @@ class Migration(migrations.Migration):
                 ('name', models.TextField(default=b'An Enemy!')),
                 ('xp_value', models.IntegerField(default=5)),
                 ('renown_value', models.IntegerField(default=10)),
-                ('hpmax', models.IntegerField(default=53)),
+                ('hpmax', models.IntegerField(default=45)),
                 ('current_hp', models.IntegerField(default=0)),
                 ('base_attack', models.IntegerField(default=4)),
                 ('base_defense', models.IntegerField(default=5)),
-                ('gold', models.IntegerField(default=19)),
+                ('gold', models.IntegerField(default=23)),
                 ('dead', models.BooleanField(default=False)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Inventory',
@@ -78,12 +69,18 @@ class Migration(migrations.Migration):
                 ('slots', models.IntegerField(default=10)),
                 ('slots_filled', models.IntegerField(default=0)),
                 ('slots_empty', models.IntegerField(default=10)),
-                ('character', models.OneToOneField(related_name=b'inventory', default=None, to='arenafighter.Character')),
+                ('character', models.OneToOneField(related_name='inventory', default=None, to='arenafighter.Character')),
             ],
             options={
                 'verbose_name_plural': 'inventories',
             },
-            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Location',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('character', models.OneToOneField(related_name='location', default=None, to='arenafighter.Character')),
+            ],
         ),
         migrations.CreateModel(
             name='Potion',
@@ -97,22 +94,16 @@ class Migration(migrations.Migration):
                 ('equipped', models.BooleanField(default=False)),
                 ('heal_percent', models.IntegerField(default=20)),
                 ('type', models.TextField(default=b'potion', editable=False)),
-                ('inventory', models.ForeignKey(related_name=b'potion', default=None, blank=True, to='arenafighter.Inventory', null=True)),
+                ('inventory', models.ForeignKey(related_name='potion', default=None, blank=True, to='arenafighter.Inventory', null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Profile',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('current_character', models.ForeignKey(related_name=b'profile', to='arenafighter.Character', null=True)),
-                ('user', models.OneToOneField(related_name=b'profile', to=settings.AUTH_USER_MODEL)),
+                ('current_character', models.ForeignKey(related_name='profile', to='arenafighter.Character', null=True)),
+                ('user', models.OneToOneField(related_name='profile', to=settings.AUTH_USER_MODEL)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Weapon',
@@ -126,28 +117,22 @@ class Migration(migrations.Migration):
                 ('equipped', models.BooleanField(default=False)),
                 ('attack_value', models.IntegerField(default=2)),
                 ('type', models.TextField(default=b'weapon', editable=False)),
-                ('inventory', models.ForeignKey(related_name=b'weapon', default=None, blank=True, to='arenafighter.Inventory', null=True)),
+                ('inventory', models.ForeignKey(related_name='weapon', default=None, blank=True, to='arenafighter.Inventory', null=True)),
             ],
-            options={
-            },
-            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='character',
             name='created_by',
-            field=models.ForeignKey(related_name=b'created_characters', to='arenafighter.Profile'),
-            preserve_default=True,
+            field=models.ForeignKey(related_name='created_characters', to='arenafighter.Profile'),
         ),
         migrations.AddField(
             model_name='character',
             name='equipped_armor',
-            field=models.ForeignKey(related_name=b'equipped_on', default=None, blank=True, to='arenafighter.Armor', null=True),
-            preserve_default=True,
+            field=models.ForeignKey(related_name='equipped_on', default=None, blank=True, to='arenafighter.Armor', null=True),
         ),
         migrations.AddField(
             model_name='armor',
             name='inventory',
-            field=models.ForeignKey(related_name=b'armor', default=None, blank=True, to='arenafighter.Inventory', null=True),
-            preserve_default=True,
+            field=models.ForeignKey(related_name='armor', default=None, blank=True, to='arenafighter.Inventory', null=True),
         ),
     ]
