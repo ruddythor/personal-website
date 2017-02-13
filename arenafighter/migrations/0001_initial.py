@@ -76,13 +76,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='Location',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('character', models.OneToOneField(related_name='location', default=None, to='arenafighter.Character')),
-            ],
-        ),
-        migrations.CreateModel(
             name='Potion',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

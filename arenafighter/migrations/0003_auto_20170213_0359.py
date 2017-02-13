@@ -11,6 +11,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='Location',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('area_difficulty_level', models.IntegerField(default=1)),
+                ('name', models.TextField(default=b'Random Location')),
+            ],
+        ),
         migrations.AlterField(
             model_name='character',
             name='hpmax',
@@ -25,5 +33,10 @@ class Migration(migrations.Migration):
             model_name='enemy',
             name='hpmax',
             field=models.IntegerField(),
+        ),
+        migrations.AddField(
+            model_name='character',
+            name='location',
+            field=models.ForeignKey(related_name='characters', default=None, blank=True, to='arenafighter.Location', null=True),
         ),
     ]

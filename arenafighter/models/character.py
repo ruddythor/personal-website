@@ -21,6 +21,8 @@ class Character(models.Model):
     fights_lost = models.IntegerField(default=0)
     dead = models.BooleanField(default=False)
     times_died = models.IntegerField(default=0)
+    location = models.ForeignKey('Location', default=None, related_name='characters', null=True, blank=True)
+
 
     class Meta:
         app_label = 'arenafighter'
