@@ -100,7 +100,7 @@ enemy_strength_dict = {
              'base_defense': 5,
              'gold': dice.roll(5, 7)
              },
-    'medium': {'name': 'An Enemy!',
+    'medium': {'name': 'A Medium Strength Enemy!',
                'xp_value': 15,
                'renown_value': 14,
                'hpmax': dice.roll(17, 5),
@@ -109,7 +109,7 @@ enemy_strength_dict = {
                'base_defense': 8,
                'gold': dice.roll(9, 7)
                 },
-    'strong': {'name': 'An Enemy!',
+    'strong': {'name': 'A Strong Enemy!',
                'xp_value': 45,
                'renown_value': 21,
                'hpmax': dice.roll(25, 5),
@@ -118,11 +118,11 @@ enemy_strength_dict = {
                'base_defense': 15,
                'gold': dice.roll(15, 5)
                 },
-    'very strong': {'name': 'An Enemy!', 'xp_value': 65, 'renown_value': 28, 'hpmax': dice.roll(35, 5), 'current_hp': 0, 'base_attack': 25, 'base_defense': 25, 'gold': dice.roll(20, 5)},
-    'exceptionally strong': {'name': 'An Enemy!', 'xp_value': 95, 'renown_value': 35, 'hpmax': dice.roll(50, 5), 'current_hp': 0, 'base_attack': 40, 'base_defense': 45, 'gold': dice.roll(30, 5)},
-    'powerful': {'name': 'An Enemy!', 'xp_value': 145, 'renown_value': 42, 'hpmax': dice.roll(65, 4), 'current_hp': 0, 'base_attack': 75, 'base_defense': 75, 'gold': dice.roll(45, 4)},
-    'exceptionally powerful': {'name': 'An Enemy!', 'xp_value': 180, 'renown_value': 49, 'hpmax': dice.roll(75, 4), 'current_hp': 0, 'base_attack': 100, 'base_defense': 100, 'gold': dice.roll(65, 4)},
-    'ultimate': {'name': 'An Enemy!', 'xp_value': 250, 'renown_value': 200, 'hpmax': dice.roll(100, 4), 'current_hp': 0, 'base_attack': 200, 'base_defense': 150, 'gold': dice.roll(80, 5)},
+    'very strong': {'name': 'A Very Strong Enemy!', 'xp_value': 65, 'renown_value': 28, 'hpmax': dice.roll(35, 5), 'current_hp': 0, 'base_attack': 25, 'base_defense': 25, 'gold': dice.roll(20, 5)},
+    'exceptionally strong': {'name': 'An Exceptionally Strong Enemy!', 'xp_value': 95, 'renown_value': 35, 'hpmax': dice.roll(50, 5), 'current_hp': 0, 'base_attack': 40, 'base_defense': 45, 'gold': dice.roll(30, 5)},
+    'powerful': {'name': 'A Powerful Enemy!', 'xp_value': 145, 'renown_value': 42, 'hpmax': dice.roll(65, 4), 'current_hp': 0, 'base_attack': 75, 'base_defense': 75, 'gold': dice.roll(45, 4)},
+    'exceptionally powerful': {'name': 'An Exceptionally Powerful Enemy!', 'xp_value': 180, 'renown_value': 49, 'hpmax': dice.roll(75, 4), 'current_hp': 0, 'base_attack': 100, 'base_defense': 100, 'gold': dice.roll(65, 4)},
+    'ultimate': {'name': 'An Ultimate Enemy!', 'xp_value': 250, 'renown_value': 200, 'hpmax': dice.roll(100, 4), 'current_hp': 0, 'base_attack': 200, 'base_defense': 150, 'gold': dice.roll(80, 5)},
 }
 
 def generate_enemy(strength):
