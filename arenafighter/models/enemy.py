@@ -28,6 +28,7 @@ class Enemy(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
+        #### THIS IS A BUG NOW, I THINK BECAUSE OF CHANGES TO __INIT__(?)
         self.hpmax = dice.roll(15, 6)
         self.gold = dice.roll(5, 6)
 

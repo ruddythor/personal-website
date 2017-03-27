@@ -30,7 +30,7 @@ class Character(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Character, self).__init__(*args, **kwargs)
-        self.hpmax = dice.roll(15, 6)
+        self.hpmax = 61
 
     def __unicode__(self):
         return self.name
