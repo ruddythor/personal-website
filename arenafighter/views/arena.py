@@ -3,6 +3,7 @@ from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.models.inventory import Potion
 from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
+from arenafighter.models.location import Location
 
 def use_potion(request):
     if request.POST.get('item_id'):
@@ -54,15 +55,17 @@ def attack(request):
 
 
 def fight(request):
+    character = Character.objects.get(id=request.user.profile.current_character_id)
+    
     if request.POST.get('enemy_id'):
         form = ContinueFightForm(request.POST)
         if form.is_valid:
             if request.POST.get('enemy_id'):
                 enemy = Enemy.objects.get(id=form.cleaned_data['enemy_id'])
     else:
-        enemy = generate_enemy('weak')
+        location = character.location.area_difficulty_level
+        enemy = character.location.spawn_enemy()
 
-    character = Character.objects.get(id=request.user.profile.current_character_id)
     context = {'enemy': enemy,
                'character': character,
                }
