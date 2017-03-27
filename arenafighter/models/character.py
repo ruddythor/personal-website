@@ -22,6 +22,7 @@ class Character(models.Model):
     dead = models.BooleanField(default=False)
     times_died = models.IntegerField(default=0)
     location = models.ForeignKey('Location', default=None, related_name='characters', null=True, blank=True)
+    gender = models.TextField(default='male')
 
 
     class Meta:
