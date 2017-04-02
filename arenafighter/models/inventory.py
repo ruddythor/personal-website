@@ -35,6 +35,8 @@ class InventoryItem(models.Model):
 class Armor(InventoryItem):
     defense_value = models.IntegerField(default=2)
     type = models.TextField(default='armor', editable=False)
+    shop = models.ForeignKey('Store', default=None, related_name='armors', blank=True, null=True)
+
 
     class Meta:
         app_label = 'arenafighter'
@@ -45,6 +47,8 @@ class Armor(InventoryItem):
 class Weapon(InventoryItem):
     attack_value = models.IntegerField(default=2)
     type = models.TextField(default='weapon', editable=False)
+    shop = models.ForeignKey('Store', default=None, related_name='weapons', blank=True, null=True)
+
 
     class Meta:
         app_label = 'arenafighter'
@@ -55,6 +59,8 @@ class Weapon(InventoryItem):
 class Potion(InventoryItem):
     heal_percent = models.IntegerField(default=20)
     type = models.TextField(default='potion', editable=False)
+    shop = models.ForeignKey('Store', default=None, related_name='potions', blank=True, null=True)
+
 
     class Meta:
         app_label = 'arenafighter'
