@@ -29,8 +29,18 @@ class Enemy(models.Model):
     def __init__(self, *args, **kwargs):
         super(Enemy, self).__init__(*args, **kwargs)
         #### THIS IS A BUG NOW, I THINK BECAUSE OF CHANGES TO __INIT__(?)
-        self.hpmax = dice.roll(15, 6)
-        self.gold = dice.roll(5, 6)
+        #### I think we need the create() method below, now
+        #self.hpmax = dice.roll(15, 6)
+        #self.gold = dice.roll(5, 6)
+
+
+    @classmethod
+    def create(cls):
+        hpmax = dice.roll(15,6)
+        gold = dice.roll(5,6)
+        enemy = cls(hpmax=hpmax, gold=gold)
+        return enemy
+
 
     def attack(self, enemy):
         attack_value = self.base_attack

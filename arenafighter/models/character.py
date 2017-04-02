@@ -30,7 +30,16 @@ class Character(models.Model):
 
     def __init__(self, *args, **kwargs):
         super(Character, self).__init__(*args, **kwargs)
-        self.hpmax = 61
+        #### THIS IS A BUG NOW, I THINK BECAUSE OF CHANGES TO __INIT__(?)
+        #### I think we need the create() method below now
+        #self.hpmax = dice.roll(15, 6)
+
+    @classmethod
+    def create(cls):
+        hpmax = dice.roll(15,6)
+        character = cls(hpmax=hpmax)
+        return character
+
 
     def __unicode__(self):
         return self.name

@@ -33,3 +33,12 @@ class Location(models.Model):
     	return enemy
 
 
+
+class Store(models.Model):
+
+	class Meta:
+		app_label = 'arenafighter'
+
+	def __unicode__(self):
+		return 'A Store'
+
