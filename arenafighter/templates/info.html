@@ -8,6 +8,11 @@
 {% if message %}
     {{ message }}
 {% endif %}
+<p>LOCATION:</p>
+<p>{{ character.location }}</p>
+<p>(An area with a difficulty level of: {{ character.location.area_difficulty_level }})</p>
+
+
 <p>INVENTORY:</p>
 <p>( an asterisk indicates the item is equipped )</p>
 {% include 'partials/inventory_list.html' with items=items equipped=character.equipped_items%}

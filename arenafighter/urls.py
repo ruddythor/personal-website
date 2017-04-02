@@ -39,7 +39,7 @@ urlpatterns = patterns('',
 
     url(r'^use-potion$', 'arenafighter.views.arena.use_potion', name='use_potion'),
 
-
+    url(r'^locations', 'arenafighter.views.location.locations', name='locations'),
 
     url(r'^play_as/(\d+)', 'arenafighter.views.home.play_as_character', name='play_as_character'),
     url(r'^delete/(\d+)', 'arenafighter.views.home.delete', name='delete'),

@@ -17,6 +17,7 @@
                 <a href="{% url 'home' %}">HOME</a>
                 {% if character_id %}
                     | <a href="{% url 'player_info' character_id %}">CHARACTER INFO</a>
+                    | <a href="{% url 'locations' %}">LOCATIONS</a> |
                     | <a href="{% url 'arena' %}">TO BATTLE!!</a> |
                     <a href="{% url 'store' %}">STORE</a>
                 {% endif %}

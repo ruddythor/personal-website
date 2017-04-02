@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<p>*Click a location to go to it*</p>
+{% for location in locations %}
+	{{ location }}<br/>
+{% endfor %}
+{% endblock %}
