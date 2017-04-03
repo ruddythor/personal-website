@@ -7,6 +7,7 @@ from arenafighter.utils import dice
 from django.db import models
 from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.models.enemy import enemy_strength_dict
+from arenafighter.models.inventory import Potion, Armor, Weapon
 
 
 strength_dict = {
@@ -62,13 +63,37 @@ class Store(models.Model):
 		return 'A Store'
 
 	def generate_items(self):
-		pass
+		if self.location.area_difficulty_level == 1:
+			for x in range(0, 10):
+				potion = Potion(name='Health Potion', description='potion', buy_value=10, sell_value=2, shop=self)
+				potion.save()
+		elif self.location.area_difficulty_level == 2:
+			potion = Potion(name='The Medium potion', description='A medium strength potion', buy_value=24, sell_value=15, shop=self)
+			potion.save()
 
 	def generate_weapons(self):
-		pass
+		if self.location.area_difficulty_level == 1:
+			for x in range(0, 2):
+				weapon = Weapon(name='Cutter', description='A basic sword', buy_value=12, sell_value=3, attack_value=1, shop=self)
+				weapon.save()
+				weapon2 = Weapon(name='Kamikaze', description='A low-end sword', buy_value=20, sell_value=5, attack_value=2, shop=self)
+				weapon2.save()
+				weapon3 = Weapon(name='Bloody Mary', description='A low-end sword', buy_value=65, sell_value=15, attack_value=5, shop=self)
+				weapon3.save()
+		elif self.location.area_difficulty_level == 2:
+			weapon = Weapon(name='The Medium Cutter', description='A medium-end sword', buy_value=24, sell_value=15, shop=self)
+			weapon.save()
 
 	def generate_armor(self):
-		pass
+		if self.location.area_difficulty_level == 1:
+			for x in range(0, 2):
+				armor = Armor(name='The Protector', description='A basic set of armor, providing minimal protection', buy_value=14, sell_value=3, shop=self)
+				armor.save()
+				armor2 = Armor(name='Gladatorius', description='Basic armor that provides a small amount of protection', buy_value=20, sell_value=5, defense_value=3, shop=self)
+				armor2.save()
+		elif self.location.area_difficulty_level == 2:
+			armor = Armor(name='The Medium Protector', description='A basic set of armor, providing minimal protection', buy_value=24, sell_value=15, shop=self)
+			armor.save()
 
 
 class Arena(models.Model):

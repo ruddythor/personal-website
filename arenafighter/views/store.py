@@ -2,22 +2,32 @@ import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
+from arenafighter.models.location import Location, Store
+
 from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
-    potions = Potion.objects.exclude(inventory__isnull=False)
-    weapons = Weapon.objects.exclude(inventory__isnull=False)
-    armor = Armor.objects.exclude(inventory__isnull=False)
+    character = Character.objects.get(id=request.user.profile.current_character_id)
+    area = Location.objects.get(id=character.location.id)
+
+    store = area.stores.all()[0]
+
+#    potions = Potion.objects.exclude(inventory__isnull=False)
+#    weapons = Weapon.objects.exclude(inventory__isnull=False)
+#    armor = Armor.objects.exclude(inventory__isnull=False)
+    potions = store.potions.all()
+    weapons = store.weapons.all()
+    armor = store.armors.all()
     if not potions:
-        generate_items(store_level)
+        store.generate_items()
     if not armor:
-        generate_armor(store_level)
+        store.generate_armor()
     if not weapons:
-        generate_weapons(store_level)
-    potions = Potion.objects.exclude(inventory__isnull=False)
-    weapons = Weapon.objects.exclude(inventory__isnull=False)
-    armor = Armor.objects.exclude(inventory__isnull=False)
+        store.generate_weapons()
+#    potions = Potion.objects.exclude(inventory__isnull=False)
+#    weapons = Weapon.objects.exclude(inventory__isnull=False)
+#    armor = Armor.objects.exclude(inventory__isnull=False)
     num_potions = dict(collections.Counter([item.name for item in potions]))
     num_weapons = dict(collections.Counter([item.name for item in weapons]))
     num_armor = dict(collections.Counter([item.name for item in armor]))
