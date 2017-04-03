@@ -3,7 +3,7 @@ from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.models.inventory import Potion
 from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
-from arenafighter.models.location import Location
+from arenafighter.models.location import Location, Arena, Store
 
 def use_potion(request):
     if request.POST.get('item_id'):

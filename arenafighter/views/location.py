@@ -21,3 +21,13 @@ def locations(request):
 				}
 	return render(request, 'locations.html', context)
 
+
+def area(request, id):
+	area = Location.objects.get(id=id)
+	character = Character.objects.get(id=request.user.profile.current_character_id)
+	character.location = area
+	character.save()
+	context = {
+		'area': area
+	}
+	return render(request, 'area.html', context)

@@ -8,6 +8,7 @@ class Character(models.Model):
     level = models.IntegerField(default=1)
     name = models.TextField(default="The Stranger")
     hpmax = models.IntegerField()
+    # equipped_armor is really an unnecessary field i think
     equipped_armor = models.ForeignKey('Armor', default=None, related_name='equipped_on', blank=True, null=True)
     current_hp = models.IntegerField()
     base_attack = models.IntegerField(default=3)
