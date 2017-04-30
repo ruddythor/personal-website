@@ -79,6 +79,8 @@ INSTALLED_APPS = (
     'arenafighter',
 #    'arenafighter',
 #    'personal',
+    'joshy',
+    'grophy',
 #    'south',
     'django_extensions',
 )

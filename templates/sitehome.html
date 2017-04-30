@@ -1,5 +1,19 @@
-<html><body>{{ characters }}
+{% load staticfiles %}
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+</head>
+
+<body>
+
 
 <br/>
 <a href="{% url 'home' %}">ArenaFighter</a>
-</body></html>
+
+
+
+
+
+</body>
+</html>

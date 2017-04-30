@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'personal.views.home.home', name='sitehome'),
+    url(r'^$', 'basesite.views.home', name='sitehome'),
     url(r'^arena$', 'arenafighter.views.home.home', name='home'),
     url(r'^arena/store$', 'arenafighter.views.store.shop', {'store_level': 1}, name='store'),
     url(r'^arena/info/(\d+)/$', 'arenafighter.views.home.info', name='player_info'),
