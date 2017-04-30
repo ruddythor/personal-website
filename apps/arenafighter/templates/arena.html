@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<center>
+    'Allo there, warrior. Lookin' for a fight? We've got 'em! If yer chicken, ya can always run away.
+<br/><br/><br/>
+
+<br/><br/><br/>
+<a href="{% url 'fight' %}">FIGHT!!</a>
+<a href="{% url 'home' %}">RUN AWAY!!</a>
+</center>
+{% endblock %}
+
+

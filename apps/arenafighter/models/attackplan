@@ -1,0 +1,19 @@
+the question is how does a weapons attack value 
+
+vs armor defense value
+
+correlate to HP reduction
+
+
+
+
+you should provide:
+	seed atttack value
+	seed attack damage
+	rate of increase per attack value
+	optoinal max attack value
+
+
+
+or you could provide:
+	

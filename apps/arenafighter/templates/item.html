@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<table border="1px">
+    <tr>
+        <td>ITEM</td>
+        <td>{{ item.name }}</td>
+    </tr>
+    <tr>
+        <td>DESCRIPTION</td>
+        <td>{{ item.description }}</td>
+    </tr>
+    <tr>
+        <td>ITEM TYPE</td>
+        <td>{{ item.type }}</td>
+    </tr>
+    <tr>
+        <td>PURCHASE VALUE</td>
+        <td>{{ item.buy_value }}</td>
+    </tr>
+    <tr>
+        <td>SELL VALUE</td>
+        <td>{{ item.sell_value }}</td>
+    </tr>
+
+    <tr>
+        <td>INVENTORY SLOTS REQUIRED</td>
+        <td>{{ item.slots_required }}</td>
+    </tr>
+
+    {% if item.defense_value %}
+    <tr>
+        <td>DEFENSE VALUE</td>
+        <td>{{ item.defense_value }}</td>
+    </tr>
+    {% endif %}
+
+    {% if item.defense_value %}
+    <tr>
+        <td>ATTACK VALUE</td>
+        <td>{{ item.attack_value }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+
+
+
+{% if purchase_form %}
+<form action="" method="post">
+{% csrf_token %}
+    <input type="hidden" value="{{item.id}}" name="item_id"/>
+    <input type="hidden" value="purchase" name="purchase"/>
+    <input type="submit" value="Purchase" id="submit"/>
+</form>
+{% endif %}
+
+
+{% if not purchase_form and item.type != "potion" %}
+
+    {% if item.type == "armor" %}
+    <form action="{% url 'equip_armor' item.id %}" method="post">
+    {% elif item.type  == "weapon" %}
+    <form action="{% url 'equip_weapon' item.id %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Equip" id="submit"/>
+    </form>
+
+    {% if item.type == "armor" %}
+    <form action="{% url 'unequip_armor' item.id %}" method="post">
+    {% elif item.type  == "weapon" %}
+    <form action="{% url 'unequip_weapon' item.id %}" method="post">
+    {% endif %}
+        {% csrf_token %}
+        <input type="hidden" value="{{item.id}}" name="item_id"/>
+        <input type="hidden" value="purchase" name="purchase"/>
+        <input type="submit" value="Un-Equip" id="submit"/>
+    </form>
+
+
+{% endif %}
+
+{% endblock %}
+
+

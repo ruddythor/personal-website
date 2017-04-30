@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Your Character's Information{% endblock %}
+{% block content %}
+
+{% if character.dead %}
+    *** THIS CHARACTER IS INCAPACITATED. USE A HEALING POTION TO FULLY CURE HIM/HER ***
+{% endif %}
+{% if message %}
+    {{ message }}
+{% endif %}
+<p>LOCATION:</p>
+<p>{{ character.location }}</p>
+<p>(An area with a difficulty level of: {{ character.location.area_difficulty_level }})</p>
+
+
+<p>INVENTORY:</p>
+<p>( an asterisk indicates the item is equipped )</p>
+{% include 'partials/inventory_list.html' with items=items equipped=character.equipped_items%}
+<p></p>
+<p></p>
+<p></p>
+<br/> <br/>
+
+<a href="{% url 'play_as_character' character.id %}">Play as this Character</a><br/>
+<a href="{% url 'delete' character.id %}">Delete Character</a><br/><br/>
+
+{% endblock %}
