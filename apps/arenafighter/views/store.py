@@ -1,10 +1,10 @@
 import collections
 from django.shortcuts import render, redirect
-from apps.arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
-from apps.arenafighter.models.character import Character
-from apps.arenafighter.models.location import Location, Store
+from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
+from arenafighter.models.character import Character
+from arenafighter.models.location import Location, Store
 
-from apps.arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
+from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):

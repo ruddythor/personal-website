@@ -1,9 +1,9 @@
 from django.contrib import admin
-from apps.arenafighter.models.character import Character
-from apps.arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon, Potion
-from apps.arenafighter.models.enemy import Enemy
-from apps.arenafighter.models.profile_model import Profile
-from apps.arenafighter.models.location import Location, Store, Arena
+from arenafighter.models.character import Character
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon, Potion
+from arenafighter.models.enemy import Enemy
+from arenafighter.models.profile_model import Profile
+from arenafighter.models.location import Location, Store, Arena
 
 
 class CharacterAdmin(admin.ModelAdmin):

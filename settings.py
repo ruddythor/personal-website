@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -23,14 +24,48 @@ SECRET_KEY = 'q6wz43x7$=6u2sc$92w-6i=2j-ptsixxp+v0juosf2r656ea(+'
 DEBUG = True
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
+sys.path.append(os.path.join(PROJECT_ROOT, 'apps/'))
+
 
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS = (
-    PROJECT_ROOT + '/templates/',
-)
+#TEMPLATE_DIRS = (
+#    PROJECT_ROOT + '/arenafighter/templates/',
+#)
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+#            '/personal/templates',
+            'apps',
+            'apps/arenafighter',
+            'apps/personal',
+            'templates',
+            # insert your TEMPLATE_DIRS here
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+
 
 # Application definition
 
@@ -42,6 +77,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'arenafighter',
+#    'arenafighter',
+#    'personal',
 #    'south',
     'django_extensions',
 )
@@ -55,9 +92,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'arenafighter.urls'
+ROOT_URLCONF = 'urls'
 
-WSGI_APPLICATION = 'arenafighter.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
@@ -99,20 +136,20 @@ STATICFILES_DIRS = (
         os.path.join(os.path.dirname(__file__), 'static'),
         )
 
-AUTH_PROFILE_MODULE = 'arenafighter.Profile'
+#AUTH_PROFILE_MODULE = 'arenafighter.Profile'
 
 
 # debug_toolbar settings
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
     MIDDLEWARE_CLASSES += (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
+#        'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
 
     INSTALLED_APPS += (
-        'debug_toolbar',
+#        'debug_toolbar',
     )
 
-    DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False,
-    }
+#    DEBUG_TOOLBAR_CONFIG = {
+#        'INTERCEPT_REDIRECTS': False,
+#    }

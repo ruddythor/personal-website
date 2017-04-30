@@ -1,8 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-The following items are in your inventory to sell, boss.
-<p>
-{% include 'partials/inventory_list.html' with character=character items=items sell=sell %}
-</p>
-{% endblock %}

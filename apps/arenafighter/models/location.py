@@ -3,11 +3,11 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-from apps.arenafighter.utils import dice
+from arenafighter.utils import dice
 from django.db import models
-from apps.arenafighter.models.enemy import Enemy, generate_enemy
-from apps.arenafighter.models.enemy import enemy_strength_dict
-from apps.arenafighter.models.inventory import Potion, Armor, Weapon
+from arenafighter.models.enemy import Enemy, generate_enemy
+from arenafighter.models.enemy import enemy_strength_dict
+from arenafighter.models.inventory import Potion, Armor, Weapon
 
 
 strength_dict = {

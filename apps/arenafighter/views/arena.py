@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
-from apps.arenafighter.models.character import Character
-from apps.arenafighter.models.enemy import Enemy, generate_enemy
-from apps.arenafighter.models.inventory import Potion
-from apps.arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
-from apps.arenafighter.models.location import Location, Arena, Store
+from arenafighter.models.character import Character
+from arenafighter.models.enemy import Enemy, generate_enemy
+from arenafighter.models.inventory import Potion
+from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
+from arenafighter.models.location import Location, Arena, Store
 
 def use_potion(request):
     if request.POST.get('item_id'):

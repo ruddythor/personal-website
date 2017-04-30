@@ -1,10 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from apps.arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
-from apps.arenafighter.models.character import Character
+from arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
+from arenafighter.models.character import Character
 from django.contrib.auth import authenticate, login, logout
-from apps.arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
-from apps.arenafighter.utils import dice
+from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
+from arenafighter.utils import dice
 import collections
 
 

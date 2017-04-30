@@ -1,6 +1,6 @@
 from django.db import models
 
-from apps.arenafighter.utils import dice
+from arenafighter.utils import dice
 
 
 class Character(models.Model):

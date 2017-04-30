@@ -3,7 +3,7 @@ Created on Oct 1, 2012
 
 @author: josh
 '''
-from apps.arenafighter.utils import dice
+from arenafighter.utils import dice
 from django.db import models
 
 
