@@ -7,7 +7,7 @@
 
 <p>The following characters are available for you to play as:</p>
 {% for char in characters %}
-    <a href="{% url 'player_info' char.id %}">{{ char }}</a><br/>
+    <a href="{% url 'arenafighter:player_info' char.id %}">{{ char }}</a><br/>
 {% endfor %}
 
 <p>Or create a new character</p>
@@ -19,8 +19,8 @@
 <br/>
 {% else %}
 <center>
-<a href="{% url 'signup' %}">Create a user</a>
-<a href="{% url 'log_in' %}">Login</a>
+<a href="{% url 'arenafighter:signup' %}">Create a user</a>
+<a href="{% url 'arenafighter:log_in' %}">Login</a>
 </center>
 {% endif %}
 

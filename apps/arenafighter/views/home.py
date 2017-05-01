@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
+from apps.arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
 from arenafighter.models.character import Character
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
@@ -22,7 +22,7 @@ def home(request):
             character.save()
             inventory = Inventory(character=character)
             inventory.save()
-            return redirect('home')
+            return redirect('arenafighter:home')
     else:
         form = CreateCharacterForm()
 
@@ -42,7 +42,7 @@ def signup(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-            return redirect('home')
+            return redirect('arenafighter:home')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
@@ -56,9 +56,9 @@ def log_in(request):
             user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            return redirect('home')
+            return redirect('arenafighter:home')
         else:
-            return redirect('home')
+            return redirect('arenafighter:home')
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
@@ -66,7 +66,7 @@ def log_in(request):
 
 def log_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('arenafighter:home')
 
 def info(request, id):
     try:
@@ -79,20 +79,20 @@ def info(request, id):
                    'equipped_items': equipped_items,
                    }
     except:
-        return redirect('player_info')
+        return redirect('arenafighter:player_info')
 
     return render(request, 'info.html', context)
 
 def delete(request, id):
     character = Character.objects.get(id=id)
     character.delete()
-    return redirect('home')
+    return redirect('arenafighter:home')
 
 def play_as_character(request, id):
     character = Character.objects.get(id=id)
     character.profile.add(request.user.profile)
     character.save()
-    return redirect('player_info', character.id)
+    return redirect('arenafighter:player_info', character.id)
 
 def go_to_store(request):
     context = {}
@@ -107,25 +107,25 @@ def equip_weapon(request, weapon_id):
     if request.POST:
         weapon = Weapon.objects.get(id=weapon_id)
         request.user.profile.current_character.equip(weapon)
-    return redirect('player_info', request.user.profile.current_character_id)
+    return redirect('arenafighter:player_info', request.user.profile.current_character_id)
 
 def equip_armor(request, armor_id):
     if request.POST:
         armor = Armor.objects.get(id=armor_id)
         request.user.profile.current_character.equip(armor)
-    return redirect('player_info', request.user.profile.current_character_id)
+    return redirect('arenafighter:player_info', request.user.profile.current_character_id)
 
 def unequip_weapon(request, armor_id):
     if request.POST:
         weapon = Weapon.objects.get(id=armor_id)
         request.user.profile.current_character.unequip(weapon)
-    return redirect('player_info', request.user.profile.current_character_id)
+    return redirect('arenafighter:player_info', request.user.profile.current_character_id)
 
 def unequip_armor(request, armor_id):
     if request.POST:
         armor = Armor.objects.get(id=armor_id)
         request.user.profile.current_character.unequip(armor)
-    return redirect('player_info', request.user.profile.current_character_id)
+    return redirect('arenafighter:player_info', request.user.profile.current_character_id)
 
 
 

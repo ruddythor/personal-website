@@ -2,7 +2,7 @@ import collections
 from django.shortcuts import render, redirect
 from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
-from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
+from apps.arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
 from arenafighter.models.location import Location, Store, Arena
 
 

@@ -4,7 +4,7 @@ from arenafighter.models.inventory import Inventory, Weapon, Armor, Potion
 from arenafighter.models.character import Character
 from arenafighter.models.location import Location, Store
 
-from arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
+from apps.arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseForm, SellForm, UnequipForm
 
 # TODO: DE-uglify this view function
 def shop(request, store_level):
@@ -106,41 +106,41 @@ def purchase_potion(request, item_id):
     if request.POST:
         item = Potion.objects.get(id=item_id)
         request.user.profile.current_character.purchase(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 
 def purchase_weapon(request, item_id):
     if request.POST:
         item = Weapon.objects.get(id=item_id)
         request.user.profile.current_character.purchase(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 
 def purchase_armor(request, item_id):
     if request.POST:
         item = Armor.objects.get(id=item_id)
         request.user.profile.current_character.purchase(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 def sell_potion(request, item_id):
     if request.POST:
         item = Potion.objects.get(id=item_id)
         request.user.profile.current_character.sell(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 
 def sell_weapon(request, item_id):
     if request.POST:
         item = Weapon.objects.get(id=item_id)
         request.user.profile.current_character.sell(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 
 def sell_armor(request, item_id):
     if request.POST:
         item = Armor.objects.get(id=item_id)
         request.user.profile.current_character.sell(item)
-    return redirect('store')
+    return redirect('arenafighter:store')
 
 
 

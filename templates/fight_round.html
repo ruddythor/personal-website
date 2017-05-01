@@ -18,11 +18,11 @@ You have: {{ user.profile.current_character.current_hp }}/{{ user.profile.curren
 
 {{ message }}
 <br/><br/>
-<form action="{% url 'attack' %}" method="post">{% csrf_token %}
+<form action="{% url 'arenafighter:attack' %}" method="post">{% csrf_token %}
 <input type="hidden" value="{{ enemy.id }}" name="enemy_id"/>
 <input type="submit" value="KEEP FIGHTIN', BITCH!" id="submit"/>
 </form>
-<form action="{% url 'player_info' user.profile.current_character_id %}" method="get">{% csrf_token %}
+<form action="{% url 'arenafighter:player_info' user.profile.current_character_id %}" method="get">{% csrf_token %}
 <input type="submit" value="RUN AWAY LIKE A MUTHAFUCKER!" id="submit"/>
 </form>
 
@@ -34,7 +34,7 @@ Or, use a potion if you have one?
     {% if item.type == "potion" %}
         <td>{{ item }}</td>
         <td>
-            <form action="{% url 'use_potion' %}" method="post">
+            <form action="{% url 'arenafighter:use_potion' %}" method="post">
                 {% csrf_token %}
                 <input type="hidden" value="{{ enemy.id }}" name="enemy_id"/>
                 <input type="hidden" value="{{ item.id }}" name="item_id"/>

@@ -5,6 +5,6 @@
 
 <p>*Click a location to go to it*</p>
 {% for location in locations %}
-	<a href="{% url 'area_detail' location.id %}">{{ location }}</a><br/>
+	<a href="{% url 'arenafighter:area_detail' location.id %}">{{ location }}</a><br/>
 {% endfor %}
 {% endblock %}

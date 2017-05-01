@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from arenafighter.models.character import Character
 from arenafighter.models.enemy import Enemy, generate_enemy
 from arenafighter.models.inventory import Potion
-from arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
+from apps.arenafighter.forms import ContinueFightForm, GetItemForm, EnemyLookupForm
 from arenafighter.models.location import Location, Arena, Store
 
 def use_potion(request):
@@ -25,7 +25,7 @@ def use_potion(request):
                 context['enemy_id'] = enemy.id
                 return render(request, 'fight_round.html', context)
             else:
-                return redirect('player_info', character.id)
+                return redirect('arenafighter:player_info', character.id)
 
 def attack(request):
     if request.POST:
@@ -47,7 +47,7 @@ def attack(request):
                        'enemy_id': enemy.id,
                        }
             if character.dead:
-                return redirect('player_info', character.id)
+                return redirect('arenafighter:player_info', character.id)
             elif enemy.dead:
                 return render(request, 'fight.html', context)
 

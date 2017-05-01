@@ -60,9 +60,9 @@
 {% if not purchase_form and item.type != "potion" %}
 
     {% if item.type == "armor" %}
-    <form action="{% url 'equip_armor' item.id %}" method="post">
+    <form action="{% url 'arenafighter:equip_armor' item.id %}" method="post">
     {% elif item.type  == "weapon" %}
-    <form action="{% url 'equip_weapon' item.id %}" method="post">
+    <form action="{% url 'arenafighter:equip_weapon' item.id %}" method="post">
     {% endif %}
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>
@@ -71,9 +71,9 @@
     </form>
 
     {% if item.type == "armor" %}
-    <form action="{% url 'unequip_armor' item.id %}" method="post">
+    <form action="{% url 'arenafighter:unequip_armor' item.id %}" method="post">
     {% elif item.type  == "weapon" %}
-    <form action="{% url 'unequip_weapon' item.id %}" method="post">
+    <form action="{% url 'arenafighter:unequip_weapon' item.id %}" method="post">
     {% endif %}
         {% csrf_token %}
         <input type="hidden" value="{{item.id}}" name="item_id"/>

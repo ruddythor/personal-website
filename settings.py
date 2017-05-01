@@ -76,11 +76,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'arenafighter',
-#    'arenafighter',
-#    'personal',
     'joshy',
     'grophy',
+    'basesite',
+    'arenafighter',
 #    'south',
     'django_extensions',
 )
