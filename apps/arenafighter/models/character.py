@@ -37,7 +37,7 @@ class Character(models.Model):
 
     @classmethod
     def create(cls):
-        hpmax = dice.roll(15,6)
+        hpmax = dice.roll(15,7)
         character = cls(hpmax=hpmax)
         return character
 

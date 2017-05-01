@@ -119,16 +119,16 @@ class Arena(models.Model):
 			}
 		strength = strength_dict[self.location.area_difficulty_level]
 	#c    enemy = Enemy([x for x in enemy_strength_dict[strength]])
-		enemy = Enemy(name=enemy_strength_dict[strength]['name'],
-						xp_value=enemy_strength_dict[strength]['xp_value'],
-						renown_value=enemy_strength_dict[strength]['renown_value'],
-						hpmax=enemy_strength_dict[strength]['hpmax'],
-						current_hp=enemy_strength_dict[strength]['hpmax'],
-						base_attack=enemy_strength_dict[strength]['base_attack'],
-						base_defense=enemy_strength_dict[strength]['base_defense'],
-						gold=enemy_strength_dict[strength]['gold']
-		)
-		enemy.save()
+#		enemy = Enemy(name=enemy_strength_dict[strength]['name'],
+#						xp_value=enemy_strength_dict[strength]['xp_value'],
+#						renown_value=enemy_strength_dict[strength]['renown_value'],
+#						hpmax=enemy_strength_dict[strength]['hpmax'],
+#						current_hp=enemy_strength_dict[strength]['hpmax'],
+#						base_attack=enemy_strength_dict[strength]['base_attack'],
+#						base_defense=enemy_strength_dict[strength]['base_defense'],
+#						gold=enemy_strength_dict[strength]['gold']
+#		)
+#		enemy.save()
 	#    print 'name', enemy.name
 	#    print 'xp', enemy.xp_value
 	#    print 'renown', enemy.renown_value
@@ -138,4 +138,5 @@ class Arena(models.Model):
 	#    print 'base defense', enemy.base_defense
 	#    print 'gold', enemy.gold
 	#    enemy.delete()
-		return enemy
+#		return enemy
+		return
