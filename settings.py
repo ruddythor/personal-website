@@ -80,9 +80,13 @@ INSTALLED_APPS = (
     'grophy',
     'basesite',
     'arenafighter',
+    'ckeditor',
+#    'tinymce',
 #    'south',
     'django_extensions',
 )
+
+CKEDITOR_JQUERY_URL = 'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js'
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -102,7 +106,7 @@ WSGI_APPLICATION = 'wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'arenafighter',
         'USER': 'arenafighter',
         'PASSWORD': 'arenafighter',
