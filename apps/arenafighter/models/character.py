@@ -16,7 +16,7 @@ class Character(models.Model):
     gold = models.IntegerField(default=50)
     xp = models.IntegerField(default=0)
     renown = models.IntegerField(default=0)
-    next_levelup = models.IntegerField(default=100)
+    next_levelup = models.IntegerField(default=25)
     num_armor = models.IntegerField(default=0)
     fights_won = models.IntegerField(default=0)
     fights_lost = models.IntegerField(default=0)
@@ -127,6 +127,7 @@ class Character(models.Model):
             character.level += 1
             character.hpmax += int(character.hpmax*.15)
             character.next_levelup += int(character.next_levelup*.2 + character.next_levelup)
+            character.current_hp = character.hpmax
             character.save()
             return character
         else:
