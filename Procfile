@@ -1,1 +1,1 @@
-web: gunicorn arena-fighter.wsgi --log-file -
+web: gunicorn wsgi --log-file -
