@@ -1,0 +1,30 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+
+</head>
+<body>
+<a href="{% url 'sitehome' %}">Home</a>
+
+hi grohpy!
+
+
+<a href="{% url 'grophy:about' %}">About</a>
+<br/>
+<a href="{% url 'grophy:portfolio' %}">Portfolio</a>
+<br/>
+<a href="{% url 'grophy:resume' %}">Resume</a>
+<br/>
+<a href="{% url 'grophy:blog' %}">Travel Blog</a>
+<br/>
+<a href="{% url 'grophy:videos' %}">Videos!</a>
+<br/>
+
+Twitter | linkedin | vimeo | instagram | pinterest | tumblr | flickr
+
+
+</body>
+
+</html>
