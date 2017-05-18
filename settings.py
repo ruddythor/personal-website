@@ -101,8 +101,6 @@ ROOT_URLCONF = 'urls'
 
 WSGI_APPLICATION = 'wsgi.application'
 
-STATIC_URL = '/static/'
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
@@ -139,8 +137,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-        os.path.join(os.path.dirname(__file__), 'static'),
+#        os.path.join(os.path.dirname(__file__), 'static'),
         )
+
+STATIC_URL = '/static/'
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 #AUTH_PROFILE_MODULE = 'arenafighter.Profile'
 
