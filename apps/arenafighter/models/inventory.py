@@ -23,6 +23,8 @@ class InventoryItem(models.Model):
     slots_required = models.IntegerField(default=1)
     inventory = models.ForeignKey('Inventory', default=None, related_name='%(class)s', blank=True, null=True)
     equipped = models.BooleanField(default=False)
+    shop = models.ForeignKey('Store', default=None, related_name='%(class)s_items', blank=True, null=True)
+
 
     class Meta:
         abstract = True
@@ -34,8 +36,8 @@ class InventoryItem(models.Model):
 
 class Armor(InventoryItem):
     defense_value = models.IntegerField(default=2)
-    type = models.TextField(default='armor', editable=False)
-    shop = models.ForeignKey('Store', default=None, related_name='armors', blank=True, null=True)
+#    type = models.TextField(default='armor', editable=False)
+#    shop = models.ForeignKey('Store', default=None, related_name='armors', blank=True, null=True)
 
 
     class Meta:
@@ -43,11 +45,16 @@ class Armor(InventoryItem):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def item_type(self):
+        return 'armor'
+
 
 class Weapon(InventoryItem):
     attack_value = models.IntegerField(default=2)
-    type = models.TextField(default='weapon', editable=False)
-    shop = models.ForeignKey('Store', default=None, related_name='weapons', blank=True, null=True)
+#    type = models.TextField(default='weapon', editable=False)
+#    shop = models.ForeignKey('Store', default=None, related_name='weapons', blank=True, null=True)
 
 
     class Meta:
@@ -55,11 +62,17 @@ class Weapon(InventoryItem):
 
     def __unicode__(self):
         return self.name
+
+    @property
+    def item_type(self):
+        return 'weapon'
+
+
 
 class Potion(InventoryItem):
     heal_percent = models.IntegerField(default=20)
-    type = models.TextField(default='potion', editable=False)
-    shop = models.ForeignKey('Store', default=None, related_name='potions', blank=True, null=True)
+#    type = models.TextField(default='potion', editable=False)
+#    shop = models.ForeignKey('Store', default=None, related_name='potions', blank=True, null=True)
 
 
     class Meta:
@@ -68,3 +81,6 @@ class Potion(InventoryItem):
     def __unicode__(self):
         return self.name
 
+    @property
+    def item_type(self):
+        return 'potion'

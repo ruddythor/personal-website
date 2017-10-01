@@ -85,6 +85,7 @@ class Character(models.Model):
 
 
     def purchase(self, item):
+        #TODO: Change this to just be something like self.inventory.add_item(item)
         if item.type == 'potion':
             self.inventory.potion.add(item)
         elif item.type == 'weapon':

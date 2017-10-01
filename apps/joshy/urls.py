@@ -10,5 +10,5 @@ app_name = 'joshy'
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'apps.joshy.views.home', name='home'),
-    url(r'^admin/', include(admin.site.urls)),
+#    url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

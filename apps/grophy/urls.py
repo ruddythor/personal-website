@@ -15,5 +15,5 @@ urlpatterns = patterns('',
     url(r'^videos/', 'apps.grophy.views.videos', name='videos'),
     url(r'^resume/', 'apps.grophy.views.resume', name='resume'),
     url(r'^portfolio/', 'apps.grophy.views.portfolio', name='portfolio'),
-    url(r'^admin/', include(admin.site.urls)),
+#    url(r'^admin/', include(admin.site.urls)),
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
