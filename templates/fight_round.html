@@ -31,7 +31,7 @@ Or, use a potion if you have one?
 <table>
 {% for item in user.profile.current_character.items %}
     <tr>
-    {% if item.type == "potion" %}
+    {% if item.item_type == "potion" %}
         <td>{{ item }}</td>
         <td>
             <form action="{% url 'arenafighter:use_potion' %}" method="post">
