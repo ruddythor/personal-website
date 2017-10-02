@@ -9,14 +9,18 @@ from apps.arenafighter.forms import EquipArmorForm, EquipWeaponForm, PurchaseFor
 # TODO: DE-uglify this view function
 def shop(request, store_level):
     character = Character.objects.get(id=request.user.profile.current_character_id)
-    area = Location.objects.get(id=character.location.id)
+    
+#    area = Location.objects.get(id=character.location.id)
 
     # Eventually we'll have multiple stores in an area. for now we just pull the first store in the list of all stores
-    store = area.stores.all()[0]
+#   store = area.stores.all()[0]
 
-#    potions = Potion.objects.exclude(inventory__isnull=False)
-#    weapons = Weapon.objects.exclude(inventory__isnull=False)
-#    armor = Armor.objects.exclude(inventory__isnull=False)
+    try:
+      store = character.location.stores.all()[0]
+    except AttributeError:
+      context = {'store': False}
+      return render(request, 'store.html', context)
+
     potions = store.potion_items.all().exclude(inventory__isnull=False)
     weapons = store.weapon_items.all().exclude(inventory__isnull=False)
     armor = store.armor_items.all().exclude(inventory__isnull=False)

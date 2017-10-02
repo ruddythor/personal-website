@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if not store %}
+Looks like you're not in a location with a store, fella. Try going to a location with a store to buy or sell things.
+{% else %}
 Well, hello there, stranger! Welcome to the shop.
 <br/><br/><br/>
 If yer in the mood to make some coin, you can always <a href="{% url 'arenafighter:sell_detail' %}">SELL</a> some items from your inventory.
@@ -68,4 +71,5 @@ If yer in the mood to make some coin, you can always <a href="{% url 'arenafight
     </tr>
 {% endfor %}
 </table>
+{% endif %}
 {% endblock %}
