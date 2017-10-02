@@ -3,7 +3,7 @@
 {% for item, value in items.items %}
 
 
-{% if item.type == "potion" %}
+{% if item.item_type == "potion" %}
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'arenafighter:potion_detail' item.id %}">{{ item }}</a><br/>
@@ -32,7 +32,7 @@
 </tr>
 {% endif %}
 
-{% if item.type == "weapon" %}
+{% if item.item_type == "weapon" %}
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'arenafighter:weapon_detail' item.id %}">{{ item }}</a><br/>
@@ -69,7 +69,7 @@
 {% endif %}
 
 
-{% if item.type == "armor" %}
+{% if item.item_type == "armor" %}
 <tr>
     <td>
         {% if item in equipped %}**{% endif %}<a href="{% url 'arenafighter:armor_detail' item.id %}">{{ item }}</a><br/>

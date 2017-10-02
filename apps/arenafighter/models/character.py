@@ -61,7 +61,7 @@ class Character(models.Model):
 
 
     def equip(self, item):
-        if item.type == 'weapon':
+        if item.item_type == 'weapon':
             if len(self.inventory.weapon.filter(equipped=True)) < 2:
                 item.equipped = True
                 item.save()
@@ -71,7 +71,7 @@ class Character(models.Model):
                     weapon.save()
                 item.equipped = True
                 item.save()
-        elif item.type == 'armor':
+        elif item.item_type == 'armor':
             if len(self.inventory.armor.filter(equipped=True)) > 0:
                 armor = self.inventory.armor.filter(equipped=True)[0]
                 self.unequip(armor)
@@ -86,27 +86,32 @@ class Character(models.Model):
 
     def purchase(self, item):
         #TODO: Change this to just be something like self.inventory.add_item(item)
-        if item.type == 'potion':
+        if item.item_type == 'potion':
             self.inventory.potion.add(item)
-        elif item.type == 'weapon':
+        elif item.item_type == 'weapon':
             self.inventory.weapon.add(item)
-        elif item.type == 'armor':
+        elif item.item_type == 'armor':
             self.inventory.armor.add(item)
         self.gold -= item.buy_value
         self.save()
+        item.shop = None
+        item.save()
 
     def sell(self, item):
-        if item.type == 'potion':
+        if item.item_type == 'potion':
             self.inventory.potion.remove(item)
-        elif item.type == 'weapon':
+        elif item.item_type == 'weapon':
             self.inventory.weapon.remove(item)
-        elif item.type == 'armor':
+        elif item.item_type == 'armor':
             self.inventory.armor.remove(item)
         self.unequip(item)
         item.equipped = False
         item.save()
         self.gold += item.sell_value
         self.save()
+        item.shop = None
+        item.save()
+
 
     def use_health_potion(self, potion):
         self.current_hp += int((float(potion.heal_percent)/100) * float(self.hpmax))

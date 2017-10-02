@@ -17,9 +17,9 @@ def shop(request, store_level):
 #    potions = Potion.objects.exclude(inventory__isnull=False)
 #    weapons = Weapon.objects.exclude(inventory__isnull=False)
 #    armor = Armor.objects.exclude(inventory__isnull=False)
-    potions = store.potions.all().exclude(inventory__isnull=False)
-    weapons = store.weapons.all().exclude(inventory__isnull=False)
-    armor = store.armors.all().exclude(inventory__isnull=False)
+    potions = store.potion_items.all().exclude(inventory__isnull=False)
+    weapons = store.weapon_items.all().exclude(inventory__isnull=False)
+    armor = store.armor_items.all().exclude(inventory__isnull=False)
 
     if not potions:
         store.generate_items()
