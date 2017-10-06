@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'q6wz43x7$=6u2sc$92w-6i=2j-ptsixxp+v0juosf2r656ea(+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 sys.path.append(os.path.join(PROJECT_ROOT, 'apps/'))
@@ -119,6 +119,7 @@ if DEBUG:
         }
     }
 else:
+    DATABASES = {}
     DATABASES['default'] = dj_database_url.config()
 
 # Internationalization
