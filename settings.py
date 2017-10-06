@@ -30,7 +30,7 @@ sys.path.append(os.path.join(PROJECT_ROOT, 'apps/'))
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'mighty-atoll-20954.herokuapp.com']
 
 #TEMPLATE_DIRS = (
 #    PROJECT_ROOT + '/arenafighter/templates/',
