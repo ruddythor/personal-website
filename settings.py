@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'q6wz43x7$=6u2sc$92w-6i=2j-ptsixxp+v0juosf2r656ea(+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 sys.path.append(os.path.join(PROJECT_ROOT, 'apps/'))
@@ -30,7 +30,7 @@ sys.path.append(os.path.join(PROJECT_ROOT, 'apps/'))
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'mighty-atoll-20954.herokuapp.com']
+ALLOWED_HOSTS = []
 
 #TEMPLATE_DIRS = (
 #    PROJECT_ROOT + '/arenafighter/templates/',
@@ -104,23 +104,22 @@ WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'arenafighter',
-            'USER': 'arenafighter',
-            'PASSWORD': 'arenafighter',
-            'HOST': 'localhost',
-            'PORT': '5432',
-            'client_encoding': 'UTF8',
-            'default_transaction_isolation': 'read committed',
-            'timezone': 'UTC',
-        }
+#if DEBUG:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'arenafighter',
+        'USER': 'arenafighter',
+        'PASSWORD': 'arenafighter',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'client_encoding': 'UTF8',
+        'default_transaction_isolation': 'read committed',
+        'timezone': 'UTC',
     }
-else:
-    DATABASES = {}
-    DATABASES['default'] = dj_database_url.config()
+}
+#else:
+DATABASES['default'] = dj_database_url.config()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
