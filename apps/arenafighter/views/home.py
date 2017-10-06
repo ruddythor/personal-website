@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from apps.arenafighter.forms import CreateCharacterForm, LoginForm, SignupForm
 from arenafighter.models.character import Character
+from arenafighter.models.location import Location
 from django.contrib.auth import authenticate, login, logout
 from arenafighter.models.inventory import Inventory, InventoryItem, Armor, Weapon
 from arenafighter.utils import dice
@@ -22,6 +23,10 @@ def home(request):
             character.save()
             inventory = Inventory(character=character)
             inventory.save()
+            locations = Location.objects.filter(name="A random location")
+            location = locations[0]
+            character.location = location
+            character.save()
             return redirect('arenafighter:home')
     else:
         form = CreateCharacterForm()
