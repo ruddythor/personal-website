@@ -139,13 +139,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-#        os.path.join(os.path.dirname(__file__), 'static'),
-        )
-
-STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+STATICFILES_DIRS = (
+#        os.path.join(os.path.dirname(__file__), 'static'),
+        os.path.join(PROJECT_DIR, 'global-static'),
+        )
 
 #AUTH_PROFILE_MODULE = 'arenafighter.Profile'
 
