@@ -5,8 +5,22 @@ body {
 .category-box {
 	background-color: #4a6181;
 	height: 50px;
+	border-bottom: 10px;
 }
 
 #main-columns {
 	columns: 30rem auto;
+	width: 90%;
+	border-right: 100px;
+}
+
+#grophy-side-nav {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	top: 0;
+	width: 10%;
+	float: right;
+	border-left: 50px;
+/*	border-style: none solid none solid;*/
 }
