@@ -43,9 +43,9 @@ TEMPLATES = [
         'DIRS': [
 #            '/personal/templates',
             'apps',
+            'templates',
             'apps/arenafighter',
             'apps/personal',
-            'templates',
             # insert your TEMPLATE_DIRS here
         ],
         'APP_DIRS': True,

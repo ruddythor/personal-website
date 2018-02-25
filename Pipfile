@@ -1,0 +1,25 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+dj-database-url = "==0.4.2"
+django-ckeditor = "==5.2.2"
+django-debug-toolbar = "==1.4"
+django-extensions = "==1.7.9"
+django-tinymce = "==2.6.0"
+gunicorn = "==19.7.1"
+MySQL-python = "==1.2.5"
+South = "==0.8.4"
+sqlparse = "==0.1.11"
+Werkzeug = "==0.9.4"
+"psycopg2" = "*"
+Django = "==1.8"

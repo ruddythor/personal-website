@@ -2,25 +2,40 @@
 
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'grophy/grophymain.css' %}"/>
 
 </head>
+
+
 <body>
 <a href="{% url 'sitehome' %}">Home</a>
 
 hi grohpy!
 
 
+<div id='main-columns'>
+<div class='category-box'>
 <a href="{% url 'grophy:about' %}">About</a>
 <br/>
+</div>
+<div class='category-box'>
 <a href="{% url 'grophy:portfolio' %}">Portfolio</a>
 <br/>
+</div>
+<div class='category-box'>
 <a href="{% url 'grophy:resume' %}">Resume</a>
 <br/>
+</div>
+<div class='category-box'>
 <a href="{% url 'grophy:blog' %}">Travel Blog</a>
 <br/>
+</div>
+<div class='category-box'>
 <a href="{% url 'grophy:videos' %}">Videos!</a>
+</div>
 <br/>
+</div>
+
 
 Twitter | linkedin | vimeo | instagram | pinterest | tumblr | flickr
 
