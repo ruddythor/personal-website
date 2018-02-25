@@ -2,7 +2,8 @@
 
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{% static 'grophy/grophymain.css' %}"/>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="{% static 'grophy/grophymain.css' %}"/>
 
 </head>
 
@@ -43,18 +44,29 @@ Twitter | linkedin | vimeo | instagram | pinterest | tumblr | flickr
 
 
 <div id='grophy-side-nav'>
-	<p>illustration</p>
-	<p>logo design</p>
-	<p>character design</p>
-	<p>user experience</p>
-	<p>painting</p>
-	<p>drawing</p>
-	<p>2d</p>
-	<p>3d</p>
-	<p>short film</p>
-	<p>photography</p>
-	<p>video compositing</p>
+	<p class='side-nav-item'>illustration</p>
+	<p class='side-nav-item'>logo design</p>
+	<p class='side-nav-item'>character design</p>
+	<p class='side-nav-item'>user experience</p>
+	<p class='side-nav-item'>painting</p>
+	<p class='side-nav-item'>drawing</p>
+	<p class='side-nav-item'>2d</p>
+	<p class='side-nav-item'>3d</p>
+	<p class='side-nav-item'>short film</p>
+	<p class='side-nav-item'>photography</p>
+	<p class='side-nav-item'>video compositing</p>
 </div>
+
+
+<script type='text/javascript'>
+$('.side-nav-item').bind('click', function () {
+	$('.side-nav-item').removeClass('expanded-nav-div-active');
+	$(this).addClass('expanded-nav-div-active');
+
+})
+
+</script>
+
 
 </body>
 
