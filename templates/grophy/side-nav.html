@@ -1,0 +1,36 @@
+
+<div id='grophy-side-nav'>
+	<p class='side-nav-item'><a href="{% url 'grophy:illustration' %}">illustration</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:logo_design' %}">logo design</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:character_design' %}">character design</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:user_experience' %}">user experience</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:painting' %}">painting</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:drawing' %}">drawing</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:two_d' %}">2d</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:three_d' %}">3d</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:short_film' %}">short film</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:photography' %}">photography</a></p>
+	<p class='side-nav-item'><a href="{% url 'grophy:video_compositing' %}">video compositing</a></p>
+
+
+<center>Twitter | linkedin | vimeo
+<br/>
+instagram | pinterest | tumblr | flickr</center>
+
+<br/>
+<p><a href="{% url 'sitehome' %}">We Are Brown Home</a></p>
+
+
+</div>
+
+
+<script type='text/javascript'>
+$('.side-nav-item').mouseenter(function () {
+	$(this).addClass('expanded-nav-div-active');
+
+})
+$('.side-nav-item').mouseleave(function () {
+	$('.side-nav-item').removeClass('expanded-nav-div-active');
+})
+
+</script>

@@ -1,0 +1,18 @@
+{% load staticfiles %}
+
+<html>
+<head>
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 	<link rel="stylesheet" type="text/css" href="{% static 'grophy/grophymain.css' %}"/>
+
+</head>
+
+
+<body>
+
+{% include 'grophy/side-nav.html' %}
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

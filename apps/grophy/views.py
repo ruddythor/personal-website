@@ -32,3 +32,49 @@ def videos(request):
 	grophy_name = 'GROPHY!'
 	context = {'grophy_name': grophy_name}
 	return render(request, 'grophyhome.html', context)
+
+def video_compositing(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def photography(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def short_film(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+
+def illustration(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+
+def logo_design(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def character_design(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def user_experience(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def painting(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def drawing(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def two_d(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
+
+def three_d(request):
+	context = {}
+	return render(request, 'grophy/portfolio-item-list.html', context)
