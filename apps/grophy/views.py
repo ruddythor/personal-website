@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from grophy.models import PortfolioItem
 
 # Create your views here.
 
@@ -47,7 +48,8 @@ def short_film(request):
 
 
 def illustration(request):
-	context = {}
+	illustrations = PortfolioItem.objects.filter(portfolio_item_type='image')
+	context = {'portfolio_items': illustrations}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 
@@ -68,6 +70,7 @@ def painting(request):
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def drawing(request):
+
 	context = {}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 

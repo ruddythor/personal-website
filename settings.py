@@ -146,6 +146,10 @@ STATICFILES_DIRS = (
         os.path.join(PROJECT_DIR, 'global-static'),
         )
 
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'media')
+MEDIA_URL = '/media/'
+
+
 #AUTH_PROFILE_MODULE = 'arenafighter.Profile'
 
 
