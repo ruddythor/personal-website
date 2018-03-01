@@ -26,11 +26,19 @@ instagram | pinterest | tumblr | flickr</center>
 
 <script type='text/javascript'>
 $('.side-nav-item').mouseenter(function () {
+//	$(this).attr('id', 'expanded-nav-div-active');
 	$(this).addClass('expanded-nav-div-active');
+	$('.expanded-nav-div-active').click(function (event){
+		console.log('i clicked it');
+		event.preventDefault();
+		var href = $('.expanded-nav-div-active').find('a:first').attr('href');
+		window.location.href = href;
+	});
 
 })
 $('.side-nav-item').mouseleave(function () {
-	$('.side-nav-item').removeClass('expanded-nav-div-active');
+//	$('.side-nav-item').removeAttr('id');
+	$(this).removeClass('expanded-nav-div-active');
 })
 
 </script>

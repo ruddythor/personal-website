@@ -34,6 +34,55 @@ body {
 .expanded-nav-div-active {
 	background-color: white;
 	width: 100%;
-	height: 100px;
+	height: 35px;
+	cursor: pointer;
 
+}
+
+/* unvisited link */
+a:link {
+    color: #d2d9e1;
+}
+
+/* visited link */
+a:visited {
+    color: #0f0d23;
+}
+
+/* mouse over link */
+a:hover {
+    color: #d2d9e1;
+}
+
+/* selected link */
+a:active {
+    color: blue;
+}
+
+.dark-blue {
+	background-color: #0f0d23;
+}
+
+.mid-dark-blue {
+	background-color: #272f42;
+}
+
+
+.light-blue {
+	background-color: #d2d9e1;
+}
+
+body {
+    font-size: 18px;
+    font-family: 'Signika';
+/*    font-family: 'ABeeZee';
+    font-family: 'Amatic SC';
+    font-family: 'Signika';
+    font-family: 'Dosis';
+    font-family: 'Ubuntu';
+    font-family: 'PT Sans';
+    font-family: 'Raleway';
+    font-family: 'ABeeZee';
+    font-family: 'ABeeZee';
+    font-family: 'ABeeZee';*/
 }
