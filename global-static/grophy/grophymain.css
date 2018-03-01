@@ -49,15 +49,7 @@ a:visited {
     color: #0f0d23;
 }
 
-/* mouse over link */
-a:hover {
-    color: #d2d9e1;
-}
 
-/* selected link */
-a:active {
-    color: blue;
-}
 
 .dark-blue {
 	background-color: #0f0d23;

@@ -35,49 +35,58 @@ def videos(request):
 	return render(request, 'grophyhome.html', context)
 
 def video_compositing(request):
-	context = {}
+	videocompositing = PortfolioItem.objects.filter(portfolio_item_type='videocompositing')
+	context = {'portfolio_items': videocompositing}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def photography(request):
-	context = {}
+	photography = PortfolioItem.objects.filter(portfolio_item_type='photography')
+	context = {'portfolio_items': photography}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def short_film(request):
-	context = {}
+	shortfilm = PortfolioItem.objects.filter(portfolio_item_type='shortfilim')
+	context = {'portfolio_items': shortfilm}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 
 def illustration(request):
-	illustrations = PortfolioItem.objects.filter(portfolio_item_type='image')
+	illustrations = PortfolioItem.objects.filter(portfolio_item_type='illustration')
 	context = {'portfolio_items': illustrations}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 
 def logo_design(request):
-	context = {}
+	logodesign = PortfolioItem.objects.filter(portfolio_item_type='logodesign')
+	context = {'portfolio_items': logodesign}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def character_design(request):
-	context = {}
+	characterdesign = PortfolioItem.objects.filter(portfolio_item_type='characterdesign')
+	context = {'portfolio_items': characterdesign}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def user_experience(request):
-	context = {}
+	userexperience = PortfolioItem.objects.filter(portfolio_item_type='userexperience')
+	context = {'portfolio_items': userexperience}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def painting(request):
-	context = {}
+	painting = PortfolioItem.objects.filter(portfolio_item_type='painting')
+	context = {'portfolio_items': painting}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def drawing(request):
-
-	context = {}
+	drawing = PortfolioItem.objects.filter(portfolio_item_type='drawing')
+	context = {'portfolio_items': drawing}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def two_d(request):
-	context = {}
+	twod = PortfolioItem.objects.filter(portfolio_item_type='twod')
+	context = {'portfolio_items': twod}
 	return render(request, 'grophy/portfolio-item-list.html', context)
 
 def three_d(request):
-	context = {}
+	threed = PortfolioItem.objects.filter(portfolio_item_type='threed')
+	context = {'portfolio_items': threed}
 	return render(request, 'grophy/portfolio-item-list.html', context)
