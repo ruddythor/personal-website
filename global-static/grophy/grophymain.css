@@ -52,16 +52,10 @@ body {
 .portfolio-list-item {
 	width: 100%;
 	max-width: 100%;
-	height: 80%;
-	max-height: 80%;
-	overflow: hidden;
 }
 
 img.portfolio-item {
 	max-width: 100%;
-	height: 80%;
-	max-height: 80%;
-	overflow: hidden;
 }
 
 .column-left{
