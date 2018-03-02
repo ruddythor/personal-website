@@ -2,7 +2,15 @@
 
 {% block content %}
 
+<div id='portfolio-list'>
 {% for item in portfolio_items %}
-<img src='{{ item.portfolio_item.url }}' height='200px' width='200px'>
+
+  {% comment %}
+ {% if forloop.counter|divisibleby:3 %}column-right {% elif forloop.counter0|divisibleby:2 %}column-center{% else %}column-left{% endif %}
+ {% endcomment %}
+	<div class='porftolio-list-item'>
+		<img src='{{ item.portfolio_item.url }}' class=' portfolio-item'>
+	</div>
 {% endfor %}
+</div>
 {% endblock %}
