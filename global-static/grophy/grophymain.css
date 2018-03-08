@@ -40,40 +40,80 @@ body {
 	cursor: pointer;
 
 }
-
+/* https://codepen.io/Cheesetoast/pen/KFAaq 
+	the above link for where i got ideas from
+*/
 #portfolio-list {
-	columns: 3;
-	width: 80%;
 	max-width: 80%;
-	column-fill: balance;
+/*	columns: 3;
 	column-gap: 50px;
-}
+	*/
+	display: flex;
+	flex-flow: row wrap;	
+
+/*	width: 80%;
+	max-width: 80%;
+*/}
 
 .portfolio-list-item {
-	width: 100%;
-	max-width: 100%;
+	flex: auto;
+	flex-basis: 25%;
+	overflow: hidden;
+	max-height: 250px;
+	position: relative;
+	margin-right: 35px;
+	margin-left: 35px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 
+.portfolio-list-item-content {
+    display: inline-block;
+    position: relative;
+    right: -50%;
+    top: -150%;
+}
+img {
+	position:relative;
+	left: -50%;
+}
+
+/*
+.portfolio-list-item {
+	overflow: hidden;
+	height: 50%;
+	max-height: 50%;
+
+	transform: translateY(-20%);
+	}
+
 img.portfolio-item {
-	max-width: 100%;
 }
 
 .column-left{
 	float: left; 
 	width: 33%;
 	max-width: 33%;
+	margin-bottom: 5px;
+	margin-top: 5px;
  }
 .column-right{ 
 	float: right; 
 	width: 33%;
 	max-width: 33%;
+	margin-bottom: 5px;
+	margin-top: 5px;
  }
 .column-center{ 
 	display: inline-block; 
-	width: 33%;
-	max-width: 33%;
+	width: 30%;
+	max-width: 30%;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	margin-top: 5px;
  }
-
+*/
 
 
 /* unvisited link */
