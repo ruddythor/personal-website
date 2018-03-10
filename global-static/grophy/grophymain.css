@@ -73,9 +73,20 @@ body {
     right: -50%;
     top: -150%;
 }
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.main-content {
+	width: 80%;
+}
+
+
 img {
-	position:relative;
+/*	position:relative;
 	left: -50%;
+*/
 }
 
 /*

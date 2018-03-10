@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div id='portfolio-list'>
+<div class='container main-content pull-left'>id='portfolio-list' 
+	<div class='row'> 
 {% for item in portfolio_items %}
 
-	<div class='portfolio-list-item'> <!---{% if forloop.counter|divisibleby:3 %}column-right{% elif forloop.counter0|divisibleby:2 %}column-center{% else %}column-left{% endif %}'>-->
-		<div class='portfolio-list-item-content'>
+		<div class='col-md-4 overflow-hidden'>
 			<img src='{{ item.portfolio_item.url }}'>
 		</div>
-	</div>
 {% endfor %}
+	</div>
 </div>
 {% endblock %}
